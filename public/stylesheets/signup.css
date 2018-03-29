@@ -1,0 +1,26 @@
+.signup__container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    width: 500px;
+}
+
+.signup__header{
+    height: 150px;
+}
+
+.signup__header h1{
+    font-size: 50px;
+    font-weight: normal;
+    text-align: center;
+    color: #826a5e;
+}
+
+.btn-signup{
+    margin: 0 25%;
+}
+
+.container_addidionaly{
+    display: none;
+}

@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <nav>
+            <div class="topnav" id="myTopnav">
+                <a href="#">ГЛАВНАЯ</a>
+                <a href="#about">О НАС</a>
+                <a href="#gallery">ГАЛЕРЕЯ</a>
+                <a href="#news">НОВОСТИ</a>
+                <a href="#contacts">КОНТАКТЫ</a>
+                <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
+
+                <a href="/logout" class="btn btn-logout">Выйти</a>
+            </div>
+            <br class="clear">
+        </nav>
+    </header>
+
+    <div class="headerProfile">
+        <div class="avatar_status">
+            <div class="avatar"><img src="./public/images/icons/avatar.svg" width="100px" height="100px" style="margin-right: 10px;"></div>
+            <div class="status">
+            <div class="status_online">online</div>
+            <div class="status_off">offline</div>
+            <div class="status_removed">removed</div>
+            </div>
+        </div>
+        <h1>Личный кабинет</h1>
+
+    </div>
+
+    <div class="tabs-box">
+        <ul class="tabs">
+            <li class="active" rel="tab1">О ПРОФИЛЕ</li>
+            <li rel="tab2">МОЯ ГАЛЕРЕЯ</li>
+            <li rel="tab4">НРАВИТСЯ</li>
+            <li rel="tab4">МОИ КОММЕНТАРИИ</li>
+            <li rel="tab5" class="tab_last">НАСТРОЙКИ</li>
+        </ul>
+
+        <div class="tab_container">
+            <h3 class="d_active tab_accordion" rel="tab1">О ПРОФИЛЕ</h3>
+            <div id="tab1" class="tab_content" style="display: block;">
+                <% if (user.local.email) { %>
+                <p>
+                    <strong>ИМЯ</strong>: <%= user.local.username %> <br>
+                <strong>E-MAIL</strong>: <br>
+                <strong>ДАТА РОЖДЕНИЯ</strong>: TEST1<br>
+                <strong>ГОРОД</strong>: TEST1<br>
+                <strong>ПОЛ</strong>: TEST1<br>
+                <strong>О СЕБЕ</strong>: TEST1<br>
+                    <strong>ДАТА РЕГИСТРАЦИИ</strong>: TEST1<br>
+                    <strong>Добавил количество фотографий</strong>: TEST1<br>
+                    <strong>Добавил количество комментариев</strong>: TEST1<br>
+                    <strong>О СЕБЕ</strong>: TEST1<br>
+                </p>
+
+                <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                <% } else { %>
+                <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+            </div>
+            <h3 class="tab_accordion" rel="tab2">МОЯ ГАЛЕРЕЯ</h3>
+            <div id="tab2" class="tab_content" style="display: none;"></div>
+            <h3 class="tab_accordion" rel="tab3">НРАВИТСЯ</h3>
+            <div id="tab3" class="tab_content" style="display: none;"></div>
+            <h3 class="tab_accordion" rel="tab4">МОИ КОММЕНТАРИИ</h3>
+            <div id="tab3" class="tab_content" style="display: none;"></div>
+            <h3 class="tab_accordion" rel="tab5">НАСТРОЙКИ</h3>
+            <div id="tab4" class="tab_content" style="display: none;"></div>
+        </div>
+    </div>
+
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Local</h3>
+
+                <% if (user.local.email) { %>
+                <p>
+                    <strong>id</strong>: <%= user._id %><br>
+                    <strong>email</strong>: <%= user.local.email %><br>
+                    <strong>password</strong>: <%= user.local.password %>
+                </p>
+
+                <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                <% } else { %>
+                <a href="/connect/local" class="btn btn-default">Connect Local</a>
+                <% } %>
+
+            </div>
+        </div>
+
+        <!--ODNOKLASSNIKI INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-odnoklassniki"></span>Odnoklassniki</h3>
+
+                <% if (user.odnoklassniki.token){ %>
+                <p>
+                    <strong>id</strong>: <%= user.odnoklassniki.id %><br>
+                    <strong>token</strong>: <%= user.odnoklassniki.token%><br>
+                    <strong>E-mail</strong>: <%= user.odnoklassniki.email%><br>
+                    <strong>name</strong>: <%= user.odnoklassniki.name%><br>
+                </p>
+                <a href="/unlink/ok" class="btn btn-primary">Отключиться</a>
+                <% } else {%>
+                <a href="/connect/ok" class="btn btn-primary">Подключить Одноклассники</a>
+                <% } %>
+            </div>
+        </div>
+
+        <!--VK-->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-vk"></span>Вконтакте</h3>
+
+                <%if(user.vkontakte.token){%>
+                <p>
+                    <strong>id</strong>: <%= user.vkontakte.id %><br>
+                    <strong>token</strong>: <%= user.vkonatkte.token%><br>
+                    <strong>E-mail</strong>: <%= user.vkontakte.email%><br>
+                    <strong>name</strong>: <%= user.vkontakte.name%><br>
+                </p>
+                <a href="/unlink/vkontakte" class="btn btn-primary">Отключиться</a>
+                <%}else{%>
+                <a href="/connect/vkontakte" class="btn btn-primary">Подключить Вконтакте</a>
+                <% } %>
+            </div>
+        </div>
+
+
+        <!-- FACEBOOK INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+                <% if (user.facebook.token) { %>
+                <p>
+                    <strong>id</strong>: <%= user.facebook.id %><br>
+                    <strong>token</strong>: <%= user.facebook.token %><br>
+                    <strong>email</strong>: <%= user.facebook.email %><br>
+                    <strong>name</strong>: <%= user.facebook.name %><br>
+                </p>
+                <a href="/unlink/facebook" class="btn btn-primary">Отключиться</a>
+                <% } else { %>
+                <a href="/connect/facebook" class="btn btn-primary">Подключить Facebook</a>
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script src="./public/javascripts/jquery-3.2.1.min.js"></script>
+<script src="./public/javascripts/profile-tab.js"></script>
+</body>
+</html>

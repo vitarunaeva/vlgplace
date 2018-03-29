@@ -1,0 +1,147 @@
+.tab-button{
+    display: flex;
+    margin-top: 20px;
+}
+.button_map,
+.button_photo-gallery{
+    line-height: 30px;
+    padding: 5px 15px;
+    background: #606060;
+    color: white;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid transparent;
+    border-bottom: 0;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.button_map.active{
+    background-color: #40E0D0;
+    border: 4px solid #606060;
+    border-bottom: 0px;
+    margin-bottom: -2.5px;
+}
+.button_photo-gallery.active{
+    background-color: #40E0D0;
+    border: 4px solid #606060;
+    border-bottom: 0px;
+    margin-bottom: -2.5px;
+}
+
+.button_photo-gallery{
+    margin-left: 5px;
+}
+
+.gallery-tab {
+    border: solid 2px #606060;
+    box-shadow: 0 0 2px #3a3a50;
+    border-radius: 0 6px 6px 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.gallery-tab.js-container {
+    display: none;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.js-container.active{
+    display: block;
+}
+
+.title-photomap,
+.title-photogallery {
+    text-align: center;
+    font-size: 35px;
+    color: #40E0D0;
+    font-weight: normal;
+}
+
+.photo-gallery-line {
+    display: flex;
+    flex-wrap: wrap;
+}
+.photo-gallery-wrapper {
+    position: relative;
+    width: 29.3%;
+    margin: 2%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.photo-gallery-wrapper:hover .gallery-desc-hover {
+    opacity: 1;
+}
+
+.some-photo {
+    max-width: 100%;
+    display: block;
+    border: 2px solid #3a3a50;
+}
+
+
+.photo-gallery-title {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #40E0D0;
+    background: rgba(62, 60, 60, 0.87);
+    font-size: 20px;
+}
+
+.gallery-desc-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.photo_gallery-wrapper {
+    position: relative;
+    width: 29.3%;
+    margin: 2%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+}
+
+.photo_gallery-wrapper:hover .photo_gallery-desc-hover{
+    opacity: 1;
+}
+
+.photo_gallery-title{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #40E0D0;
+    background: rgba(62, 60, 60, 0.87);
+    font-size: 20px;
+}
+
+.desc-hover__auth,
+.desc-hover__date,
+.desc-hover__category,
+.desc-hover__rating {
+    display: block;
+    margin-top: 15px;
+    color: #3a3a50;
+    font-size: 15px;
+}
+
+.desc-hover__style {
+    color: #40E0D0;
+}
+
+

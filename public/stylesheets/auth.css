@@ -1,0 +1,25 @@
+.submit_container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.psw{
+    float: right;
+    padding-top: 16px;
+}
+
+.container__submit-enter{
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.input__remember{
+    position: relative;
+    margin-left: 10px;
+}
+
+.auth_social{
+    position: center;
+}

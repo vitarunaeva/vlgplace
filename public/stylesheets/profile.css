@@ -1,0 +1,156 @@
+.tabs-box{
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.headerProfile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.avatar_status{
+    display: flex;
+    flex-direction: column;
+}
+.status{
+    position: relative;
+    text-align: center;
+}
+
+
+
+ul.tabs{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 42px;
+    width: 100%;
+}
+
+.btn-logout{
+    display: flex;
+    float: right;
+    background: #40E0D0;
+    cursor: pointer;
+}
+
+.btn-logout:hover{
+    background: #69c7c0;
+    color: #000;
+}
+ul.tabs li{
+    margin-right: 5px;
+    line-height: 30px;
+    padding: 5px 15px;
+    background: #606060;
+    color: #40E0D0;
+    float: left;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid transparent;
+    height: 42px;
+    border-bottom: 0;
+    overflow: hidden;
+    position: relative;
+    font-size: 16px;
+}
+
+.tab_last{
+    border-right: #40E0D0;
+}
+
+ul.tabs li:hover{
+    background-color: silver;
+    color: #40E0D0;
+}
+
+ul.tabs li.active{
+    background-color: #40E0D0;
+    color: #000;
+    display: block;
+}
+
+.tab_container{
+    border: solid 2px #606060;
+    box-shadow: 0 0 2px #3a3a50;
+    border-radius: 0 6px 6px 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: block;
+    border-top: none;
+    clear: both;
+    float: left;
+    width: 100%;
+    background: white;
+    overflow: auto;
+}
+
+.tab_content{
+    padding: 20px;
+    display: none;
+}
+
+.tab_accordion{
+    display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .tabs {
+        display: none;
+    }
+    .tab_accordion{
+        position: relative;
+        background-color: #826a5e;
+        font-weight: 400;
+        font-size: 16px;
+        color: #ffffff;
+        border-top: 1px solid #ccc;
+        margin: 0;
+        padding: 14px 20px;
+        display: block;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .tab_accordion:hover{
+        background-color: #69c7c0;
+    }
+    .tab_accordion:before{
+        content: '';
+        height: 8px;
+        width: 8px;
+        display: block;
+        border: 2px solid #69c7c0;
+        border-right-width: 0;
+        border-top-width: 0;
+        -ms-transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        position: absolute;
+        right: 20px;
+        top: 18px
+    }
+
+    .d_active{
+        background-color: yellow;
+        color: #000;
+    }
+
+    .d_active.tab_accordion:before{
+        border: 2px solid #69c7c0;
+        border-left-width: 0;
+        border-bottom-width: 0;
+        top: 18px;
+    }
+
+
+}

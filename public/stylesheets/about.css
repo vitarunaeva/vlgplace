@@ -1,0 +1,38 @@
+.container__about{
+    display: flex;
+    flex-direction: column;
+}
+
+.about__blocks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.about__item{
+    width: 30%;
+    border: 1px solid #826a5e;
+    border-radius: 6px;
+    background: #826a5e;
+    height: auto;
+}
+
+.about__item img{
+    width: 85px;
+    height: 85px;
+}
+
+.about__item h3{
+    color: #40E0D0;
+    font-size: 28px;
+}
+
+.about__item p{
+    color: #ffffff;
+    font-size: 15px;
+    margin: 15px 5px;
+}
+
+

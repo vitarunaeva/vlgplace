@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="eng">
+<head>
+    <title>vlg_place</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <nav>
+            <div class="topnav" id="myTopnav">
+                <a href="#">ГЛАВНАЯ</a>
+                <a href="#about">О НАС</a>
+                <a href="#gallery">ГАЛЕРЕЯ</a>
+                <a href="#news">НОВОСТИ</a>
+                <a href="#contacts">КОНТАКТЫ</a>
+                <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
+            </div>
+            <div class="auth_icon">
+                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon"></a>
+            </div>
+            <br class="clear">
+        </nav>
+    </header>
+    <main>
+            <div class="sight-photo__header"><h2>НАЗВАНИЕ ФОТО ДОСТОПРИМЕЧАТЕЛЬНОСТИ</h2></div>
+            <div class="sight-photo__header-info">
+                <div class="sight-photo__uploaded-info">
+                    <div class="sight-photo__uploaded">
+                        <span>Загружена:</span>
+                        <b>01.01.2018</b>
+                    </div>
+                    <div class="sight-photo__author">
+                        <span>Автор:</span>
+                        <b>Иван Иванов</b>
+                    </div>
+                    <label>Ключевые слова:
+                        <b>
+                            <a class="key_words" href="">#Скульптура</a>
+                            <a class="key_words" href="">#ВОВ</a>
+                        </b>
+                    </label>
+                </div>
+                <div class="sight-photo__rating">
+                    <div class="rating__wrapper">звезды</div>
+                </div>
+            </div>
+            <div class="sight-photo" style="background-image: url(/images/home-title.jpg);">
+                <a class="sight-photo__marks" href="#">ОТМЕТКИ НА ФОТО</a>
+                <div class="sight-photo__info js-photo-info">
+                    <div class="sight-photo__info-more js-photo-info-more">Показать информацию о снимке</div>
+                    <div class="sight-photo__info-content">
+                        <div class="photo-info">
+                            <div class="photo-info__column">
+                                <div class="photo-info__item">
+                                    <div class="photo-info__item-title">Дата съемки:</div>
+                                    <div class="photo-info__item-desc">11.11.1111</div>
+                                </div>
+                                <div class="photo-info__item">
+                                    <div class="photo-info__item-title">Месторасположение:</div>
+                                    <div class="photo-info__item-desc">Волгоград</div>
+                                </div>
+                                <div class="photo-info__item">
+                                    <div class="photo-info__item-title">Категория:</div>
+                                    <div class="photo-info__item-desc">Памятники</div>
+                                </div>
+                            </div>
+                            <div class="photo-info__column">
+                                <div class="photo-info__item">
+                                    <div class="photo-info__item-title">EXIF-данные:</div>
+                                    <div class="photo-info__item-desc">данные</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sight-photo__link"><a href="sight-over.html">Подробнее о достопримечательности...</a></div>
+            <div class="sight-photo__map-container">
+                <h4>Откуда сделан снимок</h4>
+                <div class="sight-photo__map">
+                    блок с картой
+                </div>
+            </div>
+            <div class="sight-photo__comments-container">
+                <h4>Комментарии</h4>
+                <ul id="comments-list" class="comments-list">
+                    <li>
+                        <div class="comment-main-level">
+                            <div class="comment-avatar">
+                                <img src="/icons/avatar.svg" alt="">
+                            </div>
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name by-author">
+                                        <a href="#">Иван Иванов</a>
+                                    </h6>
+                                    <span>месяц назад</span>
+                                    <div class="comment-like"><img src=""></div>
+                                    <div class="comment-reply"><img src=""></div>
+                                </div>
+                                <div class="comment-content">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+
+                            </div>
+                        </div>
+                        <ul class="comment-list reply-list">
+                            <li>
+                                <div class="comment-avatar">
+                                    <img src="/icons/avatar.svg" alt="">
+                                </div>
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name">
+                                            <a href="#">Иван Иванов</a>
+                                        </h6>
+                                        <span>месяц назад</span>
+                                        <div class="comment-like"><img src=""></div>
+                                        <div class="comment-reply"><img src=""></div>
+                                    </div>
+                                    <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="comment-avatar">
+                                    <img src="/icons/avatar.svg" alt="">
+                                </div>
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name">
+                                            <a href="#">Иван Иванов</a>
+                                        </h6>
+                                        <span>месяц назад</span>
+                                        <div class="comment-like"><img src=""></div>
+                                        <div class="comment-reply"><img src=""></div>
+                                    </div>
+                                    <div class="comment-content">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    </div>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <div class="comment-avatar">
+                        <img src="/icons/avatar.svg" alt="">
+                    </div>
+                    <div class="comment-box">
+                        <div class="comment-head">
+                            <h6 class="comment-name by-author">
+                                <a href="#">Иван Иванов</a>
+                            </h6>
+                            <span>месяц назад</span>
+                            <div class="comment-like"><img src=""></div>
+                            <div class="comment-reply"><img src=""></div>
+                        </div>
+                        <div class="comment-content">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </div>
+
+                    </div>
+                </ul>
+            </div>
+        </main>
+</div>
+    <footer>
+        Vlg_place &copy; 2017
+    </footer>
+    <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
+    <script src="./public/javascripts/scripts.js"></script>
+    <script src="./public/javascripts/gallery-button.js"></script>
+    <script src="./public/javascripts/modalWindow.js"></script>
+</body>
+</html>

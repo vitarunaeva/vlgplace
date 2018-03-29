@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+    <title>vlg_place</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <nav>
+            <div class="topnav" id="myTopnav">
+                <a href="#">ГЛАВНАЯ</a>
+                <a href="#about">О НАС</a>
+                <a href="#gallery">ГАЛЕРЕЯ</a>
+                <a href="#news">НОВОСТИ</a>
+                <a href="#contacts">КОНТАКТЫ</a>
+                <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
+            </div>
+            <div class="auth_icon">
+                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon" title="Авторизоваться"></a>
+            </div>
+            <br class="clear">
+        </nav>
+    </header>
+
+    <main id="index">
+        <section class="container__title">
+            <img src="./public/images/home-title.jpg" class="home-title">
+            <div class="title-description">
+                <h1>Volgograd<span class="br-place">Place</span></h1>
+                <div class="description">Именно здесь Вы можете найти самые главные и интересные места Волгоградской
+                    области в фотографиях разных времен
+                </div>
+            </div>
+        </section>
+        <section id="about" class="container__about">
+            <h2>О НАС</h2>
+            <div class="about__blocks">
+                <div class="about__item">
+                    <img src="./public/images/icons/eye.svg" alt="">
+                    <h3>Режимы просмотра</h3>
+                    <p>Вы можете просмотреть фотографии уникальных мест Волгоградской области как в фотогалерее,
+                        так и на фото-карте.</p>
+                </div>
+                <div class="about__item">
+                    <img src="./public/images/icons/clock.svg" style="padding-top: 10px;" alt="">
+                    <h3>Снимки разных времен</h3>
+                    <p>На этом сайте можно найти снимки одного и того же объекта,
+                        сделаные разными людьми, с разных раскурсов и с промежутком времени, возможно,
+                        в несколько десятков лет!
+                        Вы можете самостоятельно задать интересующий интервал времени и просмотреть
+                        снимки объектов того времени.</p>
+                </div>
+                <div class="about__item">
+                    <img src="./public/images/icons/camera.svg"  alt="">
+                    <h3>Фото сделаны не профессионалами!</h3>
+                    <p>Не только в Волгограде, но и в Волгоградской области большое количество достопримечательностей,
+                        о которых туристы города, да и Волгоградцы, даже и не слышали.
+                        Вы можете разместить свои фотоснимки интересных мест Волгоградской области.</p>
+                </div>
+            </div>
+        </section>
+        <section id="gallery" class="container-gallery js-container-wrapper">
+            <h2>ГАЛЕРЕЯ</h2>
+
+            <div class="search_filter">
+                <form class="search-form">
+                    <input class="search-input" placeholder="Введите название" type="search" value="" name="search" id="inputSearch" onkeyup="inputSearch()">
+                    <label for="search" class="search-label"><img src="./public/images/icons/search.svg" width="30px" height="30px" alt="search_icon"></label>
+                </form>
+                <a href ="#popup-filter" class="js-popup-open"><img src="./public/images/icons/filter.svg" width="30px" height="30px" alt="filter_icon"></a>
+                <a href="#popup-addPhoto" class="js-popup-open"><img src="./public/images/icons/add.svg" width="40px" height="40px"></a>
+            </div>
+            <div class="tab-button js-tab-button">
+                <div class='js-button button_map' data-button='map'><img src="./public/images/icons/location.svg" width="30px" height="30px" alt="location_icon"></div>
+                <div class='js-button  button_photo-gallery active' data-button='gallery'><img src="./public/images/icons/gallery.svg" width="30px" height="30px" alt="gallery_icon"></div>
+            </div>
+                <div class="gallery-tab container-map-gallery js-container" data-container='map'>
+                    <div class="title-photomap">ФОТОКАРТА</div>
+                    <div class="container-photomap"></div>
+                </div>
+                <div class="gallery-tab container-photo-gallery js-container active" data-container='gallery'>
+                    <div class="title-photogallery">ФОТОГАЛЕРЕЯ</div>
+                    <div class="photo-gallery">
+                        <div class="photo-gallery-line">
+                            <!--+-->
+                          <% if (photoList.length) { %>
+                            <% for(var i=0; i < photoList.length; i++) { %>
+                                <a href="/sight-photo" style="background-image: url(<%= photoList[i].filePhoto %>)" class="photo_gallery-wrapper">
+                                    <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
+                                    <span class="photo_gallery-desc-hover">
+                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style"><%= photoList[i].username %></span></span>
+                                <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
+                                <span class="desc-hover__category"> Категория: <span class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
+                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style"><%= photoList[i].rating %></span></span>
+                                </span>
+                                </a>
+                            <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+        </section>
+    </main>
+</div>
+<footer>
+    Vlg_place &copy; 2017
+</footer>
+
+    <div class="modal-overlay overlay">
+
+        <!--АВТОРИЗАЦИЯ-->
+        <div id="popup-auth" class="modal__content popup" role="document">
+                <div class="modal__header">
+                    <div class="submit_container">
+                        <a href="/signup" class="btn btn-registration"><span class="fa fa-user"></span>Зарегистрироваться</a>
+                        <div class="popup-close btn-close">&times;</div>
+                    </div>
+                    <h2><img src="./public/images/icons/user.svg" width="100px" height="100px">Аутентификация</h2>
+                </div>
+                <div class="modal__body">
+                    <form action="/login" method="post">
+                        <div class="modal__form form-group">
+                            <label>Логин</label>
+                            <input type="text"class="form-control" name="username">
+                           <!-- <input type="text" class="form-control" name="email">-->
+                        </div>
+                        <div class="modal__form form-group">
+                            <label>Пароль</label>
+                            <input type="password" class="form-control" name="password" >
+                            <span class="psw">Забыли<a href="#">пароль?</a></span>
+                        </div>
+                        <div class="container__submit-enter">
+                            <button type="submit" class="btn btn-enter">Войти</button>
+                            <input class="input__remember" type="checkbox" checked="checked"><label class="modal__form">Запомнить меня</label>
+                        </div>
+
+                        <div class="auth_social">
+                            <a href="/auth/vkontakte"><img src="./public/images/icons/vk.svg" width="30px" height="30px"></a>
+                            <a href="/auth/ok"><img src="./public/images/icons/odnoklassniki.svg" width="30px" height="30px"></a>
+                            <a href="/auth/facebook"><img src="./public/images/icons/facebook.svg" width="30px" height="30px"></a>
+                        </div>
+                    </form>
+
+                </div>
+        </div>
+
+        <!--ДОБАВЛЕНИЕ ФОТО-->
+        <div id="popup-addPhoto" class="modal__content popup" role="document">
+            <div class="modal__header">
+                <div class="popup-close btn-close">&times;</div>
+                <h2><img src="./public/images/icons/picture.svg" width="100px" height="100px">Добавление фото</h2>
+            </div>
+            <div class="modal__body"></div>
+            <%= typeof  msg != 'undefined' ? msg : '' %>
+            <form  method="post" id="addPhoto" enctype="multipart/form-data">
+                <div class="modal__form form-group">
+                    <label for="titlePhoto">Название:</label>
+                    <input type="text" class="form-control" name="titlePhoto">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="filePhoto">Загрузка фото:</label>
+                    <div class="requirementsFile" style="color: #606060; font-size: 10px;">
+                        <p style="font-weight: bold;">Требования к фото:</p>
+                        <p>Формат фото: JPEG</p>
+                        <p>Размер файла: не более 7 Мб</p>
+                    </div>
+                    <input type="file" name="filePhoto">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="categoryPhoto">Категория:</label>
+                    <input type="text" class="form-control" name="categoryPhoto">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="kwPhoto">Ключевые слова:</label>
+                    <input type="text" class="form-control" name="kwPhoto">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="descPhoto">Описание:</label>
+                    <input type="text" class="form-control" name="descPhoto">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="dateInput">Года:</label>
+                    <div class="dateBlock">
+                        <label>c</label>
+                        <input type="date" min="1910" max="2017" name="dateInput">
+                        <label>по</label>
+                        <input type="date" main="1911" max="2018" name="dateInput">
+                    </div>
+                </div>
+                <button type="submit uploadPhoto" class="btn">Отправить</button>
+            </form>
+        </div>
+    </div>
+
+
+
+<!--&lt;!&ndash;сделать проверку на авторизованность пользователя&ndash;&gt;-->
+
+
+
+</div>
+
+<script src="./public/javascripts/jquery-3.2.1.min.js"></script>
+<script src="./public/javascripts/scripts.js"></script>
+<script src="./public/javascripts/gallery-button.js"></script>
+<script src="./public/javascripts/modalWindow.js"></script>
+</body>
+</html>

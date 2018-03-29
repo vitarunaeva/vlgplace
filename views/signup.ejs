@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="./public/stylesheets/style.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+</head>
+<body>
+<div class=" signup__container">
+
+    <div class="signup__header">
+        <h1><img src="./public/images/icons/signIn.svg" width="70px" height="100px" style="margin-right: 10px;">Регистрация</h1>
+    </div>
+
+
+        <!--<% if (message.length > 0) { %>-->
+        <!--<div class="alert alert-danger"><%= message %></div>-->
+        <!--<% } %>-->
+
+        <form action="/signup" method="post">
+            <div class="modal__form form-group">
+                <label>E-mail:</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="modal__form form-group">
+                <label>Пароль:</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+
+              <div class="signup_additionaly">
+                  <label>Дополнительно..</label>
+                  <div class="container_addidionaly">
+                    <div class="modal__form form-group">
+                        <label>Имя:</label>
+                        <input type="text" class="form-control" name="username">
+                    </div>
+                    <div class="modal__form form-group">
+                        <label>Дата рождения:</label>
+                        <input type="date" class="form-control" name="dateOfBirth">
+                    </div>
+                    <div class="modal__form form-group">
+                        <label>Город:</label>
+                        <input type="text" class="form-control" name="city">
+                    </div>
+                    <div class="modal__form form-group">
+                        <label>Пол:</label>
+                        <input type="radio" name="sex" value="man" checked>Мужской
+                        <input type="radio" name="sex" value="woman">Женский
+                    </div>
+                  </div>
+            </div>
+            <button type="submit" class="btn btn-signup">Зарегистрироваться</button>
+
+
+
+        </form>
+
+        <hr>
+
+        <p>Уже имеете аккаунт? <a href="/login">Авторизоваться</a></p>
+        <p>Вернуться на<a href="/"> главную</a>.</p>
+
+    </div>
+</div>
+
+<script src="./public/javascripts/jquery-3.2.1.min.js"></script>
+<script src="./public/javascripts/signupAdditionaly.js"></script>
+</body>
+</html>
