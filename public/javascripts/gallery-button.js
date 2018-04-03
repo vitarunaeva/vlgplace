@@ -33,15 +33,17 @@ $(document).mouseup(function (e) {
 
 $("#addPhoto").on('submit', function (e) {
     e.preventDefault();
-    var photoFile = this.filePhoto[index];
-    var data = preperaDataFormToAjax('addPhoto');
-
-    data.append('uploadFile', photoFile.file);
+    var photoFile = $(this).find('input[name="filePhoto"]')[0].files[0];
+    // var data = preperaDataFormToAjax('addPhoto');
+    var formData = new formData(photoFile);
+    formData.append('filePhoto', file, file.name); //или file.titlePhoto
+   // data.append('uploadFile', photoFile);
 
     $.ajax({
         url: '/addPhoto',
         type: 'POST',
-        data: data,
+        data: formData,
+        processData: false,
         dataType: "json",
         contentType: 'application/json',
         success: function (response) {
@@ -58,6 +60,7 @@ $("#addPhoto").on('submit', function (e) {
         }
     });
 });
+
 
 
 // $("#addPhoto").on('submit', function (e) {

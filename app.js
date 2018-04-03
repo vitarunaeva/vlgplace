@@ -1,5 +1,6 @@
 var express          =   require('express');
 var app              =   express();
+var http             =   require('http');
 var port             =   process.env.PORT || 8080;
 var mongoose         =   require('mongoose');
 var mongo            =   require("mongodb");
@@ -11,7 +12,7 @@ var morgan           =  require('morgan');
 var cookieParser     =  require('cookie-parser');
 var bodyParser       =  require('body-parser');
 var session          =  require('express-session');
-var expressValidator = require('express-validator');
+var expressValidator =  require('express-validator');
 
 
 var configDB = require('./config/database.js');
@@ -36,6 +37,8 @@ app.use(session({
     resave          :   true,
     saveUnintialized:   true
 }));
+//+
+app.use(express.static('./public'));
 
 app.use(passport.initialize());
 app.use(passport.session()); // постоянные сеансы входа в систему

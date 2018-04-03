@@ -1,7 +1,11 @@
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
+var passport = require('passport');
 var multer = require('multer');
+var fs = require('fs');
+
+//
+// var app = express();
 
 //механизм хранения
 var storage = multer.diskStorage({
@@ -12,7 +16,7 @@ var storage = multer.diskStorage({
 });
 //+
 //инициализация загрузки
-const upload = multer({
+var upload = multer({
     storage: storage,
     limits: {fileSize: 7},
     fileFilter: function (req, file, cd) {
@@ -29,7 +33,7 @@ function checkFiletType(file, cd) {
     if (extname && mimetype) {
         return cd(null, true);
     } else {
-        cd('Error: Только изображения формата JPEG!')
+        cd('Error: Только изображения формата JPEG или JPG!')
     }
 }
 
@@ -219,25 +223,43 @@ module.exports = function (app, passport) {
         });
     });
 
-    app.post('/addPhoto', function (req, res, next) {
-        // TODO сделать загру
-        return upload(req, res, function (err) {
-            //TODO посмотреть как выводить ошибки
 
-            if (err) {
-                return res.render('index', {
+    app.post('/addPhoto', function (req, res, next) {
+        upload(req, res, function (err) {
+            if(err){
+                res.render('index', {
                     msg: err
                 });
+            }else{
+                if(req.file == undefined){
+                    res.render('index', {
+                        msg: 'Фото не выбрано!'
+                    });
+                } else {
+                    res.render('index', {
+                        msg: 'Файл загружен!',
+                        file: 'uploads/' + req.file.fieldname
+                    });
+                }
             }
-
-            if (req.body.filePhoto == undefined) {
-                console.error('Изображение не добавлено');
-            } else {
-                console.log('res', res);
-            }
-
-            next();
-        });
+        })
+        // return upload(req, res, function (err) {
+        //     //TODO посмотреть как выводить ошибки
+        //
+        //     if (err) {
+        //         return res.render('index', {
+        //             msg: err
+        //         });
+        //     }
+        //
+        //     if (req.body.filePhoto == undefined) {
+        //         console.error('Изображение не добавлено');
+        //     } else {
+        //         console.log('res', res);
+        //     }
+        //
+        //     next();
+        // });
     }, function (req, res) {
         var newPhoto = new Photo(req.body);
 
