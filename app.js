@@ -1,7 +1,8 @@
 var express          =   require('express');
 var app              =   express();
 var http             =   require('http');
-var port             =   process.env.PORT || 8080;
+var port = process.env.PORT || 5000;
+//var port             =   process.env.PORT || 8080;
 var mongoose         =   require('mongoose');
 var mongo            =   require("mongodb");
 var passport         =   require('passport');
@@ -69,6 +70,8 @@ app.use(function(req, res, next){
 //         };
 //     }
 // }));
+
+
 
 // маршруты
 require('./app/routes.js')(app, passport); // load  routes and pass in  app and fully configured passport
