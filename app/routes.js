@@ -225,6 +225,7 @@ module.exports = function (app, passport) {
 
 
     app.post('/addPhoto', function (req, res, next) {
+        console.log('req', req);
         upload(req, res, function (err) {
             if(err){
                 res.render('index', {
