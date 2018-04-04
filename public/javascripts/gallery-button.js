@@ -83,12 +83,12 @@ $(document).mouseup(function (e) {
 
 $("#addPhoto").on('submit', function (e) {
     e.preventDefault();
-    var photoFile = $(this).find('input[name="filePhoto"]')[0].files[0];
-   //var data = preperaDataFormToAjax('addPhoto');
-    var formData = new FormData();
+ var photoFile = $(this).find('input[name="filePhoto"]')[0].files[0];
+//     var data = preperaDataFormToAjax('addPhoto');
+ var formData = new FormData();
     // TODO сделать загрузку фото
 
-
+console.log('photo', photoFile);
     $.ajax({
         url: '/addPhoto',
         type: 'POST',
