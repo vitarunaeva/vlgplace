@@ -4,8 +4,6 @@ var passport = require('passport');
 var multer = require('multer');
 var fs = require('fs');
 
-//
-// var app = express();
 
 //механизм хранения
 var storage = multer.diskStorage({
@@ -61,7 +59,6 @@ module.exports = function (app, passport) {
             //     ';
             // });
 
-
             res.render('index.ejs', {photoList: photos});
         });
     });
@@ -94,8 +91,14 @@ module.exports = function (app, passport) {
 
     // сеанс profile
     app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('profile.ejs', {
-            user: req.user
+        // res.render('profile.ejs', {
+        //     user: req.user
+        // });
+        Photo.find({}, function (error, photos) {
+            res.render('profile.ejs', {
+                user: req.user,
+                photoList: photos
+            });
         });
     });
 
@@ -225,25 +228,28 @@ module.exports = function (app, passport) {
 
 
     app.post('/addPhoto', function (req, res, next) {
-        console.log('req', req);
-        upload(req, res, function (err) {
-            if(err){
-                res.render('index', {
-                    msg: err
-                });
-            }else{
-                if(req.file == undefined){
-                    res.render('index', {
-                        msg: 'Фото не выбрано!'
-                    });
-                } else {
-                    res.render('index', {
-                        msg: 'Файл загружен!',
-                        file: 'uploads/' + req.file.fieldname
-                    });
-                }
-            }
-        })
+        next();
+        // upload(req, res, function (err) {
+        //     if(err){
+        //         // res.render('index', {
+        //         //     msg: err
+        //         // });
+        //         console.log('tre');
+        //         next();
+        //     }else{
+        //         console.log('here');
+        //         if(req.file == undefined){
+        //             res.render('index', {
+        //                 msg: 'Фото не выбрано!'
+        //             });
+        //         } else {
+        //             res.render('index', {
+        //                 msg: 'Файл загружен!',
+        //                 file: 'uploads/' + req.file.fieldname
+        //             });
+        //         }
+        //     }
+        // })
         // return upload(req, res, function (err) {
         //     //TODO посмотреть как выводить ошибки
         //
@@ -265,9 +271,16 @@ module.exports = function (app, passport) {
         var newPhoto = new Photo(req.body);
 
         newPhoto.save().then(function (response) {
-            res.status(200);
+            console.log('here', response);
+            res.status(200).json({code: 200, message: 'OK'});
         }).catch(function (error) {
             console.error('new photo error', error);
+        });
+    },function (req, res) {
+        Photo.find({}, function (error, photos) {
+            res.send('index.ejs', {
+                photoList: photos
+            });
         });
     });
 };
