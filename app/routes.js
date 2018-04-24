@@ -43,6 +43,8 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         Photo.find({}, function (error, photos) {
             res.render('index.ejs', {photoList: photos});
+            console.log('photoList', photos);
+
         });
     });
 
@@ -232,6 +234,7 @@ module.exports = function (app, passport) {
         });
     
         res.redirect('/');
+
 
     } ) ;
 };

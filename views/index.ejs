@@ -83,7 +83,9 @@
             </div>
                 <div class="gallery-tab container-map-gallery js-container" data-container='map'>
                     <div class="title-photomap">ФОТОКАРТА</div>
-                    <div class="container-photomap"></div>
+                    <div class="container-photomap">
+                        <div id="map"></div>
+                    </div>
                 </div>
                 <div class="gallery-tab container-photo-gallery js-container active" data-container='gallery'>
                     <div class="title-photogallery">ФОТОГАЛЕРЕЯ</div>
@@ -93,10 +95,10 @@
                           <% if (photoList.length) { %>
                             <% for(var i=0; i < photoList.length; i++) { %>
                                 <a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)" class="photo_gallery-wrapper">
-				<span class="temp"> <%= photoList[i].filePhoto %> </span>
+
                                     <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
-                                    <span class="photo_gallery-desc-hover">
-                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style"><%= photoList[i].username %></span></span>
+                                    <span class="gallery-desc-hover">
+                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style"><%= photoList[i].email %></span></span>
                                 <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
                                 <span class="desc-hover__category"> Категория: <span class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style"><%= photoList[i].rating %></span></span>
@@ -210,7 +212,15 @@
 
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
 <script src="./public/javascripts/scripts.js"></script>
+<script src="./public/javascripts/galleryMap.js"></script>
 <script src="./public/javascripts/gallery-button.js"></script>
 <script src="./public/javascripts/modalWindow.js"></script>
+
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
+</script>
+
 </body>
 </html>

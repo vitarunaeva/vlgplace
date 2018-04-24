@@ -79,7 +79,9 @@
                         </div>
                         <div class="gallery-tab container-map-gallery js-container" data-container='map'>
                             <div class="title-photomap">ФОТОКАРТА</div>
-                            <div class="container-photomap"></div>
+                            <div class="container-photomap">
+                                <div id="map"></div>
+                            </div>
                         </div>
                         <div class="gallery-tab container-photo-gallery js-container active" data-container='gallery'>
                             <div class="title-photogallery">ФОТОГАЛЕРЕЯ</div>
@@ -163,7 +165,7 @@
                 <%if(user.vkontakte.token){%>
                 <p>
                     <strong>id</strong>: <%= user.vkontakte.id %><br>
-                    <strong>token</strong>: <%= user.vkonatkte.token%><br>
+                    <strong>token</strong>: <%= user.vkontakte.token%><br>
                     <strong>E-mail</strong>: <%= user.vkontakte.email%><br>
                     <strong>name</strong>: <%= user.vkontakte.name%><br>
                 </p>
@@ -198,7 +200,6 @@
 
 
 </div>
-
 
 
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
