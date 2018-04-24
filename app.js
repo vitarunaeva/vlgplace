@@ -16,6 +16,10 @@ var expressValidator =  require('express-validator');
 
 var configDB = require('./config/database.js');
 
+//
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
+//
 // конфигурация
 mongoose.connect(configDB.url); // соединение с БД
 
@@ -26,7 +30,8 @@ app.use(express.static('./'));
 app.use(morgan('dev')); // запись запроса в консоль
 app.use(cookieParser()); // чтение cookies
 app.use(bodyParser.urlencoded({ extended: true })); // получение информации форм html
-app.use(bodyParser());
+app.use(bodyParser({uploadDir: 'photos'}));
+//app.use(bodyParser());
 
 app.set('view engine', 'ejs'); // настройка ejs для представлений
 

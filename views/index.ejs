@@ -92,7 +92,8 @@
                             <!--+-->
                           <% if (photoList.length) { %>
                             <% for(var i=0; i < photoList.length; i++) { %>
-                                <a href="/sight-photo" style="background-image: url(<%= photoList[i].filePhoto %>)" class="photo_gallery-wrapper">
+                                <a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)" class="photo_gallery-wrapper">
+				<span class="temp"> <%= photoList[i].filePhoto %> </span>
                                     <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
                                     <span class="photo_gallery-desc-hover">
                                 <span class="desc-hover__auth">Автор: <span class="desc-hover__style"><%= photoList[i].username %></span></span>
@@ -159,7 +160,7 @@
             </div>
             <div class="modal__body"></div>
             <%= typeof  msg != 'undefined' ? msg : '' %>
-            <form  method="post" id="addPhoto" enctype="multipart/form-data">
+            <form action="/addPhoto" method="post" id="addPhoto" enctype="multipart/form-data">
                 <div class="modal__form form-group">
                     <label for="titlePhoto">Название:</label>
                     <input type="text" class="form-control" name="titlePhoto">
@@ -171,7 +172,7 @@
                         <p>Формат фото: JPEG</p>
                         <p>Размер файла: не более 7 Мб</p>
                     </div>
-                    <input type="file" name="filePhoto">
+                    <input type="file" name="filePhotos" id="fileTest" multiple="multiple">
                 </div>
                 <div class="modal__form form-group">
                     <label for="categoryPhoto">Категория:</label>

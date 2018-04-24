@@ -3,7 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
 var fs = require('fs');
-
+const fileUpload = require('express-fileupload');
 
 //механизм хранения
 var storage = multer.diskStorage({
@@ -39,39 +39,24 @@ function checkFiletType(file, cd) {
 var Photo = require('../app/models/photo');
 
 module.exports = function (app, passport) {
-
     // показать домашнюю страницу
     app.get('/', function (req, res) {
         Photo.find({}, function (error, photos) {
-            var photoList = '';
-
-            // photos.forEach(function (photo) {
-            //     photoList += '\
-            //         <a href="/sight-photo" style="background-image: url(' + photo.filePhoto + ')" class="photo_gallery-wrapper">\
-            //             <span class="photo_gallery-title">' + photo.titlePhoto + '</span>\
-            //             <span class="photo_gallery-desc-hover">\
-            //                 <span class="desc-hover__auth">Автор: <span class="desc-hover__style">' + photo.username + '</span></span>\
-            //                 <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style">' + photo.dateTime + '</span></span>\
-            //                 <span class="desc-hover__category"> Категория: <span class="desc-hover__style">' + photo.categoryPhoto + '</span></span>\
-            //                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">' +  photo.rating + '</span></span>\
-            //             </span>\
-            //         </a>\
-            //     ';
-            // });
-
             res.render('index.ejs', {photoList: photos});
         });
     });
 
     // локальный логин. показывает форму входа
     app.get('/login', function (req, res) {
-        res.render('index.ejs', {message: req.flash('loginMessage')});
+        Photo.find({}, function(arr, photos){
+            res.render('index.ejs', {photoList: photos ,message: req.flash('loginMessage')});
+        });
     });
 
     // обработка формы входа
     app.post('/login', passport.authenticate('local-login', {
         successRedirect: '/profile', // перенаправление на страницу profile
-        failureRedirect: '/404', // если ошибка, перенправление на страницу login
+        failureRedirect: '/', // если ошибка, перенправление на страницу login
         failureFlash: true //разрешить мгновенные сообщения
     }));
 
@@ -227,61 +212,27 @@ module.exports = function (app, passport) {
     });
 
 
-    app.post('/addPhoto', function (req, res, next) {
-        next();
-        // upload(req, res, function (err) {
-        //     if(err){
-        //         // res.render('index', {
-        //         //     msg: err
-        //         // });
-        //         console.log('tre');
-        //         next();
-        //     }else{
-        //         console.log('here');
-        //         if(req.file == undefined){
-        //             res.render('index', {
-        //                 msg: 'Фото не выбрано!'
-        //             });
-        //         } else {
-        //             res.render('index', {
-        //                 msg: 'Файл загружен!',
-        //                 file: 'uploads/' + req.file.fieldname
-        //             });
-        //         }
-        //     }
-        // })
-        // return upload(req, res, function (err) {
-        //     //TODO посмотреть как выводить ошибки
-        //
-        //     if (err) {
-        //         return res.render('index', {
-        //             msg: err
-        //         });
-        //     }
-        //
-        //     if (req.body.filePhoto == undefined) {
-        //         console.error('Изображение не добавлено');
-        //     } else {
-        //         console.log('res', res);
-        //     }
-        //
-        //     next();
-        // });
-    }, function (req, res) {
-        var newPhoto = new Photo(req.body);
+    app.post('/addPhoto',function (req, res) {
+        var phts = req.files.filePhotos;
+        if (!req.files){
+            console.log('*********************************');
+        }
+        var photoName = './public/uploads/'+Date.now()+phts.name;
+        phts.mv(photoName);
+        //req.body.filePhotos = phts.name;
+        var data = req.body;
+        data.filePhoto = photoName;
+        var newPhoto = new Photo(data);
+        console.log(newPhoto, data);
+        newPhoto.save(function(err, temp){
+            console.log(temp);
+            if(err){
+                console.log("ooopssss....");
+            }
+        });
+    
+        res.redirect('/');
 
-        newPhoto.save().then(function (response) {
-            console.log('here', response);
-            res.status(200).json({code: 200, message: 'OK'});
-        }).catch(function (error) {
-            console.error('new photo error', error);
-        });
-    },function (req, res) {
-        Photo.find({}, function (error, photos) {
-            res.send('index.ejs', {
-                photoList: photos
-            });
-        });
-    });
+    } ) ;
 };
 
