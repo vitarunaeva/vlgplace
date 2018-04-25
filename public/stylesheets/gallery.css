@@ -16,10 +16,6 @@
     text-align: center;
 }
 
-#map{
-    width: 100%;
-    height: 500px;
-}
 .button_map.active{
     background-color: #40E0D0;
     border: 4px solid #606060;
@@ -158,3 +154,40 @@
 }
 
 
+.rating-count {
+    display: flex;
+    width: 110px;
+}
+
+.rating-count input {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+.rating-count input + label {
+    font-size: 0;
+    display: block;
+    width: 22px;
+    height: 21px;
+    cursor: pointer;
+    background-image: url(/public/images/icons/starFill.svg);
+}
+
+.rating-count label:hover ~ label,
+.rating-count:not(:hover) input:invalid + label,
+.rating-count:not(:hover) input:checked + label ~ label {
+    background: url(/public/images/icons/star.svg) no-repeat center / contain,
+    url(/public/images/icons/starFill.svg) no-repeat center / 0 0,
+    url(/public/images/icons/star.svg) no-repeat center / 0 0;
+}
+
+.rating-count input + label:hover,
+.rating-count:not(:hover) input:focus + label {
+    background-image: url(/public/images/icons/star.svg);
+}

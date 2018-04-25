@@ -84,7 +84,7 @@
                 <div class="gallery-tab container-map-gallery js-container" data-container='map'>
                     <div class="title-photomap">ФОТОКАРТА</div>
                     <div class="container-photomap">
-                        <div id="map"></div>
+                        <div id="map" style="width: 100%; height: 500px;">map div</div>
                     </div>
                 </div>
                 <div class="gallery-tab container-photo-gallery js-container active" data-container='gallery'>
@@ -98,10 +98,24 @@
 
                                     <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
                                     <span class="gallery-desc-hover">
-                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style"><%= photoList[i].email %></span></span>
-                                <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
-                                <span class="desc-hover__category"> Категория: <span class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
-                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style"><%= photoList[i].rating %></span></span>
+                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style">Runaeva<%= photoList[i].email %></span></span>
+                                <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style">20.04.2018<%= photoList[i].dateTime %></span></span>
+                                <span class="desc-hover__category"> Категория: <span class="desc-hover__style">Горы<%= photoList[i].categoryPhoto %></span></span>
+                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
+                                        <%= photoList[i].rating %>
+                                        <div class="rating-count">
+                                          <input id="c1" type="radio" name="rating" value="1" required>
+                                          <label for="c1">1</label>
+                                          <input id="c2" type="radio" name="rating" value="2">
+                                          <label for="c2">2</label>
+                                          <input id="c3" type="radio" name="rating" value="3">
+                                          <label for="c3">3</label>
+                                          <input id="c4" type="radio" name="rating" value="4">
+                                          <label for="c4">4</label>
+                                          <input id="c5" type="radio" name="rating" value="5">
+                                          <label for="c5">5</label>
+                                        </div>
+                                    </span></span>
                                 </span>
                                 </a>
                             <% } %>
@@ -210,17 +224,21 @@
 
 </div>
 
+<script src="https://maps.google.com/maps/api/js"></script>
+
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
 <script src="./public/javascripts/scripts.js"></script>
 <script src="./public/javascripts/galleryMap.js"></script>
 <script src="./public/javascripts/gallery-button.js"></script>
 <script src="./public/javascripts/modalWindow.js"></script>
 
+
+
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 </script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
-</script>
+<!--<script async defer-->
+        <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">-->
+<!--</script>-->
 
 </body>
 </html>
