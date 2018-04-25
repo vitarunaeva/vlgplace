@@ -111,7 +111,7 @@
     height: 100%;
     padding: 20px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(96, 96, 96, 0.45);
     opacity: 0;
     transition: opacity 1s ease;
 }
