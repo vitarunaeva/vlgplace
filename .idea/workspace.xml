@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1d7a5df6-0406-465b-bc8f-5d45ab8459da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/gallery.css" afterPath="$PROJECT_DIR$/public/stylesheets/gallery.css" />
+      <change beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -18,14 +18,14 @@
   <component name="ChangesViewManager" flattened_view="false" show_ignored="true" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="4" selection-end-line="237" selection-end-column="13" />
+            <state relative-caret-position="210">
+              <caret line="102" column="111" lean-forward="false" selection-start-line="102" selection-start-column="111" selection-end-line="102" selection-end-column="111" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1524682835001" expanded="true" signature="13000:13135" ph="..." />
+                <marker date="1524683332725" expanded="true" signature="12996:13131" ph="..." />
               </folding>
             </state>
           </provider>
@@ -81,7 +81,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gallery.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="gallery.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/stylesheets/gallery.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-207">
@@ -142,8 +142,8 @@
       <find>email</find>
       <find>tempF</find>
       <find>emails</find>
-      <find>map</find>
       <find>gallery-de</find>
+      <find>map</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -208,8 +208,8 @@
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/stylesheets/map.css" />
         <option value="$PROJECT_DIR$/public/javascripts/galleryMap.js" />
-        <option value="$PROJECT_DIR$/views/index.ejs" />
         <option value="$PROJECT_DIR$/public/stylesheets/gallery.css" />
+        <option value="$PROJECT_DIR$/views/index.ejs" />
       </list>
     </option>
   </component>
@@ -381,7 +381,7 @@
       <workItem from="1524036238703" duration="5195000" />
       <workItem from="1524082356161" duration="13780000" />
       <workItem from="1524555426028" duration="9552000" />
-      <workItem from="1524650023981" duration="11546000" />
+      <workItem from="1524650023981" duration="11686000" />
     </task>
     <task id="LOCAL-00001" summary="add node_modules">
       <created>1522620054942</created>
@@ -474,11 +474,18 @@
       <option name="project" value="LOCAL" />
       <updated>1524682936130</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="gallery-desc-hover css">
+      <created>1524683322375</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1524683322375</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="335274000" />
+    <option name="totallyTimeSpent" value="335414000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -607,7 +614,8 @@
     <MESSAGE value="addedMap" />
     <MESSAGE value="replace markers on the Map" />
     <MESSAGE value="replace markers on the Map2" />
-    <option name="LAST_COMMIT_MESSAGE" value="replace markers on the Map2" />
+    <MESSAGE value="gallery-desc-hover css" />
+    <option name="LAST_COMMIT_MESSAGE" value="gallery-desc-hover css" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -945,22 +953,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="236" column="0" lean-forward="false" selection-start-line="236" selection-start-column="4" selection-end-line="237" selection-end-column="13" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1524682835001" expanded="true" signature="13000:13135" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/gallery.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-207">
           <caret line="84" column="30" lean-forward="false" selection-start-line="84" selection-start-column="30" selection-end-line="84" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="102" column="111" lean-forward="false" selection-start-line="102" selection-start-column="111" selection-end-line="102" selection-end-column="111" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#2;n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1524683332725" expanded="true" signature="12996:13131" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
