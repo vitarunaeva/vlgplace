@@ -1,68 +1,31 @@
-function CustomMarker(latlng, map, imageSrc) {
-    this.latlng_ = latlng;
-    this.imageSrc = imageSrc;
-    // Once the LatLng and text are set, add the overlay to the map.  This will
-    // trigger a call to panes_changed which should in turn call draw.
-    this.setMap(map);
-}
 
-CustomMarker.prototype = new google.maps.OverlayView();
-CustomMarker.prototype.draw = function () {
-    // Check if the div has been created.
-    var div = this.div_;
-    if (!div) {
-        // Create a overlay text DIV
-        div = this.div_ = document.createElement('div');
-        // Create the DIV representing our CustomMarker
-        div.className = "customMarker";
+    function initMap() {
 
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 3,
+            center: {lat: -28.024, lng: 140.887}
+        });
 
-        var img = document.createElement("img");
-        img.src = this.imageSrc;
-        div.appendChild(img);
-        google.maps.event.addDomListener(div, "click",
-            function (event) {
-                google.maps.event.trigger(me, "click");
+        // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations.map(function(location, i) {
+            return new google.maps.Marker({
+                position: location,
+                label: labels[i % labels.length]
             });
-
-        // Then add the overlay to the DOM
-        var panes = this.getPanes();
-        panes.overlayImage.appendChild(div);
+        });
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
-// Position the overlay
-    var point = this.getProjection().fromLatLngToDivPixel(this.latlng_);
-    if (point) {
-        div.style.left = point.x + 'px';
-        div.style.top = point.y + 'px';
-    }
-};
-
-CustomMarker.prototype.remove = function () {
-    // Check if the overlay was on the map and needs to be removed.
-    if (this.div_) {
-        this.div_.parentNode.removeChild(this.div_);
-        this.div_ = null;
-    }
-};
-
-CustomMarker.prototype.getPosition = function () {
-    return this.latlng_;
-};
-var map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 17,
-    center: new google.maps.LatLng(48.42216, 44.31308),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-});
-
-var data = [{
-    profileImage: "./images/1.jpg",
-    pos: [48.42217, 44.31308]
-}, {
-    profileImage: "./images/2.jpg",
-    pos: [48.42220, 44.31308]
-}];
-
-for(var i=0;i<data.length;i++){
-    new CustomMarker(new google.maps.LatLng(data[i].pos[0],data[i].pos[1]), map,  data[i].profileImage)
-}
+        var locations = [
+            {lat: 48.43302, lng: 44.33018},
+            {lat: 49.10908, lng: 43.46248},
+            {lat: 49.33983, lng: 42.41767},
+            {lat: 48.637318, lng: 44.435926}
+            ]
 

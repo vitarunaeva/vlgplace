@@ -42,7 +42,7 @@ module.exports = function (app, passport) {
     // показать домашнюю страницу
     app.get('/', function (req, res) {
         Photo.find({}, function (error, photos) {
-            res.render('index.ejs', {photoList: photos});
+            res.render('index.ejs', {photoList: photos, isAuth: req.isAuthenticated()});
             console.log('photoList', photos);
 
         });

@@ -18,13 +18,16 @@
                 <a href="#contacts">КОНТАКТЫ</a>
                 <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
             </div>
+            <% if(!isAuth) { %>
             <div class="auth_icon">
                 <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon" title="Авторизоваться"></a>
             </div>
+            <% } else { %>
             <div class="icForRegistrUsers">
                 <a href="/profile"><img src="./public/images/icons/avatar.svg" height="35px" width="35px" alt="avatar_icon" title="Перейти в профиль"></a>
                 <a href="/logout" class="btn btn-logout">Выйти</a>
             </div>
+            <% } %>
             <br class="clear">
         </nav>
     </header>
@@ -188,7 +191,7 @@
                         <p>Формат фото: JPEG</p>
                         <p>Размер файла: не более 7 Мб</p>
                     </div>
-                    <input type="file" name="filePhotos" id="fileTest" multiple="multiple">
+                    <input type="file" name="filePhotos" id="fileTest">
                 </div>
                 <div class="modal__form form-group">
                     <label for="categoryPhoto">Категория:</label>
@@ -224,7 +227,7 @@
 
 </div>
 
-<script src="https://maps.google.com/maps/api/js"></script>
+<!--<script src="https://maps.google.com/maps/api/js"></script>-->
 
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
 <script src="./public/javascripts/scripts.js"></script>
@@ -234,11 +237,11 @@
 
 
 
-<!--<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">-->
-<!--</script>-->
-<!--<script async defer-->
-        <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">-->
-<!--</script>-->
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
+</script>
 
 </body>
 </html>
