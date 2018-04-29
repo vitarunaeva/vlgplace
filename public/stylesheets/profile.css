@@ -32,10 +32,7 @@ ul.tabs{
 }
 
 .btn-logout{
-    display: flex;
-    float: right;
-    background: #40E0D0;
-    cursor: pointer;
+    margin-left: 10px;
 }
 
 .btn-logout:hover{
