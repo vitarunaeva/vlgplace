@@ -4,6 +4,7 @@ var passport = require('passport');
 var multer = require('multer');
 var fs = require('fs');
 const fileUpload = require('express-fileupload');
+var ExifImage = require('exif').ExifImage;
 
 //механизм хранения
 var storage = multer.diskStorage({
@@ -232,10 +233,28 @@ module.exports = function (app, passport) {
                 console.log("ooopssss....");
             }
         });
-    
+        try{
+            new ExifImage({image: newPhoto}, function (error, exifData) {
+                if(error){
+                    console.log('Error: ' + error.message);
+                } else{
+                    //console.log('exif', exifData);
+                    var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
+                    var longRef = exifData.gps.GPSLongitudeRef === 'E' ? 1 : -1;
+                    var lat = exifData.gps.GPSLatitude;
+                    var long = exifData.gps.GPSLongitude;
+                    var gps = {
+                        latitude: latRef * (lat[0]+ (lat[1]/60)+(lat[2]/3600)),
+                        longtitude: longRef * (long[0] + (long[1]/60) + (long[2]/3600))
+                    };
+
+                    console.log(gps);
+                }
+            });
+        }catch (error) {
+            console.log('Error: ' + error.message);
+        }
         res.redirect('/');
-
-
     } ) ;
 };
 

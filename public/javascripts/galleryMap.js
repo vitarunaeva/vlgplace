@@ -55,12 +55,17 @@ var map = new google.maps.Map(document.getElementById("map"), {
 });
 
 var data = [{
-    profileImage: "./images/1.jpg",
-    pos: [48.42217, 44.31308]
-}, {
-    profileImage: "./images/2.jpg",
-    pos: [48.42220, 44.31308]
+   profileImage: newPhoto,
+   pos: gps
 }];
+
+// var data = [{
+//     profileImage: "./images/1.jpg",
+//     pos: [48.42217, 44.31308]
+// }, {
+//     profileImage: "./images/2.jpg",
+//     pos: [48.42220, 44.31308]
+// }];
 
 for(var i=0;i<data.length;i++){
     new CustomMarker(new google.maps.LatLng(data[i].pos[0],data[i].pos[1]), map,  data[i].profileImage)
