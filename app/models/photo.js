@@ -8,7 +8,9 @@ var photoSchema = mongoose.Schema({
     categoryPhoto: String,
     kwPhoto: String,
     descPhoto: String,
-    datePhoto: String
+    datePhoto: String,
+    longit: Number,
+    latit: Number
 });
 
 // создание модели фотографии

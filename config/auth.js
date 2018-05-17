@@ -8,8 +8,9 @@ module.exports = {
         'profileFields' : ['id', 'email', 'name']
     },
     'vkAuth': {
-        'clientID'  : '6425432',
-        'clientSecret' : 'beb50JU2x4gRVV6ikt11',
+        'lang': 'ru',
+        'clientID'  : '6472281',
+        'clientSecret' : 'cIVNnVtcZ9rD5muh9I68',
         'callbackURL' : 'http://localhost:8080/auth/vkontakte/callback',
         'profileFields' : ['id', 'email', 'name']
     },

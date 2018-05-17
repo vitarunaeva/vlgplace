@@ -6,35 +6,36 @@ var fs = require('fs');
 const fileUpload = require('express-fileupload');
 var ExifImage = require('exif').ExifImage;
 
-//механизм хранения
-var storage = multer.diskStorage({
-    destination: './public/uploads/',
-    filename: function (req, file, cd) {
-        cd(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
-    }
-});
-//+
-//инициализация загрузки
-var upload = multer({
-    storage: storage,
-    limits: {fileSize: 7},
-    fileFilter: function (req, file, cd) {
-        checkFileType(file, cd);
-    }
-}).single('filePhoto');
 
-//проверка типа файла
-function checkFiletType(file, cd) {
-    const fileTypes = /jpeg|jpg/;
-    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = fileTypes.test(file.mimetype);
-
-    if (extname && mimetype) {
-        return cd(null, true);
-    } else {
-        cd('Error: Только изображения формата JPEG или JPG!')
-    }
-}
+// //механизм хранения
+// var storage = multer.diskStorage({
+//     destination: './public/uploads/',
+//     filename: function (req, file, cd) {
+//         cd(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+//     }
+// });
+// //+
+// //инициализация загрузки
+// var upload = multer({
+//     storage: storage,
+//     limits: {fileSize: 7},
+//     fileFilter: function (req, file, cd) {
+//         checkFileType(file, cd);
+//     }
+// }).single('filePhoto');
+//
+// //проверка типа файла
+// function checkFiletType(file, cd) {
+//     const fileTypes = /jpeg|jpg/;
+//     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+//     const mimetype = fileTypes.test(file.mimetype);
+//
+//     if (extname && mimetype) {
+//         return cd(null, true);
+//     } else {
+//         cd('Error: Только изображения формата JPEG или JPG!')
+//     }
+// }
 
 //загрузка модели фотографии
 var Photo = require('../app/models/photo');
@@ -120,7 +121,10 @@ module.exports = function (app, passport) {
         passport.authenticate('vkontakte', {
             successRedirect: '/profile',
             failureRedirect: '/'
-        }));
+        }),
+        function(req, res){
+        res.redirect('/');
+        });
 
     // facebook
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['public_profile', 'email']}));
@@ -164,7 +168,8 @@ module.exports = function (app, passport) {
 
     // facebook
     //подключение к facebook для авторизации
-    app.get('/connect/facebook', passport.authorize('facebook', {scope: ['public_profile', 'email']}));
+    app.get('/connect/facebook', passport.authorize('facebook', {
+        scope: ['public_profile', 'email']}));
 
     // обработка обратного вызова после успешной авторизации
     app.get('/connect/facebook/callback',
@@ -225,35 +230,39 @@ module.exports = function (app, passport) {
         //req.body.filePhotos = phts.name;
         var data = req.body;
         data.filePhoto = photoName;
-        var newPhoto = new Photo(data);
-        console.log(newPhoto, data);
-        newPhoto.save(function(err, temp){
-            console.log(temp);
-            if(err){
-                console.log("ooopssss....");
-            }
-        });
+        var gps;
         try{
-            new ExifImage({image: newPhoto}, function (error, exifData) {
+            new ExifImage({image: phts.data}, function (error, exifData) {
                 if(error){
                     console.log('Error: ' + error.message);
+                    console.log(phts);
                 } else{
-                    //console.log('exif', exifData);
+                    console.log('exif', exifData);
                     var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
                     var longRef = exifData.gps.GPSLongitudeRef === 'E' ? 1 : -1;
                     var lat = exifData.gps.GPSLatitude;
                     var long = exifData.gps.GPSLongitude;
-                    var gps = {
+                    gps = {
                         latitude: latRef * (lat[0]+ (lat[1]/60)+(lat[2]/3600)),
                         longtitude: longRef * (long[0] + (long[1]/60) + (long[2]/3600))
                     };
-
+                    data.longit = gps.longtitude;
+                    data.latit = gps.latitude;
                     console.log(gps);
+                    var newPhoto = new Photo(data);
+                    newPhoto.save(function(err, temp){
+                        if(err){
+                            console.log("ooopssss....");
+                        }
+                    });
                 }
             });
         }catch (error) {
             console.log('Error: ' + error.message);
         }
+        console.log(gps);
+
+
         res.redirect('/');
     } ) ;
 };

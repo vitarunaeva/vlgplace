@@ -208,14 +208,17 @@ module.exports = function (passport) {
 
     vkStrategy.passReqToCallback = true;  // проверет, вошел ли пользователь в систему или нет
     passport.use(new VKStrategy(vkStrategy,
-        function (req, token, refreshToken, profile, done) {
+        function (req, accessToken, refreshToken, params, profile, done){
+
+            //     function (req, token, refreshToken, profile, done) {
             // ассинхронность
             process.nextTick(function () {
 
                 // проверка существования логина
                 if (!req.user) {
 
-                    User.findOne({'vkontakte.id': profile.id}, function (err, user) {
+                    User.findOrCreate({vkontakteId: profile.id}, function (err, user) {
+                 //   User.findOne({'vkontakte.id': profile.id}, function (err, user) {
                         if (err)
                             return done(err);
 
