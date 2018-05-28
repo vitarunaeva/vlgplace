@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
+var gm = require('gm');
 var fs = require('fs');
 const fileUpload = require('express-fileupload');
 var ExifImage = require('exif').ExifImage;
@@ -226,7 +227,7 @@ module.exports = function (app, passport) {
             console.log('*********************************');
         }
         var photoName = './public/uploads/'+Date.now()+phts.name;
-        phts.mv(photoName);
+         phts.mv(photoName);
         //req.body.filePhotos = phts.name;
         var data = req.body;
         data.filePhoto = photoName;
@@ -255,6 +256,16 @@ module.exports = function (app, passport) {
                             console.log("ooopssss....");
                         }
                     });
+                   // var previewName = './public/uploads/preview'+Date.now()+phts.name;
+                   //  phts.mv(previewName);
+                   //  data.filePhoto = previewName;
+                   //  var previewPhoto = gm(photoName).resize(15, 15).write(previewName, function (err) {
+                   //     console.log(err);
+                   //  });
+                   //
+                   //
+                   //  var standartPhoto = gm(filePhoto).resize(900, 600);
+
                 }
             });
         }catch (error) {

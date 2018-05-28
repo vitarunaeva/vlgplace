@@ -241,16 +241,19 @@
 <script >
     var map
     function initMap(){
+        //определение карты
         map = new google.maps.Map(document.getElementById("map"), {
             zoom: 8,
             center: new google.maps.LatLng(48.42216, 44.31308),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-
+        //генерируем фотокарту из объектов словаря photoList
         <% photoList.forEach(function(temp) { %>
         photo = "<%=temp.filePhoto%>";
         photo.slice(0,1);
+        //создаем фотомаркер
         var marker = new google.maps.Marker({
+            //задаем геоданные широты и долготы, изъятые из EXIF фото
             position: new google.maps.LatLng("<%=temp.latit%>", "<%= temp.longit %>"),
             icon: photo,
             map: map

@@ -217,7 +217,7 @@ module.exports = function (passport) {
                 // проверка существования логина
                 if (!req.user) {
 
-                    User.findOrCreate({vkontakteId: profile.id}, function (err, user) {
+                    User.findOne({vkontakteId: profile.id}, function (err, user) {
                  //   User.findOne({'vkontakte.id': profile.id}, function (err, user) {
                         if (err)
                             return done(err);
