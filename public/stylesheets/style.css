@@ -122,6 +122,26 @@ footer {
     display: none;
 }
 
+.google-marker {
+    position: relative;
+    border: 1px solid red;
+    border-radius: 50%;
+}
+.google-marker img {
+    border-radius: 50%;
+}
+.google-marker:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: red transparent transparent transparent;
+}
+
 @media screen and (max-width: 768px) {
     nav {
         margin-top: 0;
@@ -166,6 +186,22 @@ footer {
         position: absolute;
         top: 15px;
         right: 15px;
+    }
+
+    .photo-gallery{
+        position: relative;
+        height: 278px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .photo-gallery-line{
+        flex-wrap: nowrap;
+        width: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+
     }
 }
 
