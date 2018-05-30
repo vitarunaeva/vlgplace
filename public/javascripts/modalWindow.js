@@ -1,3 +1,5 @@
+
+
 var modalFilter = document.getElementById('modalWindow__filter'),
     modalAuth = document.getElementById('modalWindow__auth'),
     auth = document.getElementById('authorization'),
@@ -6,6 +8,7 @@ var modalFilter = document.getElementById('modalWindow__filter'),
 (function () {
     'use strict';
 
+    //открытие модального окна
     $('.js-popup-open').on('click', function(e) {
         e.preventDefault();
 
@@ -14,12 +17,12 @@ var modalFilter = document.getElementById('modalWindow__filter'),
         $('.overlay').addClass('visible');
         $(popupId).addClass('visible');
     });
-
+    //закрытие модального окна на "крестик"
     $('.popup-close').on('click', function() {
         $('.overlay').removeClass('visible');
         $(this).parents('.popup').removeClass('visible');
     });
-
+    //закрытие модального окна путем нажатия кнопки "esc"
     $(document).keydown(function(e) {
         if(e.keyCode === 27 && $('.overlay').hasClass('visible')) {
             $('.overlay').removeClass('visible');
@@ -28,12 +31,12 @@ var modalFilter = document.getElementById('modalWindow__filter'),
     });
 
 
-    $(".overlayLink").click(function(event){
-        event.preventDefault();
-        var action = $(this).attr('data-action');
-
-        $("#loginTarget").load("ajax/" + action);
-
-        $(".overlay").fadeToggle("fast");
-    });
+    // $(".overlayLink").click(function(event){
+    //     event.preventDefault();
+    //     var action = $(this).attr('data-action');
+    //
+    //     $("#loginTarget").load("ajax/" + action);
+    //
+    //     $(".overlay").fadeToggle("fast");
+    // });
 })();

@@ -1,12 +1,12 @@
-menu.onclick=function myFunction() {
-    const x = document.getElementById("myTopnav");
-
-    if(x.className === "topnav"){
-        x.className += " responsive"
-    } else{
-        x.className = "topnav";
-    }
-};
+// menu.onclick=function myFunction() {
+//     const x = document.getElementById("myTopnav");
+//
+//     if(x.className === "topnav"){
+//         x.className += " responsive"
+//     } else{
+//         x.className = "topnav";
+//     }
+// };
 
 
 //плавный скролл по элементам меню
@@ -17,5 +17,9 @@ $(document).ready(function(){
             top = $(id).offset().top;
         $('body,html').animate({scrollTop: top}, 1500);
     });
+});
+
+$('.hamburger').on('click', function() {
+   $('.mobile-topnav').toggleClass('open');
 });
 

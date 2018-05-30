@@ -9,6 +9,7 @@ function preperaDataFormToAjax(formId) {
     return JSON.stringify(formObj);
 }
 
+//переход между вкладками фотокарта и фотогалерея
 $('.js-tab-button').on('click', '.js-button:not(.active)', function () {
     $(this)
         .addClass('active').siblings().removeClass('active')

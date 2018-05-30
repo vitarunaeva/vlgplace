@@ -15,7 +15,7 @@
 body, html{
     margin: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     font-size: 14px;
     font-family: 'Raleway', sans-serif;
 }
@@ -117,6 +117,57 @@ footer {
     color: #ffffff;
 }
 
+.mobile-topnav,
+.hamburger {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    nav {
+        margin-top: 0;
+    }
+
+    .mobile-topnav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-top: 10px;
+        padding-left: 50px;
+        background: #69c7c0;
+    }
+    .mobile-topnav.open {
+        display: block;
+    }
+    .mobile-topnav a {
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 100;
+    }
+    .topnav {
+        display: none;
+    }
+    .container__title {
+        flex-wrap: wrap;
+    }
+    .about__item h3 {
+        font-size: 14px;
+    }
+
+    .auth_icon,
+    .icForRegistrUsers {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+}
 
 
 

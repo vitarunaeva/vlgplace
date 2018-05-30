@@ -2,12 +2,22 @@
 <html>
 <head>
     <title>vlg_place</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="./public/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
+    <div class="hamburger"><img src="./public/images/icons/hamburger.svg" alt=""></div>
+    <div class="mobile-topnav">
+        <a href="#">ГЛАВНАЯ</a>
+        <a href="#about">О НАС</a>
+        <a href="#gallery">ГАЛЕРЕЯ</a>
+        <a href="#news">НОВОСТИ</a>
+        <a href="#contacts">КОНТАКТЫ</a>
+    </div>
+
     <header>
         <nav>
             <div class="topnav" id="myTopnav">
@@ -16,15 +26,17 @@
                 <a href="#gallery">ГАЛЕРЕЯ</a>
                 <a href="#news">НОВОСТИ</a>
                 <a href="#contacts">КОНТАКТЫ</a>
-                <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
             </div>
             <% if(!isAuth) { %>
             <div class="auth_icon">
-                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon" title="Авторизоваться"></a>
+                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px"
+                                                                 width="35px" alt="authorization_icon"
+                                                                 title="Авторизоваться"></a>
             </div>
             <% } else { %>
             <div class="icForRegistrUsers">
-                <a href="/profile"><img src="./public/images/icons/avatar.svg" height="35px" width="35px" alt="avatar_icon" title="Перейти в профиль"></a>
+                <a href="/profile"><img src="./public/images/icons/avatar.svg" height="35px" width="35px"
+                                        alt="avatar_icon" title="Перейти в профиль"></a>
                 <a href="/logout" class="btn btn-logout">Выйти</a>
             </div>
             <% } %>
@@ -61,7 +73,7 @@
                         снимки объектов того времени.</p>
                 </div>
                 <div class="about__item">
-                    <img src="./public/images/icons/camera.svg"  alt="">
+                    <img src="./public/images/icons/camera.svg" alt="">
                     <h3>Фото сделаны не профессионалами!</h3>
                     <p>Не только в Волгограде, но и в Волгоградской области большое количество достопримечательностей,
                         о которых туристы города, да и Волгоградцы, даже и не слышали.
@@ -74,15 +86,22 @@
 
             <div class="search_filter">
                 <form class="search-form">
-                    <input class="search-input" placeholder="Введите название" type="search" value="" name="search" id="inputSearch" onkeyup="inputSearch()">
-                    <label for="search" class="search-label"><img src="./public/images/icons/search.svg" width="30px" height="30px" alt="search_icon"></label>
+                    <input class="search-input" placeholder="Введите название" type="search" value="" name="search"
+                           id="inputSearch" onkeyup="inputSearch()">
+                    <label for="search" class="search-label"><img src="./public/images/icons/search.svg" width="30px"
+                                                                  height="30px" alt="search_icon"></label>
                 </form>
-                <a href ="#popup-filter" class="js-popup-open"><img src="./public/images/icons/filter.svg" width="30px" height="30px" alt="filter_icon"></a>
-                <a href="#popup-addPhoto" class="js-popup-open"><img src="./public/images/icons/add.svg" width="40px" height="40px"></a>
+                <a href="#popup-filter" class="js-popup-open"><img src="./public/images/icons/filter.svg" width="30px"
+                                                                   height="30px" alt="filter_icon"></a>
+                <a href="#popup-addPhoto" class="js-popup-open"><img src="./public/images/icons/add.svg" width="40px"
+                                                                     height="40px"></a>
             </div>
             <div class="tab-button js-tab-button">
-                <div class='js-button button_map' data-button='map'><img src="./public/images/icons/location.svg" width="30px" height="30px" alt="location_icon"></div>
-                <div class='js-button  button_photo-gallery active' data-button='gallery'><img src="./public/images/icons/gallery.svg" width="30px" height="30px" alt="gallery_icon"></div>
+                <div class='js-button button_map' data-button='map'><img src="./public/images/icons/location.svg"
+                                                                         width="30px" height="30px" alt="location_icon">
+                </div>
+                <div class='js-button  button_photo-gallery active' data-button='gallery'><img
+                            src="./public/images/icons/gallery.svg" width="30px" height="30px" alt="gallery_icon"></div>
             </div>
             <div class="gallery-tab container-map-gallery js-container" data-container='map'>
                 <div class="title-photomap">ФОТОКАРТА</div>
@@ -96,13 +115,17 @@
                     <div class="photo-gallery-line">
                         <!--+-->
                         <% if (photoList.length) { %>
-                        <% for(var i=0; i < photoList.length; i++) { %>
-                        <a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)" class="photo_gallery-wrapper">
+                        <% for(var i = 0; i < photoList.length; i++) { %>
+                        <a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)"
+                           class="photo_gallery-wrapper">
                             <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
                             <span class="gallery-desc-hover">
-                                <span class="desc-hover__auth">Автор: <span class="desc-hover__style">Runaeva<%= photoList[i].email %></span></span>
-                                <span class="desc-hover__date">Опубликовано: <span class="desc-hover__style">20.04.2018<%= photoList[i].dateTime %></span></span>
-                                <span class="desc-hover__category"> Категория: <span class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
+                                <span class="desc-hover__auth">Автор: <span
+                                            class="desc-hover__style">Runaeva<%= photoList[i].email %></span></span>
+                                <span class="desc-hover__date">Опубликовано: <span
+                                            class="desc-hover__style">20.04.2018<%= photoList[i].dateTime %></span></span>
+                                <span class="desc-hover__category"> Категория: <span
+                                            class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
                                         <%= photoList[i].rating %>
                                         <div class="rating-count">
@@ -147,23 +170,26 @@
             <form action="/login" method="post">
                 <div class="modal__form form-group">
                     <label>Логин</label>
-                    <input type="text"class="form-control" name="username">
+                    <input type="text" class="form-control" name="username">
                     <!-- <input type="text" class="form-control" name="email">-->
                 </div>
                 <div class="modal__form form-group">
                     <label>Пароль</label>
-                    <input type="password" class="form-control" name="password" >
+                    <input type="password" class="form-control" name="password">
                     <span class="psw">Забыли<a href="#">пароль?</a></span>
                 </div>
                 <div class="container__submit-enter">
                     <button type="submit" class="btn btn-enter">Войти</button>
-                    <input class="input__remember" type="checkbox" checked="checked"><label class="modal__form">Запомнить меня</label>
+                    <input class="input__remember" type="checkbox" checked="checked"><label class="modal__form">Запомнить
+                        меня</label>
                 </div>
 
                 <div class="auth_social">
                     <a href="/auth/vkontakte"><img src="./public/images/icons/vk.svg" width="30px" height="30px"></a>
-                    <a href="/auth/ok"><img src="./public/images/icons/odnoklassniki.svg" width="30px" height="30px"></a>
-                    <a href="/auth/facebook"><img src="./public/images/icons/facebook.svg" width="30px" height="30px"></a>
+                    <a href="/auth/ok"><img src="./public/images/icons/odnoklassniki.svg" width="30px"
+                                            height="30px"></a>
+                    <a href="/auth/facebook"><img src="./public/images/icons/facebook.svg" width="30px"
+                                                  height="30px"></a>
                 </div>
             </form>
 
@@ -173,7 +199,7 @@
     <!--ДОБАВЛЕНИЕ ФОТО-->
 
     <div id="popup-addPhoto" class="modal__content popup" role="document">
-        <%if(isAuth) { %>
+        <% if(isAuth) { %>
         <div class="modal__header">
             <div class="popup-close btn-close">&times;</div>
             <h2><img src="./public/images/icons/picture.svg" width="100px" height="100px">Добавление фото</h2>
@@ -218,7 +244,7 @@
                 <button type="submit" class="btn uploadPhoto">Отправить</button>
             </form>
         </div>
-        <%} else { %>
+        <% } else { %>
         <div class="modal__close ">
             <div class="popup-close btn-close">&times;</div>
         </div>
@@ -232,15 +258,15 @@
 </div>
 
 
-
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
 <script src="./public/javascripts/scripts.js"></script>
 <!-- <script src="./public/javascripts/galleryMap.js"></script> -->
 <script src="./public/javascripts/gallery-button.js"></script>
 <script src="./public/javascripts/modalWindow.js"></script>
-<script >
+<script>
     var map
-    function initMap(){
+
+    function initMap() {
         //определение карты
         map = new google.maps.Map(document.getElementById("map"), {
             zoom: 8,
@@ -249,19 +275,20 @@
         });
         //генерируем фотокарту из объектов словаря photoList
         <% photoList.forEach(function(temp) { %>
-        photo = "<%=temp.filePhoto%>";
-        photo.slice(0,1);
+        photo = "<%= temp.filePhoto %>";
+        photo.slice(0, 1);
         //создаем фотомаркер
         var marker = new google.maps.Marker({
             //задаем геоданные широты и долготы, изъятые из EXIF фото
-            position: new google.maps.LatLng("<%=temp.latit%>", "<%= temp.longit %>"),
-            icon: photo,
+            position: new google.maps.LatLng("<%= temp.latit %>", "<%= temp.longit %>"),
+            icon: p,
             map: map
         });
-        <%})%>
+        <% }) %>
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs&callback=initMap"> </script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs&callback=initMap"></script>
 
 
 <!--<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">-->
