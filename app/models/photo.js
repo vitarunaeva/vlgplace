@@ -5,6 +5,7 @@ var photoSchema = mongoose.Schema({
     titlePhoto: String,
     email : String,
     filePhoto: String,
+    preview: String,
     previewPhoto: String,
     standartPhoto: String,
     categoryPhoto: String,

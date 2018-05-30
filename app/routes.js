@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
+var sharp = require('sharp');
 var gm = require('gm');
 var fs = require('fs');
 const fileUpload = require('express-fileupload');
@@ -53,8 +54,8 @@ module.exports = function (app, passport) {
 
     // локальный логин. показывает форму входа
     app.get('/login', function (req, res) {
-        Photo.find({}, function(arr, photos){
-            res.render('index.ejs', {photoList: photos ,message: req.flash('loginMessage')});
+        Photo.find({}, function (arr, photos) {
+            res.render('index.ejs', {photoList: photos, message: req.flash('loginMessage')});
         });
     });
 
@@ -123,8 +124,8 @@ module.exports = function (app, passport) {
             successRedirect: '/profile',
             failureRedirect: '/'
         }),
-        function(req, res){
-        res.redirect('/');
+        function (req, res) {
+            res.redirect('/');
         });
 
     // facebook
@@ -170,7 +171,8 @@ module.exports = function (app, passport) {
     // facebook
     //подключение к facebook для авторизации
     app.get('/connect/facebook', passport.authorize('facebook', {
-        scope: ['public_profile', 'email']}));
+        scope: ['public_profile', 'email']
+    }));
 
     // обработка обратного вызова после успешной авторизации
     app.get('/connect/facebook/callback',
@@ -221,60 +223,76 @@ module.exports = function (app, passport) {
     });
 
 
-    app.post('/addPhoto',function (req, res) {
+    app.post('/addPhoto', function (req, res) {
         var phts = req.files.filePhotos;
-        if (!req.files){
+        if (!req.files) {
             console.log('*********************************');
         }
-        var photoName = './public/uploads/'+Date.now()+phts.name;
-         phts.mv(photoName);
+        var photoName = './public/uploads/' + Date.now() + phts.name;
+        console.log("photoname:", photoName);
+        phts.mv(photoName);
         //req.body.filePhotos = phts.name;
         var data = req.body;
         data.filePhoto = photoName;
         var gps;
-        try{
+        try {
             new ExifImage({image: phts.data}, function (error, exifData) {
-                if(error){
-                    console.log('Error: ' + error.message);
-                    console.log(phts);
-                } else{
+                if (error) {
+                    console.log('Error EXIF image: ' + error.message);
+                    console.log('phts', phts);
+                } else {
                     console.log('exif', exifData);
                     var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
                     var longRef = exifData.gps.GPSLongitudeRef === 'E' ? 1 : -1;
                     var lat = exifData.gps.GPSLatitude;
                     var long = exifData.gps.GPSLongitude;
                     gps = {
-                        latitude: latRef * (lat[0]+ (lat[1]/60)+(lat[2]/3600)),
-                        longtitude: longRef * (long[0] + (long[1]/60) + (long[2]/3600))
+                        latitude: latRef * (lat[0] + (lat[1] / 60) + (lat[2] / 3600)),
+                        longtitude: longRef * (long[0] + (long[1] / 60) + (long[2] / 3600))
                     };
                     data.longit = gps.longtitude;
                     data.latit = gps.latitude;
-                    console.log(gps);
+                    console.log('gps', gps);
+
                     var newPhoto = new Photo(data);
-                    newPhoto.save(function(err, temp){
-                        if(err){
+                    newPhoto.save(function (err, temp) {
+                        if (err) {
                             console.log("ooopssss....");
                         }
+
+                        var previewName = './public/uploads/preview' + Date.now() + phts.name;
+                        phts.mv(previewName);
+                        data.filePhoto = previewName;
+
+                        sharp(photoName).resize(15, 15).toFile(previewName, function (err, info) {
+                            if (err) {
+                                console.error('ERROR sharp: ', err);
+                                return;
+                            }
+
+
+                            Photo.findOneAndUpdate({filePhoto: photoName}, {preview: previewName}, {upsert: true}, function(err, info) {
+                                if (err) {
+                                    console.log('err', err);
+                                }
+                            });
+
+
+                        });
                     });
-                   // var previewName = './public/uploads/preview'+Date.now()+phts.name;
-                   //  phts.mv(previewName);
-                   //  data.filePhoto = previewName;
-                   //  var previewPhoto = gm(photoName).resize(15, 15).write(previewName, function (err) {
-                   //     console.log(err);
-                   //  });
-                   //
-                   //
-                   //  var standartPhoto = gm(filePhoto).resize(900, 600);
+
+
+                    // var standartPhoto = gm(filePhoto).resize(900, 600);
 
                 }
             });
-        }catch (error) {
+        } catch (error) {
             console.log('Error: ' + error.message);
         }
         console.log(gps);
 
 
         res.redirect('/');
-    } ) ;
+    });
 };
 
