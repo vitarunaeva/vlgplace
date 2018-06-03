@@ -4,140 +4,10 @@
     <bookmark url="file://$PROJECT_DIR$/views/index.ejs" line="42" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1d7a5df6-0406-465b-bc8f-5d45ab8459da" name="Default" comment="bd">
-      <change beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/authFacebook.js" />
+    <list default="true" id="1d7a5df6-0406-465b-bc8f-5d45ab8459da" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change beforePath="$PROJECT_DIR$/app/models/photo.js" afterPath="$PROJECT_DIR$/app/models/photo.js" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.js" afterPath="$PROJECT_DIR$/app/models/user.js" />
-      <change beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
       <change beforePath="$PROJECT_DIR$/config/database.js" afterPath="$PROJECT_DIR$/config/database.js" />
-      <change beforePath="$PROJECT_DIR$/config/passport.js" afterPath="$PROJECT_DIR$/config/passport.js" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/CONTRIBUTING.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/LICENSE" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/README.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/UPGRADE_GUIDE.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/check.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/check.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/index.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/location.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/one-of.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/one-of.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/runner.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/schema.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/schema.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/validation-chain-builders.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/validation-chain-builders.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/validation-result.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/check/validation-result.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/index.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/matched-data.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/matched-data.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/sanitization-chain-builders.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/sanitization-chain-builders.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/sanitize.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/filter/sanitize.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/index.d.ts" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/lib/chain-creator.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/lib/custom-methods.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/lib/express_validator.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/lib/legacy-runner.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/lib/utils.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/package.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/tsconfig.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/tst.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/constants.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/format-param-output.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/make-sanitizer.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/map-extend.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/persist-values.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/replace-args.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/select-fields.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/express-validator/utils/to-string.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/CHANGELOG.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/LICENSE" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/README.md" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/alpha.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/blacklist.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/contains.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/equals.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/escape.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isAfter.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isAlpha.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isAlphanumeric.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isAscii.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isBase64.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isBefore.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isBoolean.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isByteLength.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isCreditCard.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isCurrency.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isDataURI.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isDecimal.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isDivisibleBy.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isEmail.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isEmpty.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isFQDN.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isFloat.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isFullWidth.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isHalfWidth.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isHash.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isHexColor.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isHexadecimal.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isIP.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISBN.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISIN.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISO31661Alpha2.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISO8601.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISRC.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isISSN.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isIn.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isInt.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isJSON.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isLatLong.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isLength.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isLowercase.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMACAddress.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMD5.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMimeType.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMobilePhone.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMongoId.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isMultibyte.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isNumeric.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isPort.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isPostalCode.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isSurrogatePair.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isURL.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isUUID.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isUppercase.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isVariableWidth.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/isWhitelisted.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/ltrim.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/matches.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/normalizeEmail.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/rtrim.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/stripLow.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/toBoolean.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/toDate.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/toFloat.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/toInt.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/trim.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/unescape.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/util/assertString.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/util/merge.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/util/toString.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/lib/whitelist.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/package.json" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/validator.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/node_modules/validator/validator.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/map.css" afterPath="$PROJECT_DIR$/public/stylesheets/map.css" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
-      <change beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
-      <change beforePath="$PROJECT_DIR$/views/signup.ejs" afterPath="$PROJECT_DIR$/views/signup.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -165,8 +35,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="225">
+              <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -229,8 +99,8 @@
       <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="25">
+              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -286,9 +156,9 @@
       <find>usernameF</find>
       <find>route</find>
       <find>f</find>
-      <find>email</find>
-      <find>stat</find>
       <find>express-va</find>
+      <find>stat</find>
+      <find>email</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -518,7 +388,7 @@
       <workItem from="1526513827184" duration="5713000" />
       <workItem from="1526852986976" duration="2802000" />
       <workItem from="1527422915599" duration="48415000" />
-      <workItem from="1527973453065" duration="23524000" />
+      <workItem from="1527973453065" duration="24375000" />
     </task>
     <task id="LOCAL-00001" summary="add node_modules">
       <created>1522620054942</created>
@@ -751,11 +621,18 @@
       <option name="project" value="LOCAL" />
       <updated>1528063083661</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="auth username. author">
+      <created>1528063184626</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1528063184626</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="462672000" />
+    <option name="totallyTimeSpent" value="463523000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,7 +759,6 @@
     <ignored-roots>
       <path value="C:\project\vlgplace" />
     </ignored-roots>
-    <MESSAGE value="upload file Ajax" />
     <MESSAGE value="add var port" />
     <MESSAGE value="changed app.listen()" />
     <MESSAGE value="changed url from DB (mlab)" />
@@ -907,7 +783,8 @@
     <MESSAGE value="authFacebook" />
     <MESSAGE value="bd" />
     <MESSAGE value="static" />
-    <option name="LAST_COMMIT_MESSAGE" value="static" />
+    <MESSAGE value="auth username. author" />
+    <option name="LAST_COMMIT_MESSAGE" value="auth username. author" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1221,30 +1098,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/passport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2100">
-          <caret line="108" column="96" lean-forward="false" selection-start-line="108" selection-start-column="91" selection-end-line="108" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -1273,6 +1126,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/passport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="721">
+          <caret line="129" column="0" lean-forward="false" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2100">
+          <caret line="108" column="96" lean-forward="false" selection-start-line="108" selection-start-column="91" selection-end-line="108" selection-end-column="96" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4029">
@@ -1283,8 +1160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="26" column="22" lean-forward="false" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
           <folding />
         </state>
       </provider>
