@@ -37,9 +37,9 @@ app.set('view engine', 'ejs'); // настройка ejs для представ
 
 
 app.use(session({
-    secret          :   'vlgplace',
-    resave          :   true,
-    saveUnintialized:   true
+    secret          :   'v1l2g3p4l5a5c6e7',
+    resave          :    false,
+    saveUnintialized:   false
 }));
 //+
 app.use(express.static('./public'));
@@ -51,7 +51,6 @@ app.use(flash()); // использование  connect-flash для мгнов
 app.use(function(req, res, next){
    res.locals.success_msg = req.flash('success_msg');
    res.locals.error_msg = req.flash('error_msg');
-   res.locals.error = req.flash('error');
    next();
 });
 
