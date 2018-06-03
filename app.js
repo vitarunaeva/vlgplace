@@ -25,8 +25,8 @@ mongoose.connect(configDB.url); // соединение с БД
 require('./config/passport')(passport);
 
 // настрока express приложения
-//app.use(express.static('./'));
-app.use('/static', express.static(__dirname + '/public/uploads'));
+app.use(express.static('./'));
+//app.use('/static', express.static(__dirname + '/public/uploads'));
 
 app.use(morgan('dev')); // запись запроса в консоль
 app.use(cookieParser()); // чтение cookies
