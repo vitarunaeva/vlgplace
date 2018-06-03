@@ -11,7 +11,6 @@ var morgan           =  require('morgan');
 var cookieParser     =  require('cookie-parser');
 var bodyParser       =  require('body-parser');
 var session          =  require('express-session');
-var expressValidator =  require('express-validator');
 
 
 var configDB = require('./config/database.js');
@@ -27,6 +26,8 @@ require('./config/passport')(passport);
 
 // настрока express приложения
 app.use(express.static('./'));
+app.use('/static', express.static(__dirname + '/public/uploads'));
+
 app.use(morgan('dev')); // запись запроса в консоль
 app.use(cookieParser()); // чтение cookies
 app.use(bodyParser.urlencoded({ extended: true })); // получение информации форм html
