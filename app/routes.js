@@ -3,7 +3,6 @@ var router = express.Router();
 var passport = require('passport');
 var multer = require('multer');
 var sharp = require('sharp');
-var gm = require('gm');
 var fs = require('fs');
 const fileUpload = require('express-fileupload');
 var ExifImage = require('exif').ExifImage;
@@ -231,6 +230,8 @@ module.exports = function (app, passport) {
         var photoName = './public/uploads/' + Date.now() + phts.name;
         console.log("photoname:", photoName);
         phts.mv(photoName);
+        var author = req.user.local.email;
+        //console.log('user1: ', user1);
         //req.body.filePhotos = phts.name;
         var data = req.body;
         data.filePhoto = photoName;
@@ -295,4 +296,3 @@ module.exports = function (app, passport) {
         res.redirect('/');
     });
 };
-

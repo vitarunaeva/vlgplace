@@ -122,25 +122,6 @@ footer {
     display: none;
 }
 
-.google-marker {
-    position: relative;
-    border: 1px solid red;
-    border-radius: 50%;
-}
-.google-marker img {
-    border-radius: 50%;
-}
-.google-marker:after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: calc(50% - 5px);
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 5px 5px 0 5px;
-    border-color: red transparent transparent transparent;
-}
 
 @media screen and (max-width: 768px) {
     nav {

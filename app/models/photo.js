@@ -3,7 +3,7 @@ var multer = require('multer');
 
 var photoSchema = mongoose.Schema({
     titlePhoto: String,
-    email : String,
+    author : String,
     filePhoto: String,
     preview: String,
     previewPhoto: String,

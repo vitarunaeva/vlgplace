@@ -20,22 +20,26 @@
 
         <form action="/signup" method="post">
             <div class="modal__form form-group">
-                <label>E-mail:</label>
-                <input type="text" class="form-control" name="email">
+                <label for="inputEmail">E-mail:</label>
+                <input type="email" id="inputEmail" class="form-control" name="email">
             </div>
             <div class="modal__form form-group">
-                <label>Пароль:</label>
-                <input type="password" class="form-control" name="password">
+                <label for="inputUsername">Username:</label>
+                <input type="text" id="inputUsername" class="form-control" name="username">
+            </div>
+            <div class="modal__form form-group">
+                <label for="inputPassword">Пароль:</label>
+                <input type="password" id="inputPassword" class="form-control" name="password">
+            </div>
+            <div class="modal__form form-group">
+                <label for="inputConfirmPassword">Повторите пароль:</label>
+                <input type="password" id="inputConfirmPassword" class="form-control" name="password">
             </div>
 
               <div class="signup_additionaly">
                   <label>Дополнительно..</label>
                   <div class="container_addidionaly">
-                    <div class="modal__form form-group">
-                        <label>Имя:</label>
-                        <input type="text" class="form-control" name="username">
-                    </div>
-                    <div class="modal__form form-group">
+                     <div class="modal__form form-group">
                         <label>Дата рождения:</label>
                         <input type="date" class="form-control" name="dateOfBirth">
                     </div>

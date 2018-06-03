@@ -28,7 +28,7 @@ module.exports = function (passport) {
 
     passport.use('local-login', new AuthLocalStrategy({
             //по умолчанию, локальная стратегия использует username и password, переобпредяет email
-            usernameField: 'username',
+            emailField: 'email',
             passwordField: 'password',
             passReqToCallback: true // проверяет вошел пользователь в систему или нет
         },
@@ -42,7 +42,7 @@ module.exports = function (passport) {
             process.nextTick(function () {
                 console.log('124');
                 User.findOne({'local.email': email}, function (err, user) {
-                    // если ошибка, то воозвращаем ошибку
+                    // если ошибка, то возвращаем ошибку
                     if (err)
                         return done(err);
 
@@ -63,21 +63,20 @@ module.exports = function (passport) {
 
     // локальная регистрация
     passport.use('local-signup', new AuthLocalStrategy({
-            usernameField: 'email',
+            usernameField: 'username',
+            emailField: 'email',
             passwordField: 'password',
+
             passReqToCallback: true
         },
-        function (req, email, password, done) {
+        function (req, username, email, password, done) {
             if (email)
                 email = email.toLowerCase();
-
             process.nextTick(function () {
                 if (!req.user) {
                     User.findOne({'local.email': email}, function (err, user) {
-
                         if (err)
                             return done(err);
-
                         if (user) {
                             return done(null, false, req.flash('signupMessage', 'Такой E-mail уже существует.'));
                         } else {
@@ -85,6 +84,7 @@ module.exports = function (passport) {
                             // создание нового пользователя
                             var newUser = new User();
 
+                            newUser.local.username = username;
                             newUser.local.email = email;
                             newUser.local.password = newUser.generateHash(password);
 
@@ -101,7 +101,7 @@ module.exports = function (passport) {
                 } else if (!req.user.local.email) {
 
 
-                    User.findOne({'local.email': email}, function (err, user) {
+                    User.findOne({'local.email': result.value.email}, function (err, user) {
                         if (err)
                             return done(err);
 
@@ -110,6 +110,7 @@ module.exports = function (passport) {
 
                         } else {
                             var user = req.user;
+                            user.local.username = username;
                             user.local.email = email;
                             user.local.password = user.generateHash(password);
                             user.save(function (err) {
@@ -125,6 +126,8 @@ module.exports = function (passport) {
                     //прежде чем создать новую учетную запись необхожимо выйти из системы
                     return done(null, req.user);
                 }
+
+
 
             });
 

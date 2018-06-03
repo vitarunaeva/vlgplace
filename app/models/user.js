@@ -1,14 +1,12 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
+
 // схема для модели пользователя
 var userSchema = mongoose.Schema({
     local            : {
         email        : String,
         password     : String,
-        passwordConf : String,
-
-        //+
         username     : String,
         dateOfBirth  : String,
         city         : String,
@@ -33,7 +31,14 @@ var userSchema = mongoose.Schema({
         name         : String
     }
 
+    }, {
+    timestamps: {
+        createAt: 'createAt',
+        updateAt: 'updateAt'
+    }
 });
+
+
 
 // генерирующий хэш
 userSchema.methods.generateHash = function(password) {
