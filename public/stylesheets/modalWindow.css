@@ -104,6 +104,9 @@
     outline: 1px dotted;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.75);
 }
+.btn_addSigth{
+    margin-left: 20px;
+}
 
 .auth_social{
     text-align: center;

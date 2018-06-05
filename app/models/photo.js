@@ -8,7 +8,7 @@ var photoSchema = mongoose.Schema({
     preview: String,
     previewPhoto: String,
     standartPhoto: String,
-    categoryPhoto: String,
+    titleSight: String,
     kwPhoto: String,
     descPhoto: String,
     datePhoto: String,

@@ -41,14 +41,26 @@ var ExifImage = require('exif').ExifImage;
 //загрузка модели фотографии
 var Photo = require('../app/models/photo');
 
+//загрука модели достопримечательностей
+var Sight = require('../app/models/sights');
+
 module.exports = function (app, passport) {
     // показать домашнюю страницу
     app.get('/', function (req, res) {
         Photo.find({}, function (error, photos) {
             res.render('index.ejs', {photoList: photos, isAuth: req.isAuthenticated()});
-            console.log('photoList', photos);
+            // console.log('photoList', photos);
 
         });
+
+
+        // Sight.find({}, function (error, sights) {
+        //     res.render('index.ejs', {sightList: sights, isAuth: req.isAuthenticated()});
+        //     console.log('sightList', sights);
+        // });
+    });
+    app.get('/sight-photo', function (req, res) {
+       res.render('sight-photo.ejs');
     });
 
     // локальный логин. показывает форму входа
@@ -56,6 +68,9 @@ module.exports = function (app, passport) {
         Photo.find({}, function (arr, photos) {
             res.render('index.ejs', {photoList: photos, message: req.flash('loginMessage')});
         });
+        // Sight.find({}, function (arr, sights) {
+        //     res.render('index.ejs', {sightList: sights, message: req.flash('loginMessage')});
+        // });
     });
 
     // обработка формы входа
@@ -230,17 +245,18 @@ module.exports = function (app, passport) {
         var photoName = './public/uploads/' + Date.now() + phts.name;
         console.log("photoname:", photoName);
         phts.mv(photoName);
-        var author = req.user.local.email;
+        var author = req.user.local.username;
         //console.log('user1: ', user1);
         //req.body.filePhotos = phts.name;
         var data = req.body;
+        data.author = author;
         data.filePhoto = photoName;
         var gps;
         try {
             new ExifImage({image: phts.data}, function (error, exifData) {
                 if (error) {
-                    console.log('Error EXIF image: ' + error.message);
-                    console.log('phts', phts);
+                    // console.log('Error EXIF image: ' + error.message);
+                    // console.log('phts', phts);
                 } else {
                     console.log('exif', exifData);
                     var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
@@ -253,7 +269,7 @@ module.exports = function (app, passport) {
                     };
                     data.longit = gps.longtitude;
                     data.latit = gps.latitude;
-                    console.log('gps', gps);
+                    // console.log('gps', gps);
 
                     var newPhoto = new Photo(data);
                     newPhoto.save(function (err, temp) {
@@ -295,4 +311,19 @@ module.exports = function (app, passport) {
 
         res.redirect('/');
     });
+
+    app.post('/filterPhoto', function (req, res) {
+
+        var keywords = req.body.kwPhoto;
+
+        Photo.find({ kwPhoto: keywords},  function (err, photos) {
+            if(err){
+                console.log('err', err);
+            }
+
+            res.render('index.ejs', {photoList: photos});
+            // res.json({photoList: photos});
+        });
+
+    })
 };

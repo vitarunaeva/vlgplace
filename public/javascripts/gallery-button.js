@@ -9,6 +9,8 @@ function preperaDataFormToAjax(formId) {
     return JSON.stringify(formObj);
 }
 
+
+
 //переход между вкладками фотокарта и фотогалерея
 $('.js-tab-button').on('click', '.js-button:not(.active)', function () {
     $(this)
@@ -32,26 +34,26 @@ $(document).mouseup(function (e) {
     }
 });
 
-// $("#addPhoto").on('submit', function (e) {
+// $("#filterPhoto").on('submit', function (e) {
 //     e.preventDefault();
-//     console.log($("#addPhoto")[0][1].files);
-    
-//     var data = preperaDataFormToAjax('addPhoto');
-//  // var formData = new FormData();
-//     // TODO сделать загрузку фото
-    
+//
+//     var inputs = $('#filterPhoto').serializeArray();
+//     var data = JSON.stringify({
+//         kwPhoto: inputs[0].value
+//     });
+//
 //     $.ajax({
-//         url: '/addPhoto',
+//         url: '/filterPhoto',
 //         type: 'POST',
 //         data: data,
-//         dataType: "json",
 //         contentType: 'application/json',
-//         success: function() {
+//         success: function(response) {
 //             $('.popup-close').trigger('click');
-
+//
+//             console.log('response', response);
 //         },
 //         error: function(error) {
-//             console.error('1Фото не сохранилось', error);
+//             console.error('filter error', error);
 //         }
 //     });
 // });

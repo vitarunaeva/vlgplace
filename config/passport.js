@@ -63,13 +63,14 @@ module.exports = function (passport) {
 
     // локальная регистрация
     passport.use('local-signup', new AuthLocalStrategy({
-            usernameField: 'username',
+            //usernameField: 'username',
             emailField: 'email',
             passwordField: 'password',
 
             passReqToCallback: true
         },
-        function (req, username, email, password, done) {
+        function (req,  email, password, done) {
+console.log(email);
             if (email)
                 email = email.toLowerCase();
             process.nextTick(function () {
@@ -84,7 +85,7 @@ module.exports = function (passport) {
                             // создание нового пользователя
                             var newUser = new User();
 
-                            newUser.local.username = username;
+                            newUser.local.username = req.body.username;
                             newUser.local.email = email;
                             newUser.local.password = newUser.generateHash(password);
 
@@ -93,7 +94,10 @@ module.exports = function (passport) {
                                     return done(err);
 
                                 return done(null, newUser);
+
                             });
+
+
                         }
 
                     });
@@ -110,7 +114,7 @@ module.exports = function (passport) {
 
                         } else {
                             var user = req.user;
-                            user.local.username = username;
+                            user.local.username = req.body.username;
                             user.local.email = email;
                             user.local.password = user.generateHash(password);
                             user.save(function (err) {
@@ -132,6 +136,7 @@ module.exports = function (passport) {
             });
 
         }));
+    console.log('++++++');
 
 
     // Odnoklassniki

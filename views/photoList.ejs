@@ -1,0 +1,31 @@
+<% if (photoList.length) { %>
+<% for(var i = 0; i < photoList.length; i++) { %>
+<a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)"
+   class="photo_gallery-wrapper">
+    <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
+    <span class="gallery-desc-hover">
+                                <span class="desc-hover__auth">Автор: <span
+                                            class="desc-hover__style"><%= photoList[i].author %></span></span>
+                                <span class="desc-hover__date">Опубликовано: <span
+                                            class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
+                                <span class="desc-hover__category"> Категория: <span
+                                            class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
+                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
+                                        <%= photoList[i].rating %>
+                                        <div class="rating-count">
+                                          <input id="c1" type="radio" name="rating" value="1" required>
+                                          <label for="c1">1</label>
+                                          <input id="c2" type="radio" name="rating" value="2">
+                                          <label for="c2">2</label>
+                                          <input id="c3" type="radio" name="rating" value="3">
+                                          <label for="c3">3</label>
+                                          <input id="c4" type="radio" name="rating" value="4">
+                                          <label for="c4">4</label>
+                                          <input id="c5" type="radio" name="rating" value="5">
+                                          <label for="c5">5</label>
+                                        </div>
+                                    </span></span>
+                                </span>
+</a>
+<% } %>
+<% } %>

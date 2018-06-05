@@ -27,7 +27,7 @@
                 <a href="#news">НОВОСТИ</a>
                 <a href="#contacts">КОНТАКТЫ</a>
             </div>
-            <% if(!isAuth) { %>
+            <% if(!locals.isAuth) { %>
             <div class="auth_icon">
                 <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px"
                                                                  width="35px" alt="authorization_icon"
@@ -126,7 +126,7 @@
                                 <span class="desc-hover__date">Опубликовано: <span
                                             class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
                                 <span class="desc-hover__category"> Категория: <span
-                                            class="desc-hover__style"><%= photoList[i].categoryPhoto %></span></span>
+                                            class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
                                         <%= photoList[i].rating %>
                                         <div class="rating-count">
@@ -203,7 +203,7 @@
     <!--ДОБАВЛЕНИЕ ФОТО-->
 
     <div id="popup-addPhoto" class="modal__content popup" role="document">
-        <% if(isAuth) { %>
+        <% if(locals.isAuth) { %>
         <div class="modal__header">
             <div class="popup-close btn-close">&times;</div>
             <h2><img src="./public/images/icons/picture.svg" width="100px" height="100px">Добавление фото</h2>
@@ -225,8 +225,15 @@
                     <input type="file" name="filePhotos" id="fileTest">
                 </div>
                 <div class="modal__form form-group">
-                    <label for="categoryPhoto">Категория:</label>
-                    <input type="text" class="form-control" name="categoryPhoto">
+                    <label for="listTitleSight">Достопримечательность:</label>
+                    <select name="listTitleSight">
+                        <option disabled selected>Выберите достопримечательность</option>
+
+                                <option>//</option>
+
+                        <a href="#popup-addSight" class="js-popup-open"><input type="button" onclick="addSight()" class="btn btn_addSigth" value="Добавить новую!"></a>
+                    </select>
+
                 </div>
                 <div class="modal__form form-group">
                     <label for="kwPhoto">Ключевые слова:</label>
@@ -257,10 +264,38 @@
         </div>
         <% } %>
     </div>
-</div>
+
+    <!-- ДОБАВЛЕНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
+    <div id="popup-addSight" class="modal__content popup" role="document">
+        <div class="modal__header"></div>
+        <div class="modal__body"></div>
+        <div class="modal__close">
+            <div class="popup-close btn-close">&times;</div>
+        </div>
+    </div>
+
+    <div id="popup-filter"  class="modal__content popup" role="document">
+        <div class="modal__header">ФИЛЬТР</div>
+        <div class="mpdal__body">
+            <form action="/filterPhoto" method="post" id="filterPhoto" enctype="multipart/form-data">
+                <div class="modal__form form-group">
+                    <label for="kwPhoto">По ключевым словам:</label>
+                    <input type="text" class="form-control" name="kwPhoto">
+                </div>
+                <button type="submit" class="btn filterPhoto">ПРИМЕНИТЬ</button>
+                </form>
+        </div>
+        <div class="modal__close">
+            <div class="popup-close btn-close">&times;</div>
+        </div>
+
+    </div>
 
 </div>
 
+</div>
+
+<script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs"></script>
 <script src="./public/javascripts/richMaker.js"></script>
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
@@ -271,6 +306,7 @@
 <script src="./public/javascripts/authFacebook.js"></script>
 
 <script>
+
     var map;
     function initialize() {
         // Prepare markers array

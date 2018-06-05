@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var categoriesSchema = mongoose.Schema({
-   categoriesPhoto:{
-        categoryPhoto : String
+   categoriesSight:{
+        categorySight : String
    },
     categoriesNews: {
        categoryNews   : String
