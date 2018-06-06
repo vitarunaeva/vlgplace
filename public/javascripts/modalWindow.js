@@ -1,5 +1,3 @@
-
-
 var modalFilter = document.getElementById('modalWindow__filter'),
     modalAuth = document.getElementById('modalWindow__auth'),
     auth = document.getElementById('authorization'),

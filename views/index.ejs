@@ -117,7 +117,7 @@
                         <!--+-->
                         <% if (photoList.length) { %>
                         <% for(var i = 0; i < photoList.length; i++) { %>
-                        <a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)"
+                        <a href="/sight-photo/<%= photoList[i]._id%>" style="background-image: url( <%= photoList[i].filePhoto %>)"
                            class="photo_gallery-wrapper">
                             <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
                             <span class="gallery-desc-hover">
@@ -231,7 +231,7 @@
 
                                 <option>//</option>
 
-                        <a href="#popup-addSight" class="js-popup-open"><input type="button" onclick="addSight()" class="btn btn_addSigth" value="Добавить новую!"></a>
+                        <a href="#popup-addSight" class="js-popup-open"><input type="button" class="btn btn_addSight" value="Добавить новую!"></a>
                     </select>
 
                 </div>
@@ -267,13 +267,36 @@
 
     <!-- ДОБАВЛЕНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
     <div id="popup-addSight" class="modal__content popup" role="document">
-        <div class="modal__header"></div>
-        <div class="modal__body"></div>
+        <div class="modal__header">НОВАЯ ДОСТОПРИМЕЧАТЕЛЬНОСТЬ</div>
+        <div class="modal__body">
+            <form action="/addSight" method="post" id="addSight" enctype="multipart/form-data">
+                <div class="modal__form form-group">
+                    <label for="titleSight">Название:</label>
+                    <input type="text" class="form-control" name="titleSight">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="titleSight">Название: </label>
+                    <input type="text" class="form-control" name="titleSight">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="categorySight">Категория: </label>
+                    <select name="categorySight">
+                        <option></option>
+                    </select>
+                </div>
+                <div class="modal__form form-group">
+                    <label for="descSight">Описание: </label>
+                    <input type="text" class="form-control" name="descSight">
+                </div>
+                <button type="submit" class="btn newSight">Создать</button>
+            </form>
+        </div>
         <div class="modal__close">
             <div class="popup-close btn-close">&times;</div>
         </div>
     </div>
 
+    <!---ФИЛЬТР -->
     <div id="popup-filter"  class="modal__content popup" role="document">
         <div class="modal__header">ФИЛЬТР</div>
         <div class="mpdal__body">

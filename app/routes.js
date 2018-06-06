@@ -59,8 +59,18 @@ module.exports = function (app, passport) {
         //     console.log('sightList', sights);
         // });
     });
-    app.get('/sight-photo', function (req, res) {
-       res.render('sight-photo.ejs');
+
+    //показать страницу с фотографией
+    app.get('/sight-photo/:id', function (req, res) {
+        Photo.find({_id: req.params.id}, function (error, photo) {
+            console.log('photo', photo);
+
+            res.render('sight-photo.ejs', {photo: photo[0], isAuth: req.isAuthenticated()});
+        });
+    });
+    //показать страницу с достопримечателньостью
+    app.get('/sight-overall', function (req, res) {
+        res.render('sight-overall.ejs');
     });
 
     // локальный логин. показывает форму входа
@@ -238,19 +248,22 @@ module.exports = function (app, passport) {
 
 
     app.post('/addPhoto', function (req, res) {
-        var phts = req.files.filePhotos;
         if (!req.files) {
             console.log('*********************************');
         }
-        var photoName = './public/uploads/' + Date.now() + phts.name;
-        console.log("photoname:", photoName);
-        phts.mv(photoName);
+
+
+        var phts = req.files.filePhotos;
         var author = req.user.local.username;
-        //console.log('user1: ', user1);
-        //req.body.filePhotos = phts.name;
         var data = req.body;
+        var keywords = data.kwPhoto;
+        var photoName = './public/uploads/' + Date.now() + phts.name;
+
         data.author = author;
         data.filePhoto = photoName;
+        data.kwPhoto = keywords.split(', ');
+
+        phts.mv(photoName);
         var gps;
         try {
             new ExifImage({image: phts.data}, function (error, exifData) {
@@ -258,7 +271,7 @@ module.exports = function (app, passport) {
                     // console.log('Error EXIF image: ' + error.message);
                     // console.log('phts', phts);
                 } else {
-                    console.log('exif', exifData);
+                    //console.log('exif', exifData);
                     var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
                     var longRef = exifData.gps.GPSLongitudeRef === 'E' ? 1 : -1;
                     var lat = exifData.gps.GPSLatitude;
@@ -288,7 +301,7 @@ module.exports = function (app, passport) {
                             }
 
 
-                            Photo.findOneAndUpdate({filePhoto: photoName}, {preview: previewName}, {upsert: true}, function(err, info) {
+                            Photo.findOneAndUpdate({filePhoto: photoName}, {preview: previewName}, {upsert: true}, function (err, info) {
                                 if (err) {
                                     console.log('err', err);
                                 }
@@ -306,24 +319,27 @@ module.exports = function (app, passport) {
         } catch (error) {
             console.log('Error: ' + error.message);
         }
-        console.log(gps);
+        //console.log(gps);
 
 
         res.redirect('/');
     });
 
+    app.post('/addSight', function (req, res) {
+
+    });
+
     app.post('/filterPhoto', function (req, res) {
-
         var keywords = req.body.kwPhoto;
+        var kw = keywords.split(', ');
 
-        Photo.find({ kwPhoto: keywords},  function (err, photos) {
-            if(err){
+        Photo.find({kwPhoto: {$in: kw}}, function (err, photos) {
+            if (err) {
                 console.log('err', err);
             }
-
+            console.log('photos', photos);
+            // photosArray.push([photos]);
             res.render('index.ejs', {photoList: photos});
-            // res.json({photoList: photos});
         });
-
-    })
+    });
 };

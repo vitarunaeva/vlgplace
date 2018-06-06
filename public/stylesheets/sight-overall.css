@@ -1,0 +1,72 @@
+.sight-overall__header, .sight-photo__header{
+    color: #826a5e;
+    font-size: 110px;
+    text-align: center;
+    margin: 0 0 55px;
+}
+.sight-overall__category{
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+}
+
+.sight-overall__category span{
+    font-size: 15px;
+}
+
+.sight-overall__category .categorySight{
+    margin-left: 15px;
+    border: 1.5px solid #40E0D0;
+    border-radius: 3px;
+    color: #826a5e;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sight-overall__rating{
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.sight-overall__rating span{
+    display: flex;
+    font-size: 15px;
+}
+.sight-overall__rating .rating-count{
+    margin-left: 20px;
+}
+.sight-overall__desc{
+    margin-top: 20px;
+}
+
+.sight-overall__gallery h3,
+.sight-overall__near h3,
+.sight-overall__map h3{
+    text-align: center;
+    font-size: 35px;
+    color: #40E0D0;
+    font-weight: normal;
+}
+
+.sight-overall__map-near{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+#mapSight{
+    height: 400px;
+    width: 400px;
+    border: 1.5px solid #989392;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}

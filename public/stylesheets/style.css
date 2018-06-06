@@ -7,6 +7,8 @@
 @import "signup.css";
 @import "profile.css";
 @import "map.css";
+@import "sight-overall.css";
+@import "sight-photo.css";
 
 *{
     box-sizing: border-box;

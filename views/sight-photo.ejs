@@ -4,28 +4,48 @@
     <title>vlg_place</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./public/stylesheets/style.css">
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
-    <header>
-        <nav>
-            <div class="topnav" id="myTopnav">
-                <a href="#">ГЛАВНАЯ</a>
-                <a href="#about">О НАС</a>
-                <a href="#gallery">ГАЛЕРЕЯ</a>
-                <a href="#news">НОВОСТИ</a>
-                <a href="#contacts">КОНТАКТЫ</a>
-                <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
-            </div>
-            <div class="auth_icon">
-                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon"></a>
-            </div>
-            <br class="clear">
-        </nav>
-    </header>
+         <div class="hamburger"><img src="../public/images/icons/hamburger.svg" alt=""></div>
+        <div class="mobile-topnav">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#about">О НАС</a>
+            <a href="#gallery">ГАЛЕРЕЯ</a>
+            <a href="#news">НОВОСТИ</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+        </div>
+
+        <header>
+            <nav>
+                <div class="topnav" id="myTopnav">
+                    <a href="#">ГЛАВНАЯ</a>
+                    <a href="#about">О НАС</a>
+                    <a href="#gallery">ГАЛЕРЕЯ</a>
+                    <a href="#news">НОВОСТИ</a>
+                    <a href="#contacts">КОНТАКТЫ</a>
+                </div>
+                <% if(!locals.isAuth) { %>
+                <div class="auth_icon">
+                    <a href="#popup-auth" class="js-popup-open"><img src="../public/images/icons/enter.svg" height="35px"
+                                                                     width="35px" alt="authorization_icon"
+                                                                     title="Авторизоваться"></a>
+                </div>
+                <div id="status"></div>
+                <% } else { %>
+                <div class="icForRegistrUsers">
+                    <a href="/profile"><img src="../public/images/icons/avatar.svg" height="35px" width="35px"
+                                            alt="avatar_icon" title="Перейти в профиль"></a>
+                    <a href="/logout" class="btn btn-logout">Выйти</a>
+                </div>
+                <% } %>
+                <br class="clear">
+            </nav>
+        </header>
     <main>
-            <div class="sight-photo__header"><h2>НАЗВАНИЕ ФОТО ДОСТОПРИМЕЧАТЕЛЬНОСТИ</h2></div>
+        <% if (locals.photo) { %>
+            <div class="sight-photo__header"><h2><%= photo.titlePhoto %></h2></div>
             <div class="sight-photo__header-info">
                 <div class="sight-photo__uploaded-info">
                     <div class="sight-photo__uploaded">
@@ -34,33 +54,46 @@
                     </div>
                     <div class="sight-photo__author">
                         <span>Автор:</span>
-                        <b>Иван Иванов</b>
+                        <b><%= locals.photo.author %></b>
                     </div>
-                    <label>Ключевые слова:
-                        <b>
-                            <a class="key_words" href="">#Скульптура</a>
-                            <a class="key_words" href="">#ВОВ</a>
-                        </b>
-                    </label>
+                    <div class="sight-photo__keywords">
+                        <span>Ключевые слова:</span>
+                        <div class="kwPhoto">
+                            <b>
+                                <a class="key_words" href=""><%= locals.photo.kwPhoto %></a>
+                            </b>
+                        </div>
+                    </div>
                 </div>
                 <div class="sight-photo__rating">
-                    <div class="rating__wrapper">звезды</div>
+                    <div class="sight-overall__rating">
+                   <span> Рейтинг:
+                      <div class="rating-count">
+                          <input id="c1" type="radio" name="rating" value="1" required>
+                          <label for="c1">1</label>
+                          <input id="c2" type="radio" name="rating" value="2">
+                          <label for="c2">2</label>
+                          <input id="c3" type="radio" name="rating" value="3">
+                          <label for="c3">3</label>
+                          <input id="c4" type="radio" name="rating" value="4">
+                          <label for="c4">4</label>
+                          <input id="c5" type="radio" name="rating" value="5">
+                          <label for="c5">5</label>
+                      </div>
+                   </span>
+                    </div>
                 </div>
             </div>
             <div class="sight-photo" style="background-image: url(/images/home-title.jpg);">
                 <a class="sight-photo__marks" href="#">ОТМЕТКИ НА ФОТО</a>
+                <div class="sight-photo__info-more js-photo-info-more">Показать информацию о снимке</div>
                 <div class="sight-photo__info js-photo-info">
-                    <div class="sight-photo__info-more js-photo-info-more">Показать информацию о снимке</div>
                     <div class="sight-photo__info-content">
                         <div class="photo-info">
                             <div class="photo-info__column">
                                 <div class="photo-info__item">
                                     <div class="photo-info__item-title">Дата съемки:</div>
-                                    <div class="photo-info__item-desc">11.11.1111</div>
-                                </div>
-                                <div class="photo-info__item">
-                                    <div class="photo-info__item-title">Месторасположение:</div>
-                                    <div class="photo-info__item-desc">Волгоград</div>
+                                    <div class="photo-info__item-desc"><%= locals.photo.dateTime %></div>
                                 </div>
                                 <div class="photo-info__item">
                                     <div class="photo-info__item-title">Категория:</div>
@@ -79,11 +112,12 @@
             </div>
             <div class="sight-photo__link"><a href="sight-over.html">Подробнее о достопримечательности...</a></div>
             <div class="sight-photo__map-container">
-                <h4>Откуда сделан снимок</h4>
+                <h2>ОТКУДА СДЕЛАН СНИМОК</h2>
                 <div class="sight-photo__map">
-                    блок с картой
+                    <div id="mapPhoto"></div>
                 </div>
             </div>
+        <% } %>
             <div class="sight-photo__comments-container">
                 <h4>Комментарии</h4>
                 <ul id="comments-list" class="comments-list">
@@ -175,9 +209,30 @@
     <footer>
         Vlg_place &copy; 2017
     </footer>
-    <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
-    <script src="./public/javascripts/scripts.js"></script>
-    <script src="./public/javascripts/gallery-button.js"></script>
-    <script src="./public/javascripts/modalWindow.js"></script>
+    <script src="../public/javascripts/jquery-3.2.1.min.js"></script>
+    <script src="../public/javascripts/scripts.js"></script>
+    <script src="../public/javascripts/gallery-button.js"></script>
+    <script src="../public/javascripts/modalWindow.js"></script>
+
+<!--КАРТА-->
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('mapPhoto'),{
+            zoom: 10,
+            center: new google.maps.LatLng(48.42216, 44.31308)
+        });
+
+        var marker = new google.maps.Marker({
+            //TODO координаты конкретрной достопрмиечательности
+            position: {lat: 48.42216, lng: 44.31308},
+            map: map
+        });
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
+</script>
 </body>
 </html>

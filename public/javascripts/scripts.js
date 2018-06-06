@@ -23,4 +23,6 @@ $('.hamburger').on('click', function() {
    $('.mobile-topnav').toggleClass('open');
 });
 
-
+$('.js-photo-info-more').on('click', function() {
+   $('.js-photo-info').toggleClass('is-visible');
+});

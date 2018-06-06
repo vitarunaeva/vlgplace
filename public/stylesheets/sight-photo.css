@@ -1,0 +1,129 @@
+.sight-photo {
+    position: relative;
+    height: 500px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: rgba(0,0,0, 0.2);
+}
+
+.js-photo-info.is-visible{
+    opacity: 1;
+}
+
+.sight-photo__info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    background: rgba(96, 96, 96, 0.45);
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+
+.sight-photo__info-more {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    color: #40E0D0;
+    background: rgba(62, 60, 60, 0.87);
+    font-size: 20px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.sight-photo__header-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.sight-photo__uploaded,
+.sight-photo__author,
+.sight-photo__keywords{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    margin-bottom: 5px;
+}
+
+.sight-photo__uploaded span,
+.sight-photo__author span,
+.sight-photo__keywords span,
+.sight-photo__rating span{
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+.sight-photo__uploaded b,
+.sight-photo__author b,
+.sight-photo__keywords b{
+    color: #826a5e;
+}
+
+.sight-photo__keywords .key_words{
+    border: 1.5px solid #40E0D0;
+    border-radius: 3px;
+    color: #826a5e;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    letter-spacing: 1px;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sight-photo__rating{
+    margin-bottom: 20px;
+}
+
+.sight-photo__link {
+    margin-top: 20px;
+}
+
+.sight-photo__link a{
+    color: #40E0D0;
+    font-size: 15px;
+}
+
+sight-photo__info-content{
+    margin: 25px 40px;
+}
+.sight-photo__info-content .photo-info{
+    flex-direction: column;
+    justify-content: start;
+    margin: 100px;
+}
+
+.photo-info__item{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.photo-info__item-title{
+    font-size: 20px;
+    color: white;
+}
+
+.photo-info__item-desc{
+    font-size: 20px;
+    color: #40E0D0;
+}
+
+.sight-photo__map-container h2{
+    color: #40E0D0;
+}
+#mapPhoto{
+    margin: auto;
+    height: 600px;
+    width: 600px;
+    border: 1.5px solid #989392;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}

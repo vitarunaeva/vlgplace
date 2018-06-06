@@ -8,6 +8,15 @@
 </head>
 <body>
     <div class="container">
+        <div class="hamburger"><img src="./public/images/icons/hamburger.svg" alt=""></div>
+        <div class="mobile-topnav">
+            <a href="#">ГЛАВНАЯ</a>
+            <a href="#about">О НАС</a>
+            <a href="#gallery">ГАЛЕРЕЯ</a>
+            <a href="#news">НОВОСТИ</a>
+            <a href="#contacts">КОНТАКТЫ</a>
+        </div>
+
         <header>
             <nav>
                 <div class="topnav" id="myTopnav">
@@ -16,11 +25,21 @@
                     <a href="#gallery">ГАЛЕРЕЯ</a>
                     <a href="#news">НОВОСТИ</a>
                     <a href="#contacts">КОНТАКТЫ</a>
-                    <a id="menu" href="#" class="menu__toggle">&#97776;</a></li>
                 </div>
+                <% if(!locals.isAuth) { %>
                 <div class="auth_icon">
-                    <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px" width="35px" alt="authorization_icon"></a>
+                    <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px"
+                                                                     width="35px" alt="authorization_icon"
+                                                                     title="Авторизоваться"></a>
                 </div>
+                <div id="status"></div>
+                <% } else { %>
+                <div class="icForRegistrUsers">
+                    <a href="/profile"><img src="./public/images/icons/avatar.svg" height="35px" width="35px"
+                                            alt="avatar_icon" title="Перейти в профиль"></a>
+                    <a href="/logout" class="btn btn-logout">Выйти</a>
+                </div>
+                <% } %>
                 <br class="clear">
             </nav>
         </header>
@@ -29,24 +48,34 @@
                 <h2>НАЗВАНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ</h2>
             </div>
             <div class="sight-overall__key-words_rating">
-                <div class="sight-overall__key-words">
-                    <label>Ключевые слова:
-                        <b>
-                            <a class="key_words" href="">#Скульптура</a>
-                            <a class="key_words" href="">#ВОВ</a>
-                        </b>
-                    </label>
+                <div class="sight-overall__category">
+                    <span>Категория:</span>
+                    <div class="categorySight">Категория</div>
+
                 </div>
                 <div class="sight-overall__rating">
-                    <div class="rating__wrapper">звезды</div>
+                   <span> Рейтинг:
+                      <div class="rating-count">
+                          <input id="c1" type="radio" name="rating" value="1" required>
+                          <label for="c1">1</label>
+                          <input id="c2" type="radio" name="rating" value="2">
+                          <label for="c2">2</label>
+                          <input id="c3" type="radio" name="rating" value="3">
+                          <label for="c3">3</label>
+                          <input id="c4" type="radio" name="rating" value="4">
+                          <label for="c4">4</label>
+                          <input id="c5" type="radio" name="rating" value="5">
+                          <label for="c5">5</label>
+                      </div>
+                   </span>
                 </div>
             </div>
-            <p class="sight-overall__desc">
+            <div class="sight-overall__desc">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                 Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            </div>
             <div class="sight-overall__gallery">
                 <div class="photo-wrapper">
                     <img src="#" alt="" class="photo-image photo">
@@ -57,24 +86,34 @@
                 <div class="photo-wrapper"></div>
                 <div class="photo-wrapper"></div>
             </div>
-            <div class="gallery-pagination">
-                <ul class="pagination">
-                    <li class="disabled">
-                        <a href="#"><<</a>
-                    </li>
-                    <li class="active pagination-item"></li>
-                </ul>
+            <div class="sight-overall__gallery">
+                <h3>ФОТОГАЛЕРЕЯ</h3>
+                <div class="photogallery">
+                    БЛОК ФОТОГАЛЕРЕИ(перенести с главной страницы)
+                </div>
+                <div class="gallery-pagination">
+                    <ul class="pagination">
+                        <li class="disabled">
+                            <a href="#"><<</a>
+                        </li>
+                        <li class="active pagination-item"></li>
+                    </ul>
+                </div>
             </div>
-            <div class="sight-overall__map-info">
-                <div class="sight-overall__map"></div>
+            <div class="sight-overall__map-near">
                 <div class="sight-overall__near">
-                    <div class="near__header">Ближайшие достопримечательности</div>
+                    <h3>БЛИЖАЙШЕЕ</h3>
                     <ul class="near-list">
                         <li><a href="">Площадь</a></li>
                         <li><a href="">Дост1</a></li>
                         <li><a href="">Дост2</a></li>
                     </ul>
                 </div>
+                <div class="sight-overall__map">
+                    <h3>МЕСТОПОЛОЖЕНИЕ</h3>
+                    <div id="mapSight"></div>
+                </div>
+
             </div>
         </main>
     </div>
@@ -85,5 +124,26 @@
     <script src="./public/javascripts/scripts.js"></script>
     <script src="./public/javascripts/gallery-button.js"></script>
     <script src="./public/javascripts/modalWindow.js"></script>
+
+    <!--КАРТА-->
+    <script>
+        var map;
+        function initMap() {
+                map = new google.maps.Map(document.getElementById('mapSight'),{
+                zoom: 10,
+                center: new google.maps.LatLng(48.42216, 44.31308)
+            });
+
+            var marker = new google.maps.Marker({
+                //TODO координаты конкретрной достопрмиечательности
+                position: {lat: 48.42216, lng: 44.31308},
+                map: map
+            });
+        }
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
+    </script>
     </body>
 </html>
