@@ -86,8 +86,14 @@ console.log(email);
                             var newUser = new User();
 
                             newUser.local.username = req.body.username;
-                            newUser.local.email = email;
+                            newUser.local.email = req.body.email;
                             newUser.local.password = newUser.generateHash(password);
+                            newUser.local.dateOfBirth = req.body.dateOfBirth;
+                            newUser.local.city = req.body.city;
+                            newUser.local.sex = req.body.sex;
+                            newUser.local.aboutUser = req.body.aboutUser;
+
+
 
                             newUser.save(function (err) {
                                 if (err)
@@ -115,8 +121,12 @@ console.log(email);
                         } else {
                             var user = req.user;
                             user.local.username = req.body.username;
-                            user.local.email = email;
+                            user.local.email = req.body.email;
                             user.local.password = user.generateHash(password);
+                            user.local.dateOfBirth = req.body.dateOfBirth;
+                            user.local.city = req.body.city;
+                            user.local.sex = req.body.sex;
+                            user.local.aboutUser = req.body.aboutUser;
                             user.save(function (err) {
                                 if (err)
                                     return done(err);

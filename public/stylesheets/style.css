@@ -9,6 +9,7 @@
 @import "map.css";
 @import "sight-overall.css";
 @import "sight-photo.css";
+@import "rating.css";
 
 *{
     box-sizing: border-box;

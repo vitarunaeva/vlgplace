@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var categoriesSchema = mongoose.Schema({
    categoriesSight:{
-        categorySight : String
+        categorySight : Array
    },
     categoriesNews: {
        categoryNews   : String

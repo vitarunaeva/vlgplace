@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./public/stylesheets/style.css">
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
@@ -86,12 +86,15 @@
             <h2>ГАЛЕРЕЯ</h2>
 
             <div class="search_filter">
-                <form class="search-form">
-                    <input class="search-input" placeholder="Введите название" type="search" value="" name="search"
-                           id="inputSearch" onkeyup="inputSearch()">
-                    <label for="search" class="search-label"><img src="./public/images/icons/search.svg" width="30px"
-                                                                  height="30px" alt="search_icon"></label>
-                </form>
+                <div class="search-block">
+                    <form class="search-form" action="/search-form" method="post">
+                        <input class="search-input" placeholder="Введите название" type="search" value="" name="search"
+                               id="inputSearch">
+                        <label for="search" class="search-label">
+                            <img src="./public/images/icons/search.svg" width="30px"
+                                 height="30px" alt="search_icon"></label>
+                    </form>
+                </div>
                 <a href="#popup-filter" class="js-popup-open"><img src="./public/images/icons/filter.svg" width="30px"
                                                                    height="30px" alt="filter_icon"></a>
                 <a href="#popup-addPhoto" class="js-popup-open"><img src="./public/images/icons/add.svg" width="40px"
@@ -117,14 +120,17 @@
                         <!--+-->
                         <% if (photoList.length) { %>
                         <% for(var i = 0; i < photoList.length; i++) { %>
-                        <a href="/sight-photo/<%= photoList[i]._id%>" style="background-image: url( <%= photoList[i].filePhoto %>)"
+                        <a href="/sight-photo/<%= photoList[i]._id %>"
+                           style="background-image: url( <%= photoList[i].filePhoto %>)"
                            class="photo_gallery-wrapper">
-                            <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
+
+                            <span class="photo_gallery-title"><%= photoList[i].titlePhoto%></span>
+
                             <span class="gallery-desc-hover">
                                 <span class="desc-hover__auth">Автор: <span
                                             class="desc-hover__style"><%= photoList[i].author %></span></span>
                                 <span class="desc-hover__date">Опубликовано: <span
-                                            class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
+                                            class="desc-hover__style"><%= photoList[i].createdAt %></span></span>
                                 <span class="desc-hover__category"> Категория: <span
                                             class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
@@ -150,6 +156,13 @@
                 </div>
             </div>
         </section>
+        <div class="addCategorySight">
+            <form action="/addCategorySight" method="post" id="addCategorySight" enctype="multipart/form-data">
+                <input type="text" name="categorySight">
+                <input type="submit" class="btn addCategorySight" value="Добавить категорию">
+            </form>
+
+        </div>
     </main>
 </div>
 <footer>
@@ -227,12 +240,15 @@
                 <div class="modal__form form-group">
                     <label for="listTitleSight">Достопримечательность:</label>
                     <select name="listTitleSight">
+                        <% if (locals.sights.length) { %>
                         <option disabled selected>Выберите достопримечательность</option>
+                        <% for(var i = 0; i < sights.length; i++) { %>
 
-                                <option>//</option>
-
-                        <a href="#popup-addSight" class="js-popup-open"><input type="button" class="btn btn_addSight" value="Добавить новую!"></a>
+                        <option>   <%= sights[i].sight.titleSight%></option>
+                        <% } %>
+                        <% } %>
                     </select>
+                    <a href="#popup-addSight" class="js-popup-open2">Добавить новую</a>
 
                 </div>
                 <div class="modal__form form-group">
@@ -265,6 +281,24 @@
         <% } %>
     </div>
 
+    <!---ФИЛЬТР -->
+    <div id="popup-filter" class="modal__content popup" role="document">
+        <div class="modal__header">ФИЛЬТР</div>
+        <div class="mpdal__body">
+            <form action="/filterPhoto" method="post" id="filterPhoto" enctype="multipart/form-data">
+                <div class="modal__form form-group">
+                    <label for="kwPhoto">По ключевым словам:</label>
+                    <input type="text" class="form-control" name="kwPhoto">
+                </div>
+                <button type="submit" class="btn filterPhoto">ПРИМЕНИТЬ</button>
+            </form>
+        </div>
+        <div class="modal__close">
+            <div class="popup-close btn-close">&times;</div>
+        </div>
+
+    </div>
+
     <!-- ДОБАВЛЕНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
     <div id="popup-addSight" class="modal__content popup" role="document">
         <div class="modal__header">НОВАЯ ДОСТОПРИМЕЧАТЕЛЬНОСТЬ</div>
@@ -275,14 +309,13 @@
                     <input type="text" class="form-control" name="titleSight">
                 </div>
                 <div class="modal__form form-group">
-                    <label for="titleSight">Название: </label>
-                    <input type="text" class="form-control" name="titleSight">
-                </div>
-                <div class="modal__form form-group">
-                    <label for="categorySight">Категория: </label>
-                    <select name="categorySight">
-                        <option></option>
-                    </select>
+                    <div class="categorySight">
+                        <label for="categorySight">Категория: </label>
+                        <select name="categorySight">
+                            <option></option>
+                        </select>
+                        </div>
+
                 </div>
                 <div class="modal__form form-group">
                     <label for="descSight">Описание: </label>
@@ -291,34 +324,16 @@
                 <button type="submit" class="btn newSight">Создать</button>
             </form>
         </div>
-        <div class="modal__close">
+        <a href="#popup-addPhoto" class="modal__close js-popup-open">
             <div class="popup-close btn-close">&times;</div>
-        </div>
-    </div>
-
-    <!---ФИЛЬТР -->
-    <div id="popup-filter"  class="modal__content popup" role="document">
-        <div class="modal__header">ФИЛЬТР</div>
-        <div class="mpdal__body">
-            <form action="/filterPhoto" method="post" id="filterPhoto" enctype="multipart/form-data">
-                <div class="modal__form form-group">
-                    <label for="kwPhoto">По ключевым словам:</label>
-                    <input type="text" class="form-control" name="kwPhoto">
-                </div>
-                <button type="submit" class="btn filterPhoto">ПРИМЕНИТЬ</button>
-                </form>
-        </div>
-        <div class="modal__close">
-            <div class="popup-close btn-close">&times;</div>
-        </div>
-
+        </a>
     </div>
 
 </div>
 
 </div>
 
-<script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+<script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs"></script>
 <script src="./public/javascripts/richMaker.js"></script>
 <script src="./public/javascripts/jquery-3.2.1.min.js"></script>
@@ -331,6 +346,7 @@
 <script>
 
     var map;
+
     function initialize() {
         // Prepare markers array
         var markers = [];
@@ -348,15 +364,16 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        markers.forEach(function(item) {
+        markers.forEach(function (item) {
             new RichMarker({
                 position: item.latLan,
                 map: map,
-                content: '<div class="google-marker"><img src="'+item.img+'"/></div>',
+                content: '<div class="google-marker"><img src="' + item.img + '"/></div>',
                 shadow: 0
             });
         });
     }
+
     google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 

@@ -4,11 +4,11 @@
     <title>vlg_place</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
-         <div class="hamburger"><img src="../public/images/icons/hamburger.svg" alt=""></div>
+         <div class="hamburger"><img src="/static/images/icons/hamburger.svg" alt=""></div>
         <div class="mobile-topnav">
             <a href="#">ГЛАВНАЯ</a>
             <a href="#about">О НАС</a>
@@ -28,14 +28,14 @@
                 </div>
                 <% if(!locals.isAuth) { %>
                 <div class="auth_icon">
-                    <a href="#popup-auth" class="js-popup-open"><img src="../public/images/icons/enter.svg" height="35px"
+                    <a href="#popup-auth" class="js-popup-open"><img src="/static/images/icons/enter.svg" height="35px"
                                                                      width="35px" alt="authorization_icon"
                                                                      title="Авторизоваться"></a>
                 </div>
                 <div id="status"></div>
                 <% } else { %>
                 <div class="icForRegistrUsers">
-                    <a href="/profile"><img src="../public/images/icons/avatar.svg" height="35px" width="35px"
+                    <a href="/profile"><img src="/static/images/icons/avatar.svg" height="35px" width="35px"
                                             alt="avatar_icon" title="Перейти в профиль"></a>
                     <a href="/logout" class="btn btn-logout">Выйти</a>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="sight-photo__uploaded-info">
                     <div class="sight-photo__uploaded">
                         <span>Загружена:</span>
-                        <b>01.01.2018</b>
+                        <b><%= photo.createdAt%></b>
                     </div>
                     <div class="sight-photo__author">
                         <span>Автор:</span>
@@ -60,7 +60,11 @@
                         <span>Ключевые слова:</span>
                         <div class="kwPhoto">
                             <b>
-                                <a class="key_words" href=""><%= locals.photo.kwPhoto %></a>
+                                <% if (photo.kwPhoto.length) { %>
+                                <% for(var i = 0; i < photo.kwPhoto.length; i++) { %>
+                                <a class="key_words" href=""><%= photo.kwPhoto[i] %></a>
+                                <% } %>
+                                <% } %>
                             </b>
                         </div>
                     </div>
@@ -84,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sight-photo" style="background-image: url(/images/home-title.jpg);">
+            <div class="sight-photo" style="background-image: url(<%= photo.medium %>);">
                 <a class="sight-photo__marks" href="#">ОТМЕТКИ НА ФОТО</a>
                 <div class="sight-photo__info-more js-photo-info-more">Показать информацию о снимке</div>
                 <div class="sight-photo__info js-photo-info">
@@ -93,7 +97,7 @@
                             <div class="photo-info__column">
                                 <div class="photo-info__item">
                                     <div class="photo-info__item-title">Дата съемки:</div>
-                                    <div class="photo-info__item-desc"><%= locals.photo.dateTime %></div>
+                                    <div class="photo-info__item-desc"><%= photo.datePhoto %></div>
                                 </div>
                                 <div class="photo-info__item">
                                     <div class="photo-info__item-title">Категория:</div>
@@ -209,10 +213,10 @@
     <footer>
         Vlg_place &copy; 2017
     </footer>
-    <script src="../public/javascripts/jquery-3.2.1.min.js"></script>
-    <script src="../public/javascripts/scripts.js"></script>
-    <script src="../public/javascripts/gallery-button.js"></script>
-    <script src="../public/javascripts/modalWindow.js"></script>
+    <script src="/static/javascripts/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascripts/scripts.js"></script>
+    <script src="/static/javascripts/gallery-button.js"></script>
+    <script src="/static/javascripts/modalWindow.js"></script>
 
 <!--КАРТА-->
 <script>

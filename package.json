@@ -37,6 +37,7 @@
     "passport-odnoklassniki": "^0.2.0",
     "passport-vkontakte": "^0.3.2",
     "path": "^0.12.7",
+    "rater-js": "^0.5.8",
     "sharp": "^0.20.3"
   },
   "devDependencies": {

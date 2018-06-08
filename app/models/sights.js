@@ -4,11 +4,7 @@ var multer = require('multer');
 var sightsSchema = mongoose.Schema({
     sight:{
         titleSight: String,
-        categorySight: String,
-        descSight: String,
-        photoSight: {
-
-        },
+        descSight: String
     },
     oversight: {
         urlOverSight: String

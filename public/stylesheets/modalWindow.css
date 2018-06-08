@@ -155,3 +155,13 @@
 .uploadPhoto{
     margin-left: 40%;
 }
+
+.categorySight{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.categorySight .addCategorySight{
+    margin-right: 20px;
+}

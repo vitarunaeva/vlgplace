@@ -41,18 +41,22 @@
                   <label>Дополнительно..</label>
                   <div class="container_addidionaly">
                      <div class="modal__form form-group">
-                        <label>Дата рождения:</label>
+                        <label for="dateOfBirth">Дата рождения:</label>
                         <input type="date" class="form-control" name="dateOfBirth">
                     </div>
                     <div class="modal__form form-group">
-                        <label>Город:</label>
+                        <label for="city">Город:</label>
                         <input type="text" class="form-control" name="city">
                     </div>
                     <div class="modal__form form-group">
-                        <label>Пол:</label>
-                        <input type="radio" name="sex" value="man" checked>Мужской
-                        <input type="radio" name="sex" value="woman">Женский
+                        <label for="sex">Пол:</label>
+                        <input type="radio" name="sex" value="Мужчина" checked>Мужской
+                        <input type="radio" name="sex" value="Женщина">Женский
                     </div>
+                      <div class="modal__form form-group">
+                          <label for="aboutUser">О себе:</label>
+                          <input type="text" class="form-control" name="aboutUser">
+                      </div>
                   </div>
             </div>
             <button id="submit_signup" type="submit" class="btn btn-signup">Зарегистрироваться</button>

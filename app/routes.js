@@ -44,14 +44,18 @@ var Photo = require('../app/models/photo');
 //загрука модели достопримечательностей
 var Sight = require('../app/models/sights');
 
+//загрука модели категорий
+var Categories  = require('../app/models/categories');
+
 module.exports = function (app, passport) {
     // показать домашнюю страницу
     app.get('/', function (req, res) {
-        Photo.find({}, function (error, photos) {
-            res.render('index.ejs', {photoList: photos, isAuth: req.isAuthenticated()});
-            // console.log('photoList', photos);
-
-        });
+        Promise.all([
+            Photo.find({}),
+            Sight.find({})
+        ]).then(function(data) {
+            res.render('index.ejs', {photoList: data[0], sights: data[1], isAuth: req.isAuthenticated()});
+        } );
 
 
         // Sight.find({}, function (error, sights) {
@@ -69,8 +73,12 @@ module.exports = function (app, passport) {
         });
     });
     //показать страницу с достопримечателньостью
-    app.get('/sight-overall', function (req, res) {
-        res.render('sight-overall.ejs');
+    app.get('/sight-overall/:id', function (req, res) {
+        Sight.find({_id: req.params.id}, function (error, sight) {
+            console.log('sight', sight);
+            res.render('sight-overall.ejs', {sight: sight[0], isAuth: req.isAuthenticated()});
+        });
+
     });
 
     // локальный логин. показывает форму входа
@@ -246,32 +254,33 @@ module.exports = function (app, passport) {
         });
     });
 
-
+    //ДОБАВЛЕНИЕ ФОТОГРАФИИ
     app.post('/addPhoto', function (req, res) {
         if (!req.files) {
             console.log('*********************************');
         }
-
-
         var phts = req.files.filePhotos;
         var author = req.user.local.username;
         var data = req.body;
         var keywords = data.kwPhoto;
+       // var ttlPhoto = data.titlePhoto;
         var photoName = './public/uploads/' + Date.now() + phts.name;
 
         data.author = author;
         data.filePhoto = photoName;
         data.kwPhoto = keywords.split(', ');
+        //data.titlePhoto = ttlPhoto.toLocaleLowerCase().split(' ');
 
         phts.mv(photoName);
         var gps;
+        var datePhoto;
         try {
             new ExifImage({image: phts.data}, function (error, exifData) {
                 if (error) {
                     // console.log('Error EXIF image: ' + error.message);
                     // console.log('phts', phts);
                 } else {
-                    //console.log('exif', exifData);
+                    console.log('exif', exifData);
                     var latRef = exifData.gps.GPSLatitudeRef === 'N' ? 1 : -1;
                     var longRef = exifData.gps.GPSLongitudeRef === 'E' ? 1 : -1;
                     var lat = exifData.gps.GPSLatitude;
@@ -284,12 +293,16 @@ module.exports = function (app, passport) {
                     data.latit = gps.latitude;
                     // console.log('gps', gps);
 
+                    //TODO вывести дату съемки
+                    // var createDate = exifData.exif.CreateDate;
+                    // data.datePhoto = createDate;
+
                     var newPhoto = new Photo(data);
                     newPhoto.save(function (err, temp) {
                         if (err) {
                             console.log("ooopssss....");
                         }
-
+                        //маленький размер фотографии
                         var previewName = './public/uploads/preview' + Date.now() + phts.name;
                         phts.mv(previewName);
                         data.filePhoto = previewName;
@@ -305,6 +318,28 @@ module.exports = function (app, passport) {
                                 if (err) {
                                     console.log('err', err);
                                 }
+
+                                console.log('data', data);
+                            });
+
+
+                        });
+
+                        //средний размер фотографии
+                        var mediumName = './public/uploads/medium' + Date.now() + phts.name;
+                        phts.mv(mediumName);
+                        data.filePhoto = mediumName;
+
+                        sharp(photoName).resize(800, 600).toFile(mediumName, function (err, info) {
+                            if (err) {
+                                console.error('ERROR sharp: ', err);
+                                return;
+                            }
+                            Photo.findOneAndUpdate({filePhoto: photoName}, {medium: mediumName}, {upsert: true}, function (err, info) {
+                                if (err) {
+                                    console.log('err', err);
+                                }
+                                console.log('data', data);
                             });
 
 
@@ -319,16 +354,50 @@ module.exports = function (app, passport) {
         } catch (error) {
             console.log('Error: ' + error.message);
         }
-        //console.log(gps);
-
-
         res.redirect('/');
     });
 
-    app.post('/addSight', function (req, res) {
 
+    //ДОБАВЛЕНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ
+    app.post('/addSight', function (req, res) {
+        var data = req.body;
+        var newSight = {
+            sight: data
+        };
+        console.log('data: ', data);
+        // console.log('newSight: ', newSight);
+
+        // data.titleSight = titleSight;
+        var newSight = new Sight(newSight);
+        newSight.save(function (err, temp) {
+            if (err) {
+                console.log("Новая достопримечательность не сохранилась");
+            }
+            console.log('newSight: ', newSight);
+
+
+            res.redirect('/');
+        });
     });
 
+    //ДОБАВЛЕНИЕ КАТЕГОРИЙ
+    app.post('/addCategorySight', function (req, res) {
+       var data = req.body;
+       var newCategoryPhoto = {
+           categoriesSight: data
+       };
+       console.log('data', data);
+       var newCategoryPhoto = new Categories(newCategoryPhoto);
+       newCategoryPhoto.save(function (err, temp) {
+           if(err){
+               console.log("Новая категория не сохранилась");
+           }
+           console.log('newCategory:', newCategoryPhoto);
+           res.redirect('/');
+       })
+    });
+
+    //ФИЛЬТРАЦИЯ
     app.post('/filterPhoto', function (req, res) {
         var keywords = req.body.kwPhoto;
         var kw = keywords.split(', ');
@@ -337,9 +406,27 @@ module.exports = function (app, passport) {
             if (err) {
                 console.log('err', err);
             }
-            console.log('photos', photos);
-            // photosArray.push([photos]);
             res.render('index.ejs', {photoList: photos});
         });
     });
+
+
+    //ФОРМА ПОИСКА
+    app.post('/search-form', function (req, res) {
+        var inputSearch = req.body.search;
+        Photo.aggregate([
+            {"$match": {
+                "titlePhoto": {"$regex": inputSearch, "$options":i}
+                }}
+        ]);
+        res.render('index.ejs', {photoList: photos});
+        // Photo.find({titlePhoto: {$in: search}}, function (err, photos) {
+        //     if (err) {
+        //         console.log('err', err);
+        //     }
+        //
+        //     res.render('index.ejs', {photoList: photos});
+        // });
+    });
 };
+

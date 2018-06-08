@@ -43,7 +43,7 @@ app.use(session({
     saveUnintialized:   false
 }));
 //+
-app.use(express.static('./public'));
+app.use('/static', express.static(__dirname + '/public'));
 
 app.use(passport.initialize());
 app.use(passport.session()); // постоянные сеансы входа в систему

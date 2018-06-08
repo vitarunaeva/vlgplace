@@ -53,15 +53,14 @@
                 <% if (user.local.email) { %>
                 <p>
                     <strong>ИМЯ</strong>: <%= user.local.username %> <br>
-                <strong>E-MAIL</strong>: <br>
-                <strong>ДАТА РОЖДЕНИЯ</strong>: TEST1<br>
-                <strong>ГОРОД</strong>: TEST1<br>
-                <strong>ПОЛ</strong>: TEST1<br>
-                <strong>О СЕБЕ</strong>: TEST1<br>
-                    <strong>ДАТА РЕГИСТРАЦИИ</strong>: TEST1<br>
+                <strong>E-MAIL</strong>: <%= user.local.email %><br>
+                <strong>ДАТА РОЖДЕНИЯ</strong> <%= user.local.dateOfBirth%><br>
+                <strong>ГОРОД</strong>: <%= user.local.city %><br>
+                <strong>ПОЛ</strong>: <%= user.local.sex %><br>
+                <strong>О СЕБЕ</strong>: <%= user.local.aboutUser %><br>
+                    <strong>ДАТА РЕГИСТРАЦИИ</strong>: <%= user.createdAt %><br>
                     <strong>Добавил количество фотографий</strong>: TEST1<br>
                     <strong>Добавил количество комментариев</strong>: TEST1<br>
-                    <strong>О СЕБЕ</strong>: TEST1<br>
                 </p>
 
                 <a href="/unlink/local" class="btn btn-default">Unlink</a>

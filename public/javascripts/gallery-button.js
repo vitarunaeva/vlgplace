@@ -25,6 +25,7 @@ $('.search-label').on('click', function (e) {
     var $this = $(this),
         form = $this.closest('.search-form'),
         input = form.find('.search-input');
+
     input.toggleClass('show');
 });
 $(document).mouseup(function (e) {
