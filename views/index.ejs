@@ -2,41 +2,41 @@
 <html>
 <head>
     <title>vlg_place</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="/static/stylesheets/style.css">
 </head>
 <body>
 <div class="container">
-    <div class="hamburger"><img src="./public/images/icons/hamburger.svg" alt=""></div>
+    <div class="hamburger"><img src="/static/images/icons/hamburger.svg" alt=""></div>
     <div class="mobile-topnav">
         <a href="#">ГЛАВНАЯ</a>
-        <a href="#about">О НАС</a>
+        <a href="#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
         <a href="#gallery">ГАЛЕРЕЯ</a>
         <a href="#news">НОВОСТИ</a>
-        <a href="#contacts">КОНТАКТЫ</a>
+        <a href="#contacts">О НАС</a>
     </div>
 
     <header>
         <nav>
             <div class="topnav" id="myTopnav">
                 <a href="#">ГЛАВНАЯ</a>
-                <a href="#about">О НАС</a>
+                <a href="#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
                 <a href="#gallery">ГАЛЕРЕЯ</a>
                 <a href="#news">НОВОСТИ</a>
-                <a href="#contacts">КОНТАКТЫ</a>
+                <a href="#contacts">О НАС</a>
             </div>
             <% if(!locals.isAuth) { %>
             <div class="auth_icon">
-                <a href="#popup-auth" class="js-popup-open"><img src="./public/images/icons/enter.svg" height="35px"
+                <a href="#popup-auth" class="js-popup-open"><img src="/static/images/icons/enter.svg" height="35px"
                                                                  width="35px" alt="authorization_icon"
                                                                  title="Авторизоваться"></a>
             </div>
             <div id="status"></div>
             <% } else { %>
             <div class="icForRegistrUsers">
-                <a href="/profile"><img src="./public/images/icons/avatar.svg" height="35px" width="35px"
+                <a href="/profile"><img src="/static/images/icons/avatar.svg" height="35px" width="35px"
                                         alt="avatar_icon" title="Перейти в профиль"></a>
                 <a href="/logout" class="btn btn-logout">Выйти</a>
             </div>
@@ -47,7 +47,7 @@
 
     <main id="index">
         <section class="container__title">
-            <img src="./public/images/home-title.jpg" class="home-title">
+            <img src="/static/images/home-title.jpg" class="home-title">
             <div class="title-description">
                 <h1>Volgograd<span class="br-place">Place</span></h1>
                 <div class="description">Именно здесь Вы можете найти самые главные и интересные места Волгоградской
@@ -55,32 +55,21 @@
                 </div>
             </div>
         </section>
-        <section id="about" class="container__about">
-            <h2>О НАС</h2>
-            <div class="about__blocks">
-                <div class="about__item">
-                    <img src="./public/images/icons/eye.svg" alt="">
-                    <h3>Режимы просмотра</h3>
-                    <p>Вы можете просмотреть фотографии уникальных мест Волгоградской области как в фотогалерее,
-                        так и на фото-карте.</p>
+        <section id="sightList" class="container__sightList">
+            <h2>ДОСТОПРИМЕЧАТЕЛЬНОСТИ</h2>
+                <div class="sightList">
+                    <% if (locals.sights.length) { %>
+                    <ul>
+                        <% for(var i = 0; i < sights.length; i++) { %>
+                     <li><a href="/sight-overall/<%= sights[i]._id %>"><%= sights[i].sight.titleSight%></a></li>
+                        <% } %>
+                    </ul>
+                    <% } %>
                 </div>
-                <div class="about__item">
-                    <img src="./public/images/icons/clock.svg" style="padding-top: 10px;" alt="">
-                    <h3>Снимки разных времен</h3>
-                    <p>На этом сайте можно найти снимки одного и того же объекта,
-                        сделаные разными людьми, с разных раскурсов и с промежутком времени, возможно,
-                        в несколько десятков лет!
-                        Вы можете самостоятельно задать интересующий интервал времени и просмотреть
-                        снимки объектов того времени.</p>
-                </div>
-                <div class="about__item">
-                    <img src="./public/images/icons/camera.svg" alt="">
-                    <h3>Фото сделаны не профессионалами!</h3>
-                    <p>Не только в Волгограде, но и в Волгоградской области большое количество достопримечательностей,
-                        о которых туристы города, да и Волгоградцы, даже и не слышали.
-                        Вы можете разместить свои фотоснимки интересных мест Волгоградской области.</p>
-                </div>
-            </div>
+
+
+
+
         </section>
         <section id="gallery" class="container-gallery js-container-wrapper">
             <h2>ГАЛЕРЕЯ</h2>
@@ -91,13 +80,13 @@
                         <input class="search-input" placeholder="Введите название" type="search" value="" name="search"
                                id="inputSearch">
                         <label for="search" class="search-label">
-                            <img src="./public/images/icons/search.svg" width="30px"
+                            <img src="/static/images/icons/search.svg" width="30px"
                                  height="30px" alt="search_icon"></label>
                     </form>
                 </div>
-                <a href="#popup-filter" class="js-popup-open"><img src="./public/images/icons/filter.svg" width="30px"
+                <a href="#popup-filter" class="js-popup-open"><img src="/static/images/icons/filter.svg" width="30px"
                                                                    height="30px" alt="filter_icon"></a>
-                <a href="#popup-addPhoto" class="js-popup-open"><img src="./public/images/icons/add.svg" width="40px"
+                <a href="#popup-addPhoto" class="js-popup-open"><img src="/static/images/icons/add.svg" width="40px"
                                                                      height="40px"></a>
             </div>
             <div class="tab-button js-tab-button">
@@ -105,7 +94,7 @@
                                                                          width="30px" height="30px" alt="location_icon">
                 </div>
                 <div class='js-button  button_photo-gallery active' data-button='gallery'><img
-                            src="./public/images/icons/gallery.svg" width="30px" height="30px" alt="gallery_icon"></div>
+                            src="/static/images/icons/gallery.svg" width="30px" height="30px" alt="gallery_icon"></div>
             </div>
             <div class="gallery-tab container-map-gallery js-container" data-container='map'>
                 <div class="title-photomap">ФОТОКАРТА</div>
@@ -123,9 +112,7 @@
                         <a href="/sight-photo/<%= photoList[i]._id %>"
                            style="background-image: url( <%= photoList[i].filePhoto %>)"
                            class="photo_gallery-wrapper">
-
-                            <span class="photo_gallery-title"><%= photoList[i].titlePhoto%></span>
-
+                               <span class="photo_gallery-title"><%= photoList[i].titlePhoto%></span>
                             <span class="gallery-desc-hover">
                                 <span class="desc-hover__auth">Автор: <span
                                             class="desc-hover__style"><%= photoList[i].author %></span></span>
@@ -156,6 +143,35 @@
                 </div>
             </div>
         </section>
+        <section id="contact" class="container__about">
+            <h2>О НАС</h2>
+            <div class="about__blocks">
+                <div class="about__item">
+                    <img src="/static/images/icons/eye.svg" alt="">
+                    <h3>Режимы просмотра</h3>
+                    <p>Вы можете просмотреть фотографии уникальных мест Волгоградской области как в фотогалерее,
+                        так и на фото-карте.</p>
+                </div>
+                <div class="about__item">
+                    <img src="/static/images/icons/clock.svg" style="padding-top: 10px;" alt="">
+                    <h3>Снимки разных времен</h3>
+                    <p>На этом сайте можно найти снимки одного и того же объекта,
+                        сделаные разными людьми, с разных раскурсов и с промежутком времени, возможно,
+                        в несколько десятков лет!
+                        Вы можете самостоятельно задать интересующий интервал времени и просмотреть
+                        снимки объектов того времени.</p>
+                </div>
+                <div class="about__item">
+                    <img src="/static/images/icons/camera.svg" alt="">
+                    <h3>Фото сделаны не профессионалами!</h3>
+                    <p>Не только в Волгограде, но и в Волгоградской области большое количество достопримечательностей,
+                        о которых туристы города, да и Волгоградцы, даже и не слышали.
+                        Вы можете разместить свои фотоснимки интересных мест Волгоградской области.</p>
+                </div>
+            </div>
+        </section>
+
+
         <div class="addCategorySight">
             <form action="/addCategorySight" method="post" id="addCategorySight" enctype="multipart/form-data">
                 <input type="text" name="categorySight">
@@ -178,18 +194,18 @@
                 <a href="/signup" class="btn btn-registration"><span class="fa fa-user"></span>Зарегистрироваться</a>
                 <div class="popup-close btn-close">&times;</div>
             </div>
-            <h2><img src="./public/images/icons/user.svg" width="100px" height="100px">Аутентификация</h2>
+            <h2><img src="/static/images/icons/user.svg" width="100px" height="100px">Аутентификация</h2>
         </div>
         <div class="modal__body">
             <form action="/login" method="post">
                 <div class="modal__form form-group">
                     <label>Логин</label>
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username" required>
                     <!-- <input type="text" class="form-control" name="email">-->
                 </div>
                 <div class="modal__form form-group">
                     <label>Пароль</label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" required>
                     <span class="psw">Забыли<a href="#">пароль?</a></span>
                 </div>
                 <div class="container__submit-enter">
@@ -202,8 +218,8 @@
                     <fb:login-button scope="public_profile, email" onlogin="checkLoginState();">
                     </fb:login-button>
 
-                    <a href="/auth/vkontakte"><img src="./public/images/icons/vk.svg" width="30px" height="30px"></a>
-                    <a href="/auth/ok"><img src="./public/images/icons/odnoklassniki.svg" width="30px"
+                    <a href="/auth/vkontakte"><img src="/static/images/icons/vk.svg" width="30px" height="30px"></a>
+                    <a href="/auth/ok"><img src="/static//images/icons/odnoklassniki.svg" width="30px"
                                             height="30px"></a>
                     <a href="/auth/facebook"><img src="./public/images/icons/facebook.svg" width="30px"
                                                   height="30px"></a>
@@ -219,14 +235,14 @@
         <% if(locals.isAuth) { %>
         <div class="modal__header">
             <div class="popup-close btn-close">&times;</div>
-            <h2><img src="./public/images/icons/picture.svg" width="100px" height="100px">Добавление фото</h2>
+            <h2><img src="/static//images/icons/picture.svg" width="100px" height="100px">Добавление фото</h2>
         </div>
         <div class="modal__body">
             <%= typeof  msg != 'undefined' ? msg : '' %>
             <form action="/addPhoto" method="post" id="addPhoto" enctype="multipart/form-data">
                 <div class="modal__form form-group">
                     <label for="titlePhoto">Название:</label>
-                    <input type="text" class="form-control" name="titlePhoto">
+                    <input type="text" class="form-control" name="titlePhoto" required>
                 </div>
                 <div class="modal__form form-group">
                     <label for="filePhoto">Загрузка фото:</label>
@@ -235,7 +251,7 @@
                         <p>Формат фото: JPEG</p>
                         <p>Размер файла: не более 7 Мб</p>
                     </div>
-                    <input type="file" name="filePhotos" id="fileTest">
+                    <input type="file" name="filePhotos" id="fileTest" required>
                 </div>
                 <div class="modal__form form-group">
                     <label for="listTitleSight">Достопримечательность:</label>
@@ -283,12 +299,12 @@
 
     <!---ФИЛЬТР -->
     <div id="popup-filter" class="modal__content popup" role="document">
-        <div class="modal__header">ФИЛЬТР</div>
+        <div class="modal__header"><h2>ФИЛЬТР</h2></div>
         <div class="mpdal__body">
             <form action="/filterPhoto" method="post" id="filterPhoto" enctype="multipart/form-data">
                 <div class="modal__form form-group">
                     <label for="kwPhoto">По ключевым словам:</label>
-                    <input type="text" class="form-control" name="kwPhoto">
+                    <input type="text" class="form-control" name="kwPhoto" required>
                 </div>
                 <button type="submit" class="btn filterPhoto">ПРИМЕНИТЬ</button>
             </form>
@@ -301,12 +317,12 @@
 
     <!-- ДОБАВЛЕНИЕ ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
     <div id="popup-addSight" class="modal__content popup" role="document">
-        <div class="modal__header">НОВАЯ ДОСТОПРИМЕЧАТЕЛЬНОСТЬ</div>
+        <div class="modal__header"><h2>НОВАЯ ДОСТОПРИМЕЧАТЕЛЬНОСТЬ</h2></div>
         <div class="modal__body">
             <form action="/addSight" method="post" id="addSight" enctype="multipart/form-data">
                 <div class="modal__form form-group">
                     <label for="titleSight">Название:</label>
-                    <input type="text" class="form-control" name="titleSight">
+                    <input type="text" class="form-control" name="titleSight" required>
                 </div>
                 <div class="modal__form form-group">
                     <div class="categorySight">
@@ -320,6 +336,11 @@
                 <div class="modal__form form-group">
                     <label for="descSight">Описание: </label>
                     <input type="text" class="form-control" name="descSight">
+                </div>
+                <div class="modal__form form-group">
+                    <label for="locationSight">Местоположение:</label>
+                    <p>Поставьте метку на карте</p>
+                    <div id="locationSight" style="width: 100%; height: 500px;">_______</div>
                 </div>
                 <button type="submit" class="btn newSight">Создать</button>
             </form>
@@ -335,18 +356,18 @@
 
 <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs"></script>
-<script src="./public/javascripts/richMaker.js"></script>
-<script src="./public/javascripts/jquery-3.2.1.min.js"></script>
-<script src="./public/javascripts/scripts.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="/static/javascripts/richMaker.js"></script>
+<script src="/static/javascripts/jquery-3.2.1.min.js"></script>
+<script src="/static/javascripts/scripts.js"></script>
 <!-- <script src="./public/javascripts/galleryMap.js"></script> -->
-<script src="./public/javascripts/gallery-button.js"></script>
-<script src="./public/javascripts/modalWindow.js"></script>
-<script src="./public/javascripts/authFacebook.js"></script>
+<script src="/static/javascripts/gallery-button.js"></script>
+<script src="/static/javascripts/modalWindow.js"></script>
+<script src="/static/javascripts/authFacebook.js"></script>
+<script src="/static/javascripts/addLocationSight.js"></script>
 
 <script>
-
     var map;
-
     function initialize() {
         // Prepare markers array
         var markers = [];
@@ -372,13 +393,16 @@
                 shadow: 0
             });
         });
+        //Кластеризация
+        var markerCluster = new MarkerClusterer(map2, markers,
+            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
-
+    
     google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
 
-<!--<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">-->
-<!--</script>-->
+
 <!--<script async defer-->
 <!--src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">-->
 <!--</script>-->

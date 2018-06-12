@@ -28,20 +28,20 @@ module.exports = function (passport) {
 
     passport.use('local-login', new AuthLocalStrategy({
             //по умолчанию, локальная стратегия использует username и password, переобпредяет email
-            emailField: 'email',
+            emailField: 'username',
             passwordField: 'password',
             passReqToCallback: true // проверяет вошел пользователь в систему или нет
         },
-        function (req, email, password, done) {
+        function (req, username, password, done) {
 
-            if (email)
-                email = email.toLowerCase(); // нижний регистр
+            if (username)
+                username = username.toLowerCase(); // нижний регистр
 
 
             // ассинхронность
             process.nextTick(function () {
                 console.log('124');
-                User.findOne({'local.email': email}, function (err, user) {
+                User.findOne({'local.username': username}, function (err, user) {
                     // если ошибка, то возвращаем ошибку
                     if (err)
                         return done(err);
@@ -63,14 +63,12 @@ module.exports = function (passport) {
 
     // локальная регистрация
     passport.use('local-signup', new AuthLocalStrategy({
-            //usernameField: 'username',
             emailField: 'email',
             passwordField: 'password',
-
-            passReqToCallback: true
+            passReqToCallback: true //возвращает весь запрос на обратный вызов
         },
         function (req,  email, password, done) {
-console.log(email);
+            console.log(email);
             if (email)
                 email = email.toLowerCase();
             process.nextTick(function () {

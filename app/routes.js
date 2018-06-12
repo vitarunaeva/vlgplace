@@ -56,12 +56,6 @@ module.exports = function (app, passport) {
         ]).then(function(data) {
             res.render('index.ejs', {photoList: data[0], sights: data[1], isAuth: req.isAuthenticated()});
         } );
-
-
-        // Sight.find({}, function (error, sights) {
-        //     res.render('index.ejs', {sightList: sights, isAuth: req.isAuthenticated()});
-        //     console.log('sightList', sights);
-        // });
     });
 
     //показать страницу с фотографией
@@ -74,10 +68,18 @@ module.exports = function (app, passport) {
     });
     //показать страницу с достопримечателньостью
     app.get('/sight-overall/:id', function (req, res) {
-        Sight.find({_id: req.params.id}, function (error, sight) {
-            console.log('sight', sight);
-            res.render('sight-overall.ejs', {sight: sight[0], isAuth: req.isAuthenticated()});
+        Promise.all([
+            Photo.find({}),
+            Sight.find({_id: req.params.id})
+        ]).then(function (data) {
+            res.render('sight-overall.ejs', {photoList: data[0], sights: data[1], isAuth: req.isAuthenticated()});
+            console.log('data.sight: ', data[1][0].sight);
         });
+
+        // Sight.find({_id: req.params.id}, function (data) {
+        //     console.log('sight', sights);
+        //     res.render('sight-overall.ejs', {sights: data[1], isAuth: req.isAuthenticated()});
+        // });
 
     });
 
@@ -221,7 +223,7 @@ module.exports = function (app, passport) {
     // local
     app.get('/unlink/local', isLoggedIn, function (req, res) {
         var user = req.user;
-        user.local.email = undefined;
+        user.local.username = undefined;
         user.local.password = undefined;
         user.save(function (err) {
             res.redirect('/profile');
@@ -275,6 +277,7 @@ module.exports = function (app, passport) {
         var gps;
         var datePhoto;
         try {
+
             new ExifImage({image: phts.data}, function (error, exifData) {
                 if (error) {
                     // console.log('Error EXIF image: ' + error.message);
@@ -312,8 +315,6 @@ module.exports = function (app, passport) {
                                 console.error('ERROR sharp: ', err);
                                 return;
                             }
-
-
                             Photo.findOneAndUpdate({filePhoto: photoName}, {preview: previewName}, {upsert: true}, function (err, info) {
                                 if (err) {
                                     console.log('err', err);
@@ -321,8 +322,6 @@ module.exports = function (app, passport) {
 
                                 console.log('data', data);
                             });
-
-
                         });
 
                         //средний размер фотографии

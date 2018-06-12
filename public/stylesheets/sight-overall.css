@@ -70,3 +70,23 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
+
+.sightList ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid 2px #606060;
+    box-shadow: 0 0 2px #3a3a50;
+    border-radius: 0 6px 6px 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.sightList ul li{
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 30%;
+    height: 125px;
+    text-align: center;
+}
