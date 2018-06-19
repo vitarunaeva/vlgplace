@@ -6,6 +6,7 @@ var sharp = require('sharp');
 var fs = require('fs');
 const fileUpload = require('express-fileupload');
 var ExifImage = require('exif').ExifImage;
+var math = require('mathjs');
 
 
 // //механизм хранения
@@ -52,9 +53,10 @@ module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         Promise.all([
             Photo.find({}),
-            Sight.find({})
+            Sight.find({}),
+            Categories.find({})
         ]).then(function(data) {
-            res.render('index.ejs', {photoList: data[0], sights: data[1], isAuth: req.isAuthenticated()});
+            res.render('index.ejs', {photoList: data[0], sights: data[1], categories: data[2], isAuth: req.isAuthenticated()});
         } );
     });
 
@@ -62,25 +64,52 @@ module.exports = function (app, passport) {
     app.get('/sight-photo/:id', function (req, res) {
         Photo.find({_id: req.params.id}, function (error, photo) {
             console.log('photo', photo);
-
             res.render('sight-photo.ejs', {photo: photo[0], isAuth: req.isAuthenticated()});
         });
     });
     //показать страницу с достопримечателньостью
     app.get('/sight-overall/:id', function (req, res) {
         Promise.all([
-            Photo.find({}),
-            Sight.find({_id: req.params.id})
-        ]).then(function (data) {
-            res.render('sight-overall.ejs', {photoList: data[0], sights: data[1], isAuth: req.isAuthenticated()});
-            console.log('data.sight: ', data[1][0].sight);
+            Sight.find({_id: req.params.id}),
+            Sight.find({})
+        ]).then(function(data) {
+            var currentSight = data[0][0];
+            var sightList = data[1];
+            var titleSight = currentSight.sight.titleSight;
+
+            var numberLng = parseInt(currentSight.sight.lng);
+            var numberLat = parseInt(currentSight.sight.lat);
+
+            // массив объектов вида {достопримечательность, расстояние до текущей достопримечательности}
+            var sightsWithDistance = [];
+
+            // проходим по всему списку достопримечательностей
+            sightList.forEach(function(sight) {
+                //перевод строки в чилсло
+                var lng = parseInt(sight.sight.lng);
+                var lat = parseInt(sight.sight.lat);
+
+                // находим расстояния
+                sightsWithDistance.push({
+                    sight: sight,
+                    distance: Math.sqrt((Math.pow(numberLng, 2) - Math.pow(lng, 2)) + (Math.pow(numberLat, 2) - Math.pow(lat, 2)))
+                });
+            });
+
+            // сортируем по возрастанию и оставляем первые 4
+            var nearestSights = sightsWithDistance.sort(function(a, b) {
+                return a.distance - b.distance;
+            }).slice(3);
+
+            // фильтрируем массив для того, чтобы не возвращать свойство distance, которое не понадобится
+            var mappedNearestSights = nearestSights.map(function(sight) {
+               return sight.sight;
+            });
+
+            Photo.find({titleSight: titleSight}).then(function(photoData) {
+                res.render('sight-overall.ejs', {photoList: photoData, sight: currentSight, nearestSights: mappedNearestSights, isAuth: req.isAuthenticated()});
+            });
         });
-
-        // Sight.find({_id: req.params.id}, function (data) {
-        //     console.log('sight', sights);
-        //     res.render('sight-overall.ejs', {sights: data[1], isAuth: req.isAuthenticated()});
-        // });
-
     });
 
     // локальный логин. показывает форму входа
@@ -256,6 +285,8 @@ module.exports = function (app, passport) {
         });
     });
 
+
+
     //ДОБАВЛЕНИЕ ФОТОГРАФИИ
     app.post('/addPhoto', function (req, res) {
         if (!req.files) {
@@ -280,6 +311,8 @@ module.exports = function (app, passport) {
 
             new ExifImage({image: phts.data}, function (error, exifData) {
                 if (error) {
+                    //TODO добавить дату съемки и добавления вручную метки фото
+
                     // console.log('Error EXIF image: ' + error.message);
                     // console.log('phts', phts);
                 } else {
@@ -294,11 +327,7 @@ module.exports = function (app, passport) {
                     };
                     data.longit = gps.longtitude;
                     data.latit = gps.latitude;
-                    // console.log('gps', gps);
-
-                    //TODO вывести дату съемки
-                    // var createDate = exifData.exif.CreateDate;
-                    // data.datePhoto = createDate;
+                    data.datePhoto =  exifData.exif.CreateDate;
 
                     var newPhoto = new Photo(data);
                     newPhoto.save(function (err, temp) {
@@ -320,7 +349,6 @@ module.exports = function (app, passport) {
                                     console.log('err', err);
                                 }
 
-                                console.log('data', data);
                             });
                         });
 
@@ -338,13 +366,12 @@ module.exports = function (app, passport) {
                                 if (err) {
                                     console.log('err', err);
                                 }
-                                console.log('data', data);
+
                             });
 
 
                         });
                     });
-
 
                     // var standartPhoto = gm(filePhoto).resize(900, 600);
 
@@ -363,10 +390,9 @@ module.exports = function (app, passport) {
         var newSight = {
             sight: data
         };
-        console.log('data: ', data);
-        // console.log('newSight: ', newSight);
 
-        // data.titleSight = titleSight;
+        console.log('data: ', data);
+    console.log("req", req.body);
         var newSight = new Sight(newSight);
         newSight.save(function (err, temp) {
             if (err) {
@@ -378,6 +404,8 @@ module.exports = function (app, passport) {
             res.redirect('/');
         });
     });
+
+
 
     //ДОБАВЛЕНИЕ КАТЕГОРИЙ
     app.post('/addCategorySight', function (req, res) {
@@ -399,9 +427,11 @@ module.exports = function (app, passport) {
     //ФИЛЬТРАЦИЯ
     app.post('/filterPhoto', function (req, res) {
         var keywords = req.body.kwPhoto;
-        var kw = keywords.split(', ');
-
-        Photo.find({kwPhoto: {$in: kw}}, function (err, photos) {
+        var kw = keywords.split(', ');//склеивание строки по разделитью запятая и пробел
+        var author = req.body.author;
+        var titleSight = req.body.titleSight;
+        //выборка фотографий из базы данных
+        Photo.find({kwPhoto: {$in: kw}, author: {$in: author}, titleSight: {$in: titleSight}}, function (err, photos) {
             if (err) {
                 console.log('err', err);
             }
@@ -411,21 +441,62 @@ module.exports = function (app, passport) {
 
 
     //ФОРМА ПОИСКА
-    app.post('/search-form', function (req, res) {
-        var inputSearch = req.body.search;
-        Photo.aggregate([
-            {"$match": {
-                "titlePhoto": {"$regex": inputSearch, "$options":i}
-                }}
-        ]);
-        res.render('index.ejs', {photoList: photos});
-        // Photo.find({titlePhoto: {$in: search}}, function (err, photos) {
-        //     if (err) {
-        //         console.log('err', err);
+    // app.get = function (request, response, next) {
+    //     var markerRequest = async function () {
+    //         var e = {};
+    //         e.params = await getParams(request);
+    //         e.photos = await getPhotos(e.params);
+    //
+    //         return response.send(e);
+    //     }
+    //
+    //     return makeRequest()
+    //     catch(function (e){
+    //         return next(error(404, e.message));
+    //     })
+    //
+    // };
+    // function  getParams(request) {
+    //     return{
+    //         search: request.body.search
+    //     }
+    // }
+    //
+    // function getPhotos(request) {
+    //     return Photos.aggregate([
+    //         {
+    //             $match:{
+    //                 titlePhoto: {
+    //                     $text: {$search: request.search}
+    //                 }
+    //             }
+    //         }
+    //     ])
+    // }
+    app.post('/search-form', function (req, res, next) {
+        var inputSearch = req.body.searchString;
+        console.log('req.body', req.body);
+        console.log('inputSearch', inputSearch);
+        //
+        // Photo.aggregate([
+        //     {"$match": {
+        //         "titlePhoto": {"$regex": inputSearch, "$options":'i'}
+        //         }}
+        // ], function (err, photos) {
+        //     if(err){
+        //         return next(err);
         //     }
         //
-        //     res.render('index.ejs', {photoList: photos});
+        //     res.json({photoList: photos});
         // });
+
+        Photo.find({titlePhoto: inputSearch}, function (err, photos) {
+            if (err) {
+                console.log('err', err);
+            }
+
+            res.json({photoList: photos});
+        });
     });
 };
 

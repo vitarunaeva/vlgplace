@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sight-photo" style="background-image: url(<%= photo.medium %>);">
+            <div class="sight-photo" style="background-image: url(.<%= photo.medium %>);">
                 <a class="sight-photo__marks" href="#">ОТМЕТКИ НА ФОТО</a>
                 <div class="sight-photo__info-more js-photo-info-more">Показать информацию о снимке</div>
                 <div class="sight-photo__info js-photo-info">
@@ -114,7 +114,10 @@
                     </div>
                 </div>
             </div>
-            <div class="sight-photo__link"><a href="sight-over.html">Подробнее о достопримечательности...</a></div>
+        <% if (locals.sights) { %>
+
+            <div class="sight-photo__link"><a href="/sight-overall/<%= sights[i]._id %>">Подробнее о достопримечательности...</a></div>
+        <% } %>
             <div class="sight-photo__map-container">
                 <h2>ОТКУДА СДЕЛАН СНИМОК</h2>
                 <div class="sight-photo__map">
@@ -227,11 +230,15 @@
             center: new google.maps.LatLng(48.42216, 44.31308)
         });
 
-        var marker = new google.maps.Marker({
-            //TODO координаты конкретрной достопрмиечательности
-            position: {lat: 48.42216, lng: 44.31308},
-            map: map
-        });
+        var photo = <%- JSON.stringify(photo) %>
+
+
+        <% if (typeof photo !== undefined) { %>
+            var marker = new google.maps.Marker({
+                position: {lat: photo.latit, lng: photo.longit},
+                map: map
+            });
+        <% } %>
     }
 </script>
 

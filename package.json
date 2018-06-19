@@ -26,6 +26,7 @@
     "fs": "0.0.1-security",
     "http": "0.0.0",
     "joi": "^13.3.0",
+    "mathjs": "^4.4.2",
     "method-override": "^2.3.10",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.7",

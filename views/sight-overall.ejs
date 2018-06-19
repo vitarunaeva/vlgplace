@@ -8,58 +8,57 @@
     <link rel="stylesheet" href="/static/stylesheets/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="hamburger"><img src="/static/images/icons/hamburger.svg" alt=""></div>
-        <div class="mobile-topnav">
-            <a href="/">ГЛАВНАЯ</a>
-            <a href="/#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
-            <a href="/#gallery">ГАЛЕРЕЯ</a>
-            <a href="/#news">НОВОСТИ</a>
-            <a href="/#contacts">О НАС</a>
+<div class="container">
+    <div class="hamburger"><img src="/static/images/icons/hamburger.svg" alt=""></div>
+    <div class="mobile-topnav">
+        <a href="/">ГЛАВНАЯ</a>
+        <a href="/#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+        <a href="/#gallery">ГАЛЕРЕЯ</a>
+        <a href="/#news">НОВОСТИ</a>
+        <a href="/#contacts">О НАС</a>
+    </div>
+
+    <header>
+        <nav>
+            <div class="topnav" id="myTopnav">
+                <a href="/#">ГЛАВНАЯ</a>
+                <a href="/#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
+                <a href="/#gallery">ГАЛЕРЕЯ</a>
+                <a href="/#news">НОВОСТИ</a>
+                <a href="/#contacts">О НАС</a>
+            </div>
+            <% if(!locals.isAuth) { %>
+            <div class="auth_icon">
+                <a href="#popup-auth" class="js-popup-open"><img src="/static/images/icons/enter.svg" height="35px"
+                                                                 width="35px" alt="authorization_icon"
+                                                                 title="Авторизоваться"></a>
+            </div>
+            <div id="status"></div>
+            <% } else { %>
+            <div class="icForRegistrUsers">
+                <a href="/profile"><img src="/static/images/icons/avatar.svg" height="35px" width="35px"
+                                        alt="avatar_icon" title="Перейти в профиль"></a>
+                <a href="/logout" class="btn btn-logout">Выйти</a>
+            </div>
+            <% } %>
+            <br class="clear">
+        </nav>
+    </header>
+    <main>
+
+        <% if (locals.sight) { %>
+        <div class="sight-overall__header">
+            <h2><%= sight.sight.titleSight %></h2>
         </div>
 
-        <header>
-            <nav>
-                <div class="topnav" id="myTopnav">
-                    <a href="/#">ГЛАВНАЯ</a>
-                    <a href="/#sightList">ДОСТОПРИМЕЧАТЕЛЬНОСТИ</a>
-                    <a href="/#gallery">ГАЛЕРЕЯ</a>
-                    <a href="/#news">НОВОСТИ</a>
-                    <a href="/#contacts">О НАС</a>
-                </div>
-                <% if(!locals.isAuth) { %>
-                <div class="auth_icon">
-                    <a href="#popup-auth" class="js-popup-open"><img src="/static/images/icons/enter.svg" height="35px"
-                                                                     width="35px" alt="authorization_icon"
-                                                                     title="Авторизоваться"></a>
-                </div>
-                <div id="status"></div>
-                <% } else { %>
-                <div class="icForRegistrUsers">
-                    <a href="/profile"><img src="/static/images/icons/avatar.svg" height="35px" width="35px"
-                                            alt="avatar_icon" title="Перейти в профиль"></a>
-                    <a href="/logout" class="btn btn-logout">Выйти</a>
-                </div>
-                <% } %>
-                <br class="clear">
-            </nav>
-        </header>
-        <main>
 
-            <% if (locals.sights) { %>
-            <div class="sight-overall__header">
-                    <h2><%= sights[0].sight.titleSight%></h2>
+        <div class="sight-overall__key-words_rating">
+            <div class="sight-overall__category">
+                <span>Категория:</span>
+                <div class="categorySight">Категория</div>
+
             </div>
-
-
-
-            <div class="sight-overall__key-words_rating">
-                <div class="sight-overall__category">
-                    <span>Категория:</span>
-                    <div class="categorySight">Категория</div>
-
-                </div>
-                <div class="sight-overall__rating">
+            <div class="sight-overall__rating">
                    <span> Рейтинг:
                       <div class="rating-count">
                           <input id="c1" type="radio" name="rating" value="1" required>
@@ -74,81 +73,106 @@
                           <label for="c5">5</label>
                       </div>
                    </span>
-                </div>
             </div>
-            <div class="sight-overall__desc">
-                <%= sights[0].sight.descSight%>
+        </div>
+        <div class="sight-overall__desc">
+            <%= sight.sight.descSight %>
+        </div>
+        <div class="sight-overall__gallery">
+            <h3>ФОТОГАЛЕРЕЯ</h3>
+            <div class="photogallery">
+                <% if (photoList.length) { %>
+                <% for(var i = 0; i < photoList.length; i++) { %>
+                <a href="/sight-photo/<%= photoList[i]._id %>"
+                   style="background-image: url('.<%= photoList[i].filePhoto %>')"
+                   class="photo_gallery-wrapper">
+                    <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
+                    <span class="gallery-desc-hover">
+                                <span class="desc-hover__auth">Автор: <span
+                                            class="desc-hover__style"><%= photoList[i].author %></span></span>
+                                <span class="desc-hover__date">Опубликовано: <span
+                                            class="desc-hover__style"><%= photoList[i].createdAt %></span></span>
+                                <span class="desc-hover__category"> Категория: <span
+                                            class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
+                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
+                                        <%= photoList[i].rating %>
+                                        <div class="rating-count">
+                                          <input id="c1" type="radio" name="rating" value="1" required>
+                                          <label for="c1">1</label>
+                                          <input id="c2" type="radio" name="rating" value="2">
+                                          <label for="c2">2</label>
+                                          <input id="c3" type="radio" name="rating" value="3">
+                                          <label for="c3">3</label>
+                                          <input id="c4" type="radio" name="rating" value="4">
+                                          <label for="c4">4</label>
+                                          <input id="c5" type="radio" name="rating" value="5">
+                                          <label for="c5">5</label>
+                                        </div>
+                                    </span></span>
+                                </span>
+                </a>
+                <% } %>
+                <% } %>
             </div>
-            <div class="sight-overall__gallery">
-                <div class="photo-wrapper">
-                    <img src="#" alt="" class="photo-image photo">
-                </div>
-                <div class="photo-wrapper"></div>
-                <div class="photo-wrapper"></div>
-                <div class="photo-wrapper"></div>
-                <div class="photo-wrapper"></div>
-                <div class="photo-wrapper"></div>
+            <div class="gallery-pagination">
+                <ul class="pagination">
+                    <li class="disabled">
+                        <a href="#"><<</a>
+                    </li>
+                    <li class="active pagination-item"></li>
+                </ul>
             </div>
-            <div class="sight-overall__gallery">
-                <h3>ФОТОГАЛЕРЕЯ</h3>
-                <div class="photogallery">
-                    БЛОК ФОТОГАЛЕРЕИ(перенести с главной страницы)
-                </div>
-                <div class="gallery-pagination">
-                    <ul class="pagination">
-                        <li class="disabled">
-                            <a href="#"><<</a>
-                        </li>
-                        <li class="active pagination-item"></li>
-                    </ul>
-                </div>
+        </div>
+        <div class="sight-overall__map-near">
+            <div class="sight-overall__near">
+                <h3>БЛИЖАЙШИЕ</h3>
+                <ul class="near-list">
+                    <% if (locals.nearestSights.length) { %>
+                    <% for(var i = 0; i < nearestSights.length; i++) { %>
+                    <li><a href="/sight-overall/<%= nearestSights[i]._id%>"><%= nearestSights[i].sight.titleSight%></a></li>
+                    <% } %>
+                    <% } %>
+                </ul>
             </div>
-            <div class="sight-overall__map-near">
-                <div class="sight-overall__near">
-                    <h3>БЛИЖАЙШЕЕ</h3>
-                    <ul class="near-list">
-                        <li><a href="">Площадь</a></li>
-                        <li><a href="">Дост1</a></li>
-                        <li><a href="">Дост2</a></li>
-                    </ul>
-                </div>
-                <div class="sight-overall__map">
-                    <h3>МЕСТОПОЛОЖЕНИЕ</h3>
-                    <div id="mapSight"></div>
-                </div>
-
+            <div class="sight-overall__map">
+                <h3>МЕСТОПОЛОЖЕНИЕ</h3>
+                <div id="mapSight"></div>
             </div>
-            <% } %>
-        </main>
-    </div>
-    <footer>
-        Vlg_place &copy; 2017
-    </footer>
-    <script src="/static/javascripts/jquery-3.2.1.min.js"></script>
-    <script src="/static/javascripts/scripts.js"></script>
-    <script src="/static/javascripts/gallery-button.js"></script>
-    <script src="/static/javascripts/modalWindow.js"></script>
 
-    <!--КАРТА-->
-    <script>
-        var map;
-        function initMap() {
-                map = new google.maps.Map(document.getElementById('mapSight'),{
-                zoom: 10,
-                center: new google.maps.LatLng(48.42216, 44.31308)
-            });
+        </div>
+        <% } %>
+    </main>
+</div>
+<footer>
+    Vlg_place &copy; 2017
+</footer>
+<script src="/static/javascripts/jquery-3.2.1.min.js"></script>
+<script src="/static/javascripts/scripts.js"></script>
+<script src="/static/javascripts/gallery-button.js"></script>
+<script src="/static/javascripts/modalWindow.js"></script>
 
-            var marker = new google.maps.Marker({
-                //TODO координаты конкретрной достопрмиечательности
-                position: {lat: 48.42216, lng: 44.31308},
-                map: map
-            });
+<!--КАРТА-->
+<script>
+    var map;
 
-        }
-    </script>
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('mapSight'), {
+            zoom: 10,
+            center: new google.maps.LatLng(48.42216, 44.31308)
+        });
+        var sight = <%- JSON.stringify(sight) %>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
-    </script>
-    </body>
+        console.log('signt', sight);
+        var marker = new google.maps.Marker({
+            //TODO координаты конкретрной достопрмиечательности
+            position: {lat: sight.sight.lat, lng: sight.sight.lng},
+            map: map
+        });
+    }
+</script>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPnH8mcza_4bepKeNRWxTR_02l-PB6bhw&callback=initMap">
+</script>
+</body>
 </html>

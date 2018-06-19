@@ -74,7 +74,7 @@
 .sightList ul{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    flex-wrap: wrap;
     border: solid 2px #606060;
     box-shadow: 0 0 2px #3a3a50;
     border-radius: 0 6px 6px 6px;
@@ -87,6 +87,15 @@
     margin: 0;
     padding: 0;
     width: 30%;
-    height: 125px;
+    padding-bottom: 20px;
     text-align: center;
+}
+
+.photogallery{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.newSight{
+    margin-left: 50%;
 }

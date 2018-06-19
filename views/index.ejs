@@ -118,7 +118,7 @@
                                             class="desc-hover__style"><%= photoList[i].author %></span></span>
                                 <span class="desc-hover__date">Опубликовано: <span
                                             class="desc-hover__style"><%= photoList[i].createdAt %></span></span>
-                                <span class="desc-hover__category"> Категория: <span
+                                <span class="desc-hover__category"> Достопримечательность <span
                                             class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
                                         <%= photoList[i].rating %>
@@ -194,7 +194,7 @@
                 <a href="/signup" class="btn btn-registration"><span class="fa fa-user"></span>Зарегистрироваться</a>
                 <div class="popup-close btn-close">&times;</div>
             </div>
-            <h2><img src="/static/images/icons/user.svg" width="100px" height="100px">Аутентификация</h2>
+            <h2><img src="/static/images/icons/user.svg" width="100px" height="100px">Авторизация</h2>
         </div>
         <div class="modal__body">
             <form action="/login" method="post">
@@ -254,8 +254,8 @@
                     <input type="file" name="filePhotos" id="fileTest" required>
                 </div>
                 <div class="modal__form form-group">
-                    <label for="listTitleSight">Достопримечательность:</label>
-                    <select name="listTitleSight">
+                    <label for="titleSight">Достопримечательность:</label>
+                    <select name="titleSight">
                         <% if (locals.sights.length) { %>
                         <option disabled selected>Выберите достопримечательность</option>
                         <% for(var i = 0; i < sights.length; i++) { %>
@@ -275,15 +275,17 @@
                     <label for="descPhoto">Описание:</label>
                     <input type="text" class="form-control" name="descPhoto">
                 </div>
+
+                <!--сделать скрытым!!!-->
                 <div class="modal__form form-group">
-                    <label for="dateInput">Года:</label>
-                    <div class="dateBlock">
-                        <label>c</label>
-                        <input type="date" min="1910" max="2017" name="dateInput">
-                        <label>по</label>
-                        <input type="date" main="1911" max="2018" name="dateInput">
-                    </div>
+                    <label for="dateInput">Дата съемки:</label>
+                    <input type="date" name="datePhoto">
                 </div>
+                <div class="modal__form form-group">
+                    <label for="locationPhoto">Дата съемки:</label>
+                    <div id="locationPhoto" style="width: 100%; height: 500px;">_______</div>
+                </div>
+
                 <button type="submit" class="btn uploadPhoto">Отправить</button>
             </form>
         </div>
@@ -305,6 +307,22 @@
                 <div class="modal__form form-group">
                     <label for="kwPhoto">По ключевым словам:</label>
                     <input type="text" class="form-control" name="kwPhoto" required>
+                </div>
+                <div class="modal__form form-group">
+                    <label for="author">По автору:</label>
+                    <input type="text" class="form-control" name="author" required>
+                </div>
+                <div class="modal__form form-group">
+                    <label for="titleSight">По достопримечательности:</label>
+                    <select name="titleSight">
+                        <% if (locals.sights.length) { %>
+                        <option disabled selected>Выберите достопримечательность</option>
+                        <% for(var i = 0; i < sights.length; i++) { %>
+
+                        <option>   <%= sights[i].sight.titleSight%></option>
+                        <% } %>
+                        <% } %>
+                    </select>
                 </div>
                 <button type="submit" class="btn filterPhoto">ПРИМЕНИТЬ</button>
             </form>
@@ -328,7 +346,11 @@
                     <div class="categorySight">
                         <label for="categorySight">Категория: </label>
                         <select name="categorySight">
-                            <option></option>
+                            <%if (locals.categories.length) { %>
+                            <%for(var i=0; i<categories.length; i++){%>
+                            <option><%= categories[i].categoriesSight.categorySight  %></option>
+                        <% } %>
+                        <% } %>
                         </select>
                         </div>
 
@@ -338,6 +360,8 @@
                     <input type="text" class="form-control" name="descSight">
                 </div>
                 <div class="modal__form form-group">
+                    <input type="hidden" name="lat" class="inputLat">
+                    <input type="hidden" name="lng" class="inputLng">
                     <label for="locationSight">Местоположение:</label>
                     <p>Поставьте метку на карте</p>
                     <div id="locationSight" style="width: 100%; height: 500px;">_______</div>
@@ -353,23 +377,28 @@
 </div>
 
 </div>
-
+<script src="/static/javascripts/jquery-3.2.1.min.js"></script>
 <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwh0W5bYN3XJl6p_TXfJgSvccy0Jq3sgs"></script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
 <script src="/static/javascripts/richMaker.js"></script>
-<script src="/static/javascripts/jquery-3.2.1.min.js"></script>
+
 <script src="/static/javascripts/scripts.js"></script>
 <!-- <script src="./public/javascripts/galleryMap.js"></script> -->
 <script src="/static/javascripts/gallery-button.js"></script>
 <script src="/static/javascripts/modalWindow.js"></script>
 <script src="/static/javascripts/authFacebook.js"></script>
 <script src="/static/javascripts/addLocationSight.js"></script>
+<script src="/static/javascripts/ejs.min.js"></script>
 
 <script>
+
+    //ФОТОМАРКЕРЫ НА КАРТЕ
     var map;
     function initialize() {
         // Prepare markers array
+
         var markers = [];
         <% photoList.forEach(function(photo) { %>
         markers.push({
@@ -385,20 +414,116 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        markers.forEach(function (item) {
-            new RichMarker({
+        markers = markers.map(function (item) {
+            return new RichMarker({
                 position: item.latLan,
                 map: map,
-                content: '<div class="google-marker"><img src="' + item.img + '"/></div>',
+                content: '<div class="google-marker"><img src="'+item.img+'"/></div>',
                 shadow: 0
             });
         });
+        // markers.forEach(function (item) {
+        //     new RichMarker({
+        //         position: item.latLan,
+        //         map: map,
+        //         content: '<div class="google-marker"><img src="'+item.img+'"/></div>',
+        //         shadow: 0
+        //     });
+        // });
         //Кластеризация
-        var markerCluster = new MarkerClusterer(map2, markers,
+        var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
-    
+
+
+    //ДОБАВЛЕНИЕ МАРКЕРА ФОТОГРАФИИ ВРУЧНУЮ
+    // var map1;
+    // var location;
+    // function initMap() {
+    //     map2 = new google.maps.Map(document.getElementById('locationSight'),{
+    //         zoom: 10,
+    //         center: new google.maps.LatLng(48.42216, 44.31308)
+    //     });
+    //
+    //     map2.addListener('click', function(e) {
+    //         placeMarker(e.latLng, map2);
+    //
+    //     });
+    //
+    //     function placeMarker(position, map2) {
+    //         var marker = new google.maps.Marker({
+    //             position: position,
+    //             map: map2
+    //         });
+    //         map.panTo(position);
+    //
+    //         var lat = position.lat();
+    //         var lng = position.lng();
+    //
+    //         document.querySelector('.inputLat').value = lat;
+    //         document.querySelector('.inputLng').value = lng;
+    //     }
+    //
+    // }
+
+
+    //ДОБАВЛЕНИЕ МАРКЕРА ДОТОПРИМЕЧАТЕЛЬНОСТИ
+    var map2;
+
+    function initMap() {
+        map2 = new google.maps.Map(document.getElementById('locationSight'), {
+            zoom: 10,
+            center: {lat: 48, lng: 43}
+        });
+
+        map2.addListener('click', function (e) {
+
+            placeMarkerAndPanTo(e.latLng, map2);
+        });
+    }
+
+    function placeMarkerAndPanTo(latLng, map2) {
+        var marker = new google.maps.Marker({
+            position: latLng,
+            map: map2
+        });
+        map2.panTo(latLng);
+
+
+        var latit = latLng.lat();
+        var longit = latLng.lng();
+
+        console.log('latLng', latLng);
+        document.querySelector('.inputLat').value = latit;
+        document.querySelector('.inputLng').value = longit;
+
+    }
+
+        // map2.addListener('click', function(e) {
+        //    console.log('e: ', e);
+        //     placeMarker(e.latLng, map2);
+        //
+        //
+        // });
+
+        // google.maps.event.addListeners()
+        //
+        // function placeMarker(position, map2) {
+        //     var marker = new google.maps.Marker({
+        //         position: position,
+        //         map: map2
+        //     });
+        //     map.panTo(position);
+
+
+
+
+
+
+
+
     google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initMap);
 
 </script>
 
