@@ -8,12 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/models/photo.js" afterPath="$PROJECT_DIR$/app/models/photo.js" />
       <change beforePath="$PROJECT_DIR$/app/routes.js" afterPath="$PROJECT_DIR$/app/routes.js" />
-      <change beforePath="$PROJECT_DIR$/config/database.js" afterPath="$PROJECT_DIR$/config/database.js" />
-      <change beforePath="$PROJECT_DIR$/views/index.ejs" afterPath="$PROJECT_DIR$/views/index.ejs" />
-      <change beforePath="$PROJECT_DIR$/views/photoList.ejs" afterPath="$PROJECT_DIR$/views/photoList.ejs" />
-      <change beforePath="$PROJECT_DIR$/views/profile.ejs" afterPath="$PROJECT_DIR$/views/profile.ejs" />
-      <change beforePath="$PROJECT_DIR$/views/sight-overall.ejs" afterPath="$PROJECT_DIR$/views/sight-overall.ejs" />
-      <change beforePath="$PROJECT_DIR$/views/sight-photo.ejs" afterPath="$PROJECT_DIR$/views/sight-photo.ejs" />
+      <change beforePath="$PROJECT_DIR$/views/signup.ejs" afterPath="$PROJECT_DIR$/views/signup.ejs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -42,16 +37,16 @@
         <entry file="file://$PROJECT_DIR$/views/sight-overall.ejs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
-              <caret line="115" column="18" lean-forward="true" selection-start-line="82" selection-start-column="12" selection-end-line="115" selection-end-column="18" />
+              <caret line="115" column="18" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="115" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/index.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2246">
+            <state relative-caret-position="-2396">
               <caret line="140" column="59" lean-forward="false" selection-start-line="140" selection-start-column="59" selection-end-line="140" selection-end-column="59" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -64,22 +59,22 @@
       <file leaf-file-name="photo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/photo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+            <state relative-caret-position="150">
+              <caret line="20" column="3" lean-forward="false" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="routes.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="routes.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="334" column="55" lean-forward="false" selection-start-line="334" selection-start-column="55" selection-end-line="334" selection-end-column="55" />
+            <state relative-caret-position="233">
+              <caret line="341" column="53" lean-forward="true" selection-start-line="341" selection-start-column="53" selection-end-line="341" selection-end-column="53" />
               <folding>
                 <element signature="e#9666#9739#0" expanded="false" />
-                <element signature="e#14224#14677#0" expanded="false" />
-                <marker date="1529605466916" expanded="true" signature="15410:15411" ph="..." />
+                <element signature="e#14166#14619#0" expanded="false" />
+                <marker date="1529608276161" expanded="true" signature="15352:15353" ph="..." />
               </folding>
             </state>
           </provider>
@@ -98,10 +93,10 @@
       <file leaf-file-name="database.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+            <state relative-caret-position="25">
+              <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding>
-                <marker date="1529443233822" expanded="true" signature="93:139" ph="..." />
+                <marker date="1529608147197" expanded="true" signature="91:140" ph="..." />
               </folding>
             </state>
           </provider>
@@ -130,7 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>morgan</find>
       <find>rater</find>
       <find>flash</find>
       <find>positS</find>
@@ -153,13 +147,14 @@
       <find>categor</find>
       <find>ajax</find>
       <find>sight.latit</find>
-      <find>public</find>
       <find>ejs</find>
       <find>photoList</find>
       <find>incu</find>
       <find>ближай</find>
       <find>include</find>
       <find>CreateDate</find>
+      <find>public</find>
+      <find>publ</find>
     </findStrings>
     <replaceStrings>
       <replace>AuthLocalStrategy</replace>
@@ -221,15 +216,15 @@
         <option value="$PROJECT_DIR$/public/stylesheets/sight-overall.css" />
         <option value="$PROJECT_DIR$/app/models/sights.js" />
         <option value="$PROJECT_DIR$/public/javascripts/scripts.js" />
-        <option value="$PROJECT_DIR$/config/database.js" />
         <option value="$PROJECT_DIR$/views/template/photoList.ejs" />
         <option value="$PROJECT_DIR$/views/photoList.ejs" />
         <option value="$PROJECT_DIR$/views/sight-overall.ejs" />
         <option value="$PROJECT_DIR$/views/sight-photo.ejs" />
-        <option value="$PROJECT_DIR$/app/models/photo.js" />
         <option value="$PROJECT_DIR$/views/index.ejs" />
-        <option value="$PROJECT_DIR$/app/routes.js" />
         <option value="$PROJECT_DIR$/views/profile.ejs" />
+        <option value="$PROJECT_DIR$/app/models/photo.js" />
+        <option value="$PROJECT_DIR$/config/database.js" />
+        <option value="$PROJECT_DIR$/app/routes.js" />
       </list>
     </option>
   </component>
@@ -413,7 +408,7 @@
       <workItem from="1528668292265" duration="37126000" />
       <workItem from="1528874306457" duration="50584000" />
       <workItem from="1529169427957" duration="70679000" />
-      <workItem from="1529603719474" duration="2337000" />
+      <workItem from="1529603719474" duration="4317000" />
     </task>
     <task id="LOCAL-00001" summary="add node_modules">
       <created>1522620054942</created>
@@ -716,11 +711,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529408669571</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="index, photoList, profile, sight-ocerall">
+      <created>1529606417618</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1529606417618</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="752299000" />
+    <option name="totallyTimeSpent" value="754279000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -847,8 +849,6 @@
     <ignored-roots>
       <path value="C:\project\vlgplace" />
     </ignored-roots>
-    <MESSAGE value="addedMap" />
-    <MESSAGE value="replace markers on the Map" />
     <MESSAGE value="replace markers on the Map2" />
     <MESSAGE value="gallery-desc-hover css" />
     <MESSAGE value="commit" />
@@ -872,7 +872,9 @@
     <MESSAGE value="local sign in, sight.ejs" />
     <MESSAGE value="nearlist. sightMarker" />
     <MESSAGE value="db" />
-    <option name="LAST_COMMIT_MESSAGE" value="db" />
+    <MESSAGE value="index, photoList, profile, sight-ocerall" />
+    <MESSAGE value="add static" />
+    <option name="LAST_COMMIT_MESSAGE" value="add static" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -961,6 +963,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1011,6 +1014,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="469">
           <caret line="165" column="17" lean-forward="false" selection-start-line="165" selection-start-column="17" selection-end-line="165" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,6 +1037,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1084,6 +1089,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
           <caret line="17" column="2" lean-forward="false" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,10 +1194,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/views/sight-overall.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="115" column="18" lean-forward="false" selection-start-line="82" selection-start-column="12" selection-end-line="115" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/sight-photo.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="107" column="34" lean-forward="false" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/profile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="89" column="43" lean-forward="false" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -1206,57 +1228,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="2" lean-forward="false" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        <state relative-caret-position="25">
+          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
           <folding>
-            <marker date="1529443233822" expanded="true" signature="93:139" ph="..." />
+            <marker date="1529608147197" expanded="true" signature="91:140" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/sight-overall.ejs">
+    <entry file="file://$PROJECT_DIR$/views/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="115" column="18" lean-forward="true" selection-start-line="82" selection-start-column="12" selection-end-line="115" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="-2396">
+          <caret line="140" column="59" lean-forward="false" selection-start-line="140" selection-start-column="59" selection-end-line="140" selection-end-column="59" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1529604117080" expanded="true" signature="19852:20649" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/photo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
+        <state relative-caret-position="150">
+          <caret line="20" column="3" lean-forward="false" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="334" column="55" lean-forward="false" selection-start-line="334" selection-start-column="55" selection-end-line="334" selection-end-column="55" />
+        <state relative-caret-position="233">
+          <caret line="341" column="53" lean-forward="true" selection-start-line="341" selection-start-column="53" selection-end-line="341" selection-end-column="53" />
           <folding>
             <element signature="e#9666#9739#0" expanded="false" />
-            <element signature="e#14224#14677#0" expanded="false" />
-            <marker date="1529605466916" expanded="true" signature="15410:15411" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/profile.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="89" column="43" lean-forward="false" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2246">
-          <caret line="140" column="59" lean-forward="false" selection-start-line="140" selection-start-column="59" selection-end-line="140" selection-end-column="59" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1529604117080" expanded="true" signature="19852:20649" ph="..." />
+            <element signature="e#14166#14619#0" expanded="false" />
+            <marker date="1529608276161" expanded="true" signature="15352:15353" ph="..." />
           </folding>
         </state>
       </provider>

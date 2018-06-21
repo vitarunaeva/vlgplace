@@ -301,7 +301,7 @@ module.exports = function (app, passport) {
         var data = req.body;
         var keywords = data.kwPhoto;
        // var ttlPhoto = data.titlePhoto;
-        var photoName = './public/uploads/' + Date.now() + phts.name;
+        var photoName = '/static/uploads/' + Date.now() + phts.name;
 
         data.author = author;
         data.filePhoto = photoName;
@@ -332,7 +332,7 @@ module.exports = function (app, passport) {
                     data.longit = gps.longtitude;
                     data.latit = gps.latitude;
                     data.datePhoto =  exifData.exif.CreateDate;
-                    data.exifPhoto = exifData.thumbnail;
+
 
                     var newPhoto = new Photo(data);
                     newPhoto.save(function (err, temp) {
@@ -340,7 +340,7 @@ module.exports = function (app, passport) {
                             console.log("ooopssss....");
                         }
                         //маленький размер фотографии
-                        var previewName = './public/uploads/preview' + Date.now() + phts.name;
+                        var previewName = '/static/uploads/preview' + Date.now() + phts.name;
                         phts.mv(previewName);
                         data.filePhoto = previewName;
 
