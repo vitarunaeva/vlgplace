@@ -7,6 +7,7 @@ var fs = require('fs');
 const fileUpload = require('express-fileupload');
 var ExifImage = require('exif').ExifImage;
 var math = require('mathjs');
+var ejs = require ('ejs');
 
 
 // //механизм хранения
@@ -77,8 +78,8 @@ module.exports = function (app, passport) {
             var sightList = data[1];
             var titleSight = currentSight.sight.titleSight;
 
-            var numberLng = parseInt(currentSight.sight.lng);
-            var numberLat = parseInt(currentSight.sight.lat);
+            var numberLng = currentSight.sight.lng;
+            var numberLat = parseFloat(currentSight.sight.lat);
 
             // массив объектов вида {достопримечательность, расстояние до текущей достопримечательности}
             var sightsWithDistance = [];
@@ -86,24 +87,27 @@ module.exports = function (app, passport) {
             // проходим по всему списку достопримечательностей
             sightList.forEach(function(sight) {
                 //перевод строки в чилсло
-                var lng = parseInt(sight.sight.lng);
-                var lat = parseInt(sight.sight.lat);
+                var lng = sight.sight.lng;
+                var lat = sight.sight.lat;
 
-                // находим расстояния
+                // находим расстояния от текущей достопримечательности (currentSight) до sight
                 sightsWithDistance.push({
-                    sight: sight,
-                    distance: Math.sqrt((Math.pow(numberLng, 2) - Math.pow(lng, 2)) + (Math.pow(numberLat, 2) - Math.pow(lat, 2)))
+                    sightData: sight,
+                    distance: Math.sqrt(Math.abs((Math.pow(numberLng, 2) - Math.pow(lng, 2)) + (Math.pow(numberLat, 2) - Math.pow(lat, 2))))
                 });
             });
 
             // сортируем по возрастанию и оставляем первые 4
             var nearestSights = sightsWithDistance.sort(function(a, b) {
                 return a.distance - b.distance;
-            }).slice(3);
+            }).slice(0, 4);
+
+            console.log('nearestSights', nearestSights);
 
             // фильтрируем массив для того, чтобы не возвращать свойство distance, которое не понадобится
             var mappedNearestSights = nearestSights.map(function(sight) {
-               return sight.sight;
+
+               return sight.sightData;
             });
 
             Photo.find({titleSight: titleSight}).then(function(photoData) {
@@ -328,6 +332,7 @@ module.exports = function (app, passport) {
                     data.longit = gps.longtitude;
                     data.latit = gps.latitude;
                     data.datePhoto =  exifData.exif.CreateDate;
+                    data.exifPhoto = exifData.thumbnail;
 
                     var newPhoto = new Photo(data);
                     newPhoto.save(function (err, temp) {
@@ -441,61 +446,26 @@ module.exports = function (app, passport) {
 
 
     //ФОРМА ПОИСКА
-    // app.get = function (request, response, next) {
-    //     var markerRequest = async function () {
-    //         var e = {};
-    //         e.params = await getParams(request);
-    //         e.photos = await getPhotos(e.params);
-    //
-    //         return response.send(e);
-    //     }
-    //
-    //     return makeRequest()
-    //     catch(function (e){
-    //         return next(error(404, e.message));
-    //     })
-    //
-    // };
-    // function  getParams(request) {
-    //     return{
-    //         search: request.body.search
-    //     }
-    // }
-    //
-    // function getPhotos(request) {
-    //     return Photos.aggregate([
-    //         {
-    //             $match:{
-    //                 titlePhoto: {
-    //                     $text: {$search: request.search}
-    //                 }
-    //             }
-    //         }
-    //     ])
-    // }
+
     app.post('/search-form', function (req, res, next) {
         var inputSearch = req.body.searchString;
-        console.log('req.body', req.body);
-        console.log('inputSearch', inputSearch);
-        //
-        // Photo.aggregate([
-        //     {"$match": {
-        //         "titlePhoto": {"$regex": inputSearch, "$options":'i'}
-        //         }}
-        // ], function (err, photos) {
-        //     if(err){
-        //         return next(err);
-        //     }
-        //
-        //     res.json({photoList: photos});
-        // });
 
+        // ищем фото по полному названию
         Photo.find({titlePhoto: inputSearch}, function (err, photos) {
             if (err) {
                 console.log('err', err);
             }
 
-            res.json({photoList: photos});
+            // загружаем шаблон из файловой системы (1 параметр - путь до шаблона, 2 параметр - данные для шаблона
+            // 3 параметр - колбек
+            ejs.renderFile('./views/photoList.ejs', {photoList: photos}, function(err, html) {
+                if (err) {
+                    console.log('err', err);
+                }
+
+                // возвращаем сгенерированный html с вставленными данными из БД обратно в запрос
+                res.end(html);
+            });
         });
     });
 };

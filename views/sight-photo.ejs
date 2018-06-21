@@ -99,15 +99,11 @@
                                     <div class="photo-info__item-title">Дата съемки:</div>
                                     <div class="photo-info__item-desc"><%= photo.datePhoto %></div>
                                 </div>
-                                <div class="photo-info__item">
-                                    <div class="photo-info__item-title">Категория:</div>
-                                    <div class="photo-info__item-desc">Памятники</div>
-                                </div>
                             </div>
                             <div class="photo-info__column">
                                 <div class="photo-info__item">
                                     <div class="photo-info__item-title">EXIF-данные:</div>
-                                    <div class="photo-info__item-desc">данные</div>
+                                    <div class="photo-info__item-desc"><%= photo.exifData %></div>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +223,7 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById('mapPhoto'),{
             zoom: 10,
-            center: new google.maps.LatLng(48.42216, 44.31308)
+            center: new google.maps.LatLng(48.707103, 44.516939)
         });
 
         var photo = <%- JSON.stringify(photo) %>

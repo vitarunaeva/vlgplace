@@ -55,7 +55,7 @@
         <div class="sight-overall__key-words_rating">
             <div class="sight-overall__category">
                 <span>Категория:</span>
-                <div class="categorySight">Категория</div>
+                <div class="categorySight"><%= sight.sight.categorySight %></div>
 
             </div>
             <div class="sight-overall__rating">
@@ -158,7 +158,7 @@
     function initMap() {
         map = new google.maps.Map(document.getElementById('mapSight'), {
             zoom: 10,
-            center: new google.maps.LatLng(48.42216, 44.31308)
+            center: new google.maps.LatLng(48.707103, 44.516939)
         });
         var sight = <%- JSON.stringify(sight) %>
 

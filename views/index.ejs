@@ -105,41 +105,7 @@
             <div class="gallery-tab container-photo-gallery js-container active" data-container='gallery'>
                 <div class="title-photogallery">ФОТОГАЛЕРЕЯ</div>
                 <div class="photo-gallery">
-                    <div class="photo-gallery-line">
-                        <!--+-->
-                        <% if (photoList.length) { %>
-                        <% for(var i = 0; i < photoList.length; i++) { %>
-                        <a href="/sight-photo/<%= photoList[i]._id %>"
-                           style="background-image: url( <%= photoList[i].filePhoto %>)"
-                           class="photo_gallery-wrapper">
-                               <span class="photo_gallery-title"><%= photoList[i].titlePhoto%></span>
-                            <span class="gallery-desc-hover">
-                                <span class="desc-hover__auth">Автор: <span
-                                            class="desc-hover__style"><%= photoList[i].author %></span></span>
-                                <span class="desc-hover__date">Опубликовано: <span
-                                            class="desc-hover__style"><%= photoList[i].createdAt %></span></span>
-                                <span class="desc-hover__category"> Достопримечательность <span
-                                            class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
-                                <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
-                                        <%= photoList[i].rating %>
-                                        <div class="rating-count">
-                                          <input id="c1" type="radio" name="rating" value="1" required>
-                                          <label for="c1">1</label>
-                                          <input id="c2" type="radio" name="rating" value="2">
-                                          <label for="c2">2</label>
-                                          <input id="c3" type="radio" name="rating" value="3">
-                                          <label for="c3">3</label>
-                                          <input id="c4" type="radio" name="rating" value="4">
-                                          <label for="c4">4</label>
-                                          <input id="c5" type="radio" name="rating" value="5">
-                                          <label for="c5">5</label>
-                                        </div>
-                                    </span></span>
-                                </span>
-                        </a>
-                        <% } %>
-                        <% } %>
-                    </div>
+                    <%- include('photoList') %>
                 </div>
             </div>
         </section>
@@ -172,7 +138,7 @@
         </section>
 
 
-        <div class="addCategorySight">
+        <div class="addCategorySight" style="display: none;">
             <form action="/addCategorySight" method="post" id="addCategorySight" enctype="multipart/form-data">
                 <input type="text" name="categorySight">
                 <input type="submit" class="btn addCategorySight" value="Добавить категорию">
@@ -277,14 +243,14 @@
                 </div>
 
                 <!--сделать скрытым!!!-->
-                <div class="modal__form form-group">
-                    <label for="dateInput">Дата съемки:</label>
-                    <input type="date" name="datePhoto">
-                </div>
-                <div class="modal__form form-group">
-                    <label for="locationPhoto">Дата съемки:</label>
-                    <div id="locationPhoto" style="width: 100%; height: 500px;">_______</div>
-                </div>
+                <!--<div class="modal__form form-group">-->
+                    <!--<label for="dateInput">Дата съемки:</label>-->
+                    <!--<input type="date" name="datePhoto">-->
+                <!--</div>-->
+                <!--<div class="modal__form form-group">-->
+                    <!--<label for="locationPhoto">Дата съемки:</label>-->
+                    <!--<div id="locationPhoto" style="width: 100%; height: 500px;">_______</div>-->
+                <!--</div>-->
 
                 <button type="submit" class="btn uploadPhoto">Отправить</button>
             </form>
@@ -410,7 +376,7 @@
         //определение карты
         map = new google.maps.Map(document.getElementById("map"), {
             zoom: 8,
-            center: new google.maps.LatLng(48.42216, 44.31308),
+            center: new google.maps.LatLng(48.707103, 44.516939),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
@@ -439,23 +405,23 @@
     //ДОБАВЛЕНИЕ МАРКЕРА ФОТОГРАФИИ ВРУЧНУЮ
     // var map1;
     // var location;
-    // function initMap() {
-    //     map2 = new google.maps.Map(document.getElementById('locationSight'),{
+    // function initMap1() {
+    //     map1 = new google.maps.Map(document.getElementById('locationSight'),{
     //         zoom: 10,
     //         center: new google.maps.LatLng(48.42216, 44.31308)
     //     });
     //
-    //     map2.addListener('click', function(e) {
-    //         placeMarker(e.latLng, map2);
+    //     map1.addListener('click', function(e) {
+    //         placeMarker(e.latLng, map1);
     //
     //     });
     //
-    //     function placeMarker(position, map2) {
+    //     function placeMarker(position, map1) {
     //         var marker = new google.maps.Marker({
     //             position: position,
-    //             map: map2
+    //             map: map1
     //         });
-    //         map.panTo(position);
+    //         map1.panTo(position);
     //
     //         var lat = position.lat();
     //         var lng = position.lng();
@@ -473,7 +439,7 @@
     function initMap() {
         map2 = new google.maps.Map(document.getElementById('locationSight'), {
             zoom: 10,
-            center: {lat: 48, lng: 43}
+            center: {lat: 48.707103, lng: 44.516939}
         });
 
         map2.addListener('click', function (e) {
@@ -499,31 +465,35 @@
 
     }
 
-        // map2.addListener('click', function(e) {
-        //    console.log('e: ', e);
-        //     placeMarker(e.latLng, map2);
-        //
-        //
-        // });
-
-        // google.maps.event.addListeners()
-        //
-        // function placeMarker(position, map2) {
-        //     var marker = new google.maps.Marker({
-        //         position: position,
-        //         map: map2
-        //     });
-        //     map.panTo(position);
 
 
+    $('.search-form').on('submit', function(e) {
+        e.preventDefault();
 
+        // берем значение из инпута поиска
+        var searchString = $('.search-input').val();
 
-
-
-
+        $.ajax({
+            url: '/search-form',
+            type: 'POST',
+            data: JSON.stringify({
+                searchString: searchString
+            }),
+            contentType: 'application/json',
+            success: function(response) {
+                // заменяем дочерний html в классе сгенерированным html'ем на сервере
+                $('.photo-gallery').html(response);
+            },
+            error: function(error) {
+                console.error('filter error', error);
+            }
+        });
+    });
 
     google.maps.event.addDomListener(window, 'load', initialize);
+
     google.maps.event.addDomListener(window, 'load', initMap);
+
 
 </script>
 

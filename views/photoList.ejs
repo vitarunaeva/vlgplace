@@ -1,15 +1,17 @@
-<% if (photoList.length) { %>
-
-<% for(var i = 0; i < photoList.length; i++) { %>
-<a href="/sight-photo" style="background-image: url( <%= photoList[i].filePhoto %>)"
-   class="photo_gallery-wrapper">
-    <span class="photo_gallery-title"><%= photoList[i].titlePhoto %></span>
-    <span class="gallery-desc-hover">
+<div class="photo-gallery-line">
+    <!--+-->
+    <% if (photoList.length) { %>
+    <% for(var i = 0; i < photoList.length; i++) { %>
+    <a href="/sight-photo/<%= photoList[i]._id %>"
+       style="background-image: url( <%= photoList[i].filePhoto %>)"
+       class="photo_gallery-wrapper">
+        <span class="photo_gallery-title"><%= photoList[i].titlePhoto%></span>
+        <span class="gallery-desc-hover">
                                 <span class="desc-hover__auth">Автор: <span
                                             class="desc-hover__style"><%= photoList[i].author %></span></span>
                                 <span class="desc-hover__date">Опубликовано: <span
-                                            class="desc-hover__style"><%= photoList[i].dateTime %></span></span>
-                                <span class="desc-hover__category"> Категория: <span
+                                            class="desc-hover__style"><%= photoList[i].createdAt %></span></span>
+                                <span class="desc-hover__category"> Достопримечательность <span
                                             class="desc-hover__style"><%= photoList[i].titleSight %></span></span>
                                 <span class="desc-hover__rating"> Рейтинг: <span class="desc-hover__style">
                                         <%= photoList[i].rating %>
@@ -27,6 +29,7 @@
                                         </div>
                                     </span></span>
                                 </span>
-</a>
-<% } %>
-<% } %>
+    </a>
+    <% } %>
+    <% } %>
+</div>

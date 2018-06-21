@@ -13,7 +13,8 @@ var photoSchema = mongoose.Schema({
     descPhoto: String,
     datePhoto: String,
     longit: Number,
-    latit: Number
+    latit: Number,
+    exifPhoto: String
     }, {
     timestamps: {
         createAt: 'createAt',
